@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav-bar/>
+    <nav-bar></nav-bar>
     <router-view/>
   </div>
 </template>
@@ -14,9 +14,3 @@
   color: #2c3e50;
 }
 </style>
-<script>
-import NavBar from "@/components/header/head";
-export default {
-  components: { NavBar }
-}
-</script>

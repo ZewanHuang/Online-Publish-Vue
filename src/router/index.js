@@ -11,65 +11,72 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
+    path: '/guide',
+    name: 'Guide',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-    // 路由拦截
-    meta: {
-      requireAuth: true
-    }
-  },
-  {
-    path: '/register',
-    name: 'Register',
-    component: () => import('../views/register/register')
+    component: () => import( '../views/Guide.vue')
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/login/login'),
-    meta: {
-      requireNotAuth: true
-    }
+    component: () => import('../views/Login.vue')
   },
   {
-    path: '/unverified_email',
-    name: 'Verify',
-    component: () => import('../views/register/verify'),
-    meta: {
-      requireAuth: true,
-      requireAuthNotConfirmed: true
-    }
+    path: '/register',
+    name: 'Register',
+    component: () => import( '../views/Register.vue')
   },
   {
-    path: '/:username/info',
-    name: 'UserInfo',
-    props: true,
-    component: () => import('../views/user/userinfo'),
+    path: '/person',
+    name: 'Person',
+    component: () => import( '../views/Person.vue')
   },
   {
-    path: '/confirm',
-    name: 'Confirm',
-    component: () => import('../views/register/confirm'),
+    path: '/welcome',
+    name: 'Welcome',
+    component: () => import( '../views/Welcome.vue')
   },
   {
-    path: '/*',
-    name: 'PageNotFound',
-    component: () => import('../views/error/PageNotFound'),
+    path: '/apply',
+    name: 'Apply',
+    component: () => import( '../views/Apply.vue')
+  },
+  {
+    path: '/register/success',
+    name: 'Register-success',
+    component: () => import( '../views/Register-success.vue')
+  },
+  {
+    path: '/audit',
+    name: 'Audit',
+    component: () => import( '../views/Audit.vue'),
+    children:[
+      {
+        path: '',
+        name: 'Overview',
+        component: () => import( '../components/Overview')
+      },
+      {
+        path: 'finish-audit',
+        name: 'Finish-audit',
+        component: () => import( '../components/Finish-audit')
+      },
+      {
+        path: 'to-audit',
+        name: 'To-audit',
+        component: () => import( '../components/To-audit')
+      }
+    ]
   }
+
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
-
-router.beforeEach((to, from, next) => {
-  next()
 })
 
 export default router
