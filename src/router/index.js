@@ -11,65 +11,83 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
+    path: '/guide',
+    name: 'Guide',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-    // 路由拦截
-    meta: {
-      requireAuth: true
-    }
-  },
-  {
-    path: '/register',
-    name: 'Register',
-    component: () => import('../views/register/register')
+    component: () => import( '../views/Guide.vue')
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/login/login'),
-    meta: {
-      requireNotAuth: true
-    }
+    component: () => import('../views/Login.vue')
   },
   {
-    path: '/unverified_email',
-    name: 'Verify',
-    component: () => import('../views/register/verify'),
-    meta: {
-      requireAuth: true,
-      requireAuthNotConfirmed: true
-    }
+    path: '/register',
+    name: 'Register',
+    component: () => import( '../views/Register.vue')
   },
   {
     path: '/:username/info',
-    name: 'UserInfo',
-    props: true,
-    component: () => import('../views/user/userinfo'),
+    name: 'Info',
+    component: () => import( '../views/Info.vue'),
+    children:[
+      {
+        path: 'article',
+        name: 'Article',
+        component: () => import( '../components/InfoDir/Article')
+      },
+      {
+        path: 'collection',
+        name: 'Collection',
+        component: () => import( '../components/InfoDir/Collection')
+      },
+      {
+        path: '',
+        name: 'News',
+        component: () => import( '../components/InfoDir/News')
+      }
+    ]
   },
   {
-    path: '/confirm',
-    name: 'Confirm',
-    component: () => import('../views/register/confirm'),
+    path: '/writing',
+    name: 'Writing',
+    component: () => import( '../views/Writing'),
+    children:[
+      {
+        path: 'article',
+        name: 'WriteArticle',
+        component: () => import( '../components/WritingDir/Article')
+      },
+      {
+        path: 'review',
+        name: 'Review',
+        component: () => import( '../components/WritingDir/Review')
+      },
+      {
+        path: '',
+        name: 'Overview',
+        component: () => import( '../components/WritingDir/Overview')
+      }
+    ]
   },
   {
-    path: '/*',
-    name: 'PageNotFound',
-    component: () => import('../views/error/PageNotFound'),
-  }
+    path: '/welcome',
+    name: 'Welcome',
+    component: () => import( '../views/Welcome.vue')
+  },
+  {
+    path: '/apply',
+    name: 'Apply',
+    component: () => import( '../views/Apply.vue')
+  } 
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
-
-router.beforeEach((to, from, next) => {
-  next()
 })
 
 export default router
