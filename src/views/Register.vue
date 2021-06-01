@@ -57,7 +57,7 @@
         this.password2_error=false;
         this.email_error=false;
         if(this.form.username !== "" && this.form.email !== "" && this.form.password1 !== "" && this.form.password2 !== ""){
-          this.$router.replace('/welcome')
+          this.$router.replace('/register/success')
         }
         else {
           if (this.form.username === ""){

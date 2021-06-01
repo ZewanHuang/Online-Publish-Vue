@@ -81,7 +81,50 @@ const routes = [
     path: '/apply',
     name: 'Apply',
     component: () => import( '../views/Apply.vue')
-  } 
+  },
+  {
+    path: '/person',
+    name: 'Person',
+    component: () => import( '../views/Person.vue')
+  },
+  {
+    path: '/welcome',
+    name: 'Welcome',
+    component: () => import( '../views/Welcome.vue')
+  },
+  {
+    path: '/apply',
+    name: 'Apply',
+    component: () => import( '../views/Apply.vue')
+  },
+  {
+    path: '/register/success',
+    name: 'Register-success',
+    component: () => import( '../views/Register-success.vue')
+  },
+  {
+    path: '/audit',
+    name: 'Audit',
+    component: () => import( '../views/Audit.vue'),
+    children:[
+      {
+        path: '',
+        name: 'Overview',
+        component: () => import( '../components/Overview')
+      },
+      {
+        path: 'finish-audit',
+        name: 'Finish-audit',
+        component: () => import( '../components/Finish-audit')
+      },
+      {
+        path: 'to-audit',
+        name: 'To-audit',
+        component: () => import( '../components/To-audit')
+      }
+    ]
+  }
+
 ]
 
 const router = new VueRouter({
