@@ -15,7 +15,7 @@
           <div slot="header" class="clearfix">
             <h4>读者</h4>
           </div>
-          <img class="image" src="../assets/reader.png"><br>
+          <img class="image" src="../../assets/reader.png"><br>
           <span >读者是注册后的默认选项，无需申请</span>
           <div style="color: #808080;margin-top: 10px">这里是关于读者的描述...</div>
         </el-card>
@@ -25,7 +25,7 @@
           <div slot="header" class="clearfix">
             <h4>成为作者</h4>
           </div>
-          <img class="image" src="../assets/taster.png"><br>
+          <img class="image" src="../../assets/taster.png"><br>
           <span >点击申请成为作者</span>
           <div style="color: #808080;margin-top: 10px">这里是关于作者的描述...</div>
         </el-card>

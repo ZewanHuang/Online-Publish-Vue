@@ -2,14 +2,20 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import navBar from './components/Nav.vue'
+import navBar from './components/header/head.vue'
 import navBarInfo from './components/InfoDir/NavInfo.vue'
 import newsList from './components/WritingDir/NewsList.vue'
 import News from './components/News.vue'
+import axios from 'axios'
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import user from "@/store/user";
+
 Vue.use(ElementUI);
+
+Vue.prototype.$axios = axios
+axios.defaults.baseURL = '/api/'
 
 Vue.component("nav-bar", navBar);
 Vue.component("nav-bar-info", navBarInfo);
@@ -17,6 +23,38 @@ Vue.component("news-list", newsList);
 Vue.component("news", News);
 
 Vue.config.productionTip = false
+
+
+//全局路由导航钩子
+router.beforeEach((to, from, next) => {
+  //此处获取登陆的用户信息，参考 store/index.js and user.js
+  const userInfo = user.getters.getUser(user.state())
+  console.log(userInfo)
+
+  //要求登录后不能访问的页面
+  if (userInfo && to.meta.requireNotAuth) {
+    next({
+      name: 'Home',
+    })
+  }
+  //邮箱验证后不能访问的页面 如再次验证邮箱
+  if (userInfo && userInfo.user.confirmed && to.meta.requireAuthNotConfirmed) {
+    next({
+      name: 'Home',
+    })
+  }
+  //不登录时 或者登录但邮箱没验证时 不能访问 比如在线阅读和下载文章
+  if (!userInfo && to.meta.requireAuth) {
+    next({
+      name: 'Login',
+      // query: {
+      //   redirect: to.fullPath//当前页面的地址
+      // }
+    })
+  }
+  //其它情况不拦截
+  next()
+})
 
 new Vue({
   router,

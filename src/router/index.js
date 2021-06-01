@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../views/home/Home.vue'
 
 Vue.use(VueRouter)
 
@@ -13,25 +13,41 @@ const routes = [
   {
     path: '/guide',
     name: 'Guide',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import( '../views/Guide.vue')
+    component: () => import( '../views/home/Guide.vue')
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/Login.vue')
+    component: () => import('../views/login/login.vue'),
+    meta: {
+      requireNotAuth: true
+    }
+
   },
   {
     path: '/register',
     name: 'Register',
-    component: () => import( '../views/Register.vue')
+    component: () => import( '../views/register/register.vue')
+  },
+  {
+    path: '/unverified_email',
+    name: 'Verify',
+    component: () => import('../views/register/verify'),
+    meta: {
+      requireAuth: true,
+      requireAuthNotConfirmed: true
+    }
+  },
+  {
+    path: '/confirm',
+    name: 'Confirm',
+    component: () => import('../views/register/confirm'),
   },
   {
     path: '/:username/info',
-    name: 'Info',
-    component: () => import( '../views/Info.vue'),
+    name: 'UserInfo',
+    props: true,
+    component: () => import( '../views/user/userinfo'),
     children:[
       {
         path: 'article',
@@ -53,7 +69,7 @@ const routes = [
   {
     path: '/writing',
     name: 'Writing',
-    component: () => import( '../views/Writing'),
+    component: () => import( '../views/writer/Writing'),
     children:[
       {
         path: 'article',
@@ -75,37 +91,22 @@ const routes = [
   {
     path: '/welcome',
     name: 'Welcome',
-    component: () => import( '../views/Welcome.vue')
+    component: () => import( '../views/home/Welcome.vue')
   },
   {
     path: '/apply',
     name: 'Apply',
-    component: () => import( '../views/Apply.vue')
-  },
-  {
-    path: '/person',
-    name: 'Person',
-    component: () => import( '../views/Person.vue')
-  },
-  {
-    path: '/welcome',
-    name: 'Welcome',
-    component: () => import( '../views/Welcome.vue')
-  },
-  {
-    path: '/apply',
-    name: 'Apply',
-    component: () => import( '../views/Apply.vue')
+    component: () => import( '../views/user/Apply.vue')
   },
   {
     path: '/register/success',
     name: 'Register-success',
-    component: () => import( '../views/Register-success.vue')
+    component: () => import( '../views/register/Register-success.vue')
   },
   {
     path: '/audit',
     name: 'Audit',
-    component: () => import( '../views/Audit.vue'),
+    component: () => import( '../views/review/Audit.vue'),
     children:[
       {
         path: '',
@@ -123,6 +124,11 @@ const routes = [
         component: () => import( '../components/To-audit')
       }
     ]
+  },
+  {
+    path: '/*',
+    name: 'PageNotFound',
+    component: () => import('../views/error/PageNotFound'),
   }
 
 ]
@@ -131,6 +137,10 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  next()
 })
 
 export default router

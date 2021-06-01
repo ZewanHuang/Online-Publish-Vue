@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img v-bind:style="imgStyle" src="../assets/logo.png">
+    <img v-bind:style="imgStyle" src="../../assets/logo.png">
     <h1>Welcome to Online Publish !</h1>
     <input
         id="search"

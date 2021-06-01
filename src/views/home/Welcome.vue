@@ -74,7 +74,7 @@ export default {
 
 <style>
 .welcome{
-  background: url("../assets/welcome-book.png") no-repeat;
+  background: url("../../assets/welcome-book.png") no-repeat;
   background-position: center;
   height: 100%;
   width: 100%;
