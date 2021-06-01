@@ -3,7 +3,7 @@
     <ul>
       <li><router-link to="/">主页</router-link></li>
       <li><router-link to="/guide">说明</router-link></li>
-      <li><a @click="test()">个人中心</a></li>
+      <li><router-link :to=getUrl()>个人中心</router-link></li>
       <li><router-link to="/login">登录</router-link></li>
       <li><router-link to="/register">注册</router-link></li>
       <img src="../../assets/logo.png"  alt="logo">
@@ -14,7 +14,6 @@
 
 <script>
 import user from "@/store/user";
-import router from "@/router";
 
 export default {
   name: 'navBar',
@@ -24,8 +23,10 @@ export default {
     }
   },
   methods: {
-    test() {
-      router.push('/' + this.username + '/info');
+    getUrl() {
+      return {
+        path: '/' + this.username + '/info'
+      }
     }
   }
 }

@@ -39,7 +39,7 @@ export default {
   props: ['username'],
   data() {
     return {
-      userinfo: {}
+      userinfo: {},
     }
   },
   created() {
@@ -50,14 +50,14 @@ export default {
       url: '/userinfo/',
       data: formData
     })
-        .then(res => {
-          if (res.data.status_code === '2000') {
-            this.userinfo = JSON.parse(res.data.user);
-          }
-        })
-        .catch(err => {
-          this.$router.push({name: 'PageNotFound'});
-        })
+      .then(res => {
+        if (res.data.status_code === '2000') {
+          this.userinfo = JSON.parse(res.data.user);
+        }
+      })
+      .catch(err => {
+        this.$router.push({name: 'PageNotFound'});
+      })
   },
   methods: {
 
@@ -65,20 +65,9 @@ export default {
 }
 </script>
 
-<style>
+<style vars="{ avatar }">
 .info {
   height: auto;
-}
-
-.info .portrait {
-  position: absolute;
-  left: 15%;
-  top: 15%;
-  height: 180px;
-  width: 180px;
-  box-shadow: 0 0 4px 2px #c9c9c9;
-  background: white url("../../assets/portrait.png") no-repeat center;
-  background-size: 100% 100%;
 }
 
 .info .header {

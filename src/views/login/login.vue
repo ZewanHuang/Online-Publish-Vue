@@ -30,11 +30,6 @@ export default {
     };
   },
   methods: {
-    // jump(status) {
-    //   if (status) {
-    //     this.$router.push({ name: 'Home'});
-    //   }
-    // },
     login() {
       const self = this;
       const formData = new FormData();
@@ -53,7 +48,7 @@ export default {
                 // 前端保存用户信息
                 this.$store.dispatch('saveUserInfo', {user: {
                   'username': this.form.username,
-                  'confirmed': true
+                  'confirmed': true,
                 }});
                 // 登录成功后自动跳转上一个页面
                 // const redirect = this.$route.query.redirect
