@@ -1,6 +1,6 @@
 <template>
   <div class="info">
-    <div class="portrait"></div>
+    <div class="portrait" ref="AVATAR"></div>
     <el-container>
       <div class="header">
         <div class="header-bg"></div>
@@ -12,7 +12,8 @@
             <el-row>
               <el-col span="12" class="introduction">个人简介：{{ userinfo.description }}</el-col>
               <el-col span="11" class="button">
-                <el-button>联系他</el-button>
+                <a :href="getEmailUrl()"><el-button>联系他</el-button></a>
+                &emsp;&emsp;
                 <el-button type="primary">编辑个人资料</el-button>
               </el-col>
             </el-row>
@@ -42,6 +43,9 @@ export default {
       userinfo: {},
     }
   },
+  mounted() {
+
+  },
   created() {
     const formData = new FormData();
     formData.append("username", this.username);
@@ -53,6 +57,8 @@ export default {
       .then(res => {
         if (res.data.status_code === '2000') {
           this.userinfo = JSON.parse(res.data.user);
+          console.log(this.userinfo.avatar);
+          this.setAvatar();
         }
       })
       .catch(err => {
@@ -60,12 +66,21 @@ export default {
       })
   },
   methods: {
-
+    setAvatar() {
+      console.log("white url(" + this.userinfo.avatar + ") no-repeat center");
+      this.$refs.AVATAR.style.setProperty("--avatar", "white url(" + this.userinfo.avatar + ") no-repeat center");
+    },
+    getEmailUrl() {
+      return 'mailto:' + this.userinfo.email
+    }
   },
 }
 </script>
 
-<style vars="{ avatar }">
+<style>
+a {
+  text-decoration: none;
+}
 .info {
   height: auto;
 }
@@ -84,6 +99,19 @@ export default {
 
 .info .introduction{
   text-align: left;
+}
+
+.info .portrait {
+  position: absolute;
+  left: 15%;
+  top: 15%;
+  height: 180px;
+  width: 180px;
+  box-shadow: 0 0 4px 2px #c9c9c9;
+
+  --avatar: white url('../../assets/portrait.png') no-repeat center;
+  background: var(--avatar);
+  background-size: 100% 100%;
 }
 
 .info .header-bg {
