@@ -13,11 +13,11 @@
       <li>
         <img src="../../assets/logo.png" alt="logo" height="50px" width="50px">
       </li>
-            <li>
+      <li>
         <router-link to="/contactus">联系我们</router-link>
       </li>
       <li>
-        <p>备案号：京xxxxxx</p>
+        <p><a href="https://beian.miit.gov.cn/" target="_blank">备案号：粤ICP备2021021248号-1</a></p>
       </li>
     </ul>
 
@@ -36,6 +36,9 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
 
+a {
+  text-decoration: none;
+}
 
 #foot p{
   float: right;

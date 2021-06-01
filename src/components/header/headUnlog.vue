@@ -30,7 +30,7 @@
 import user from "@/store/user";
 
 export default {
-  name: 'navBar',
+  name: 'navBarNonLogin',
 }
 </script>
 

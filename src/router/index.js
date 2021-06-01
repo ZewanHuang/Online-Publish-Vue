@@ -44,6 +44,11 @@ const routes = [
     component: () => import('../views/register/confirm'),
   },
   {
+    path: '/edit',
+    name: 'Edit',
+    component: () => import('../views/user/edit'),
+  },
+  {
     path: '/:username/info',
     name: 'UserInfo',
     props: true,
@@ -70,20 +75,36 @@ const routes = [
     path: '/writing',
     name: 'Writing',
     component: () => import( '../views/writer/Writing'),
+    meta: {
+      requireAuth: true,
+      requireAuthor: true
+    },
     children:[
       {
         path: 'article',
         name: 'WriteArticle',
+        meta: {
+          requireAuth: true,
+          requireAuthor: true
+        },
         component: () => import( '../components/WritingDir/Article')
       },
       {
         path: 'review',
         name: 'Review',
+        meta: {
+          requireAuth: true,
+          requireAuthor: true
+        },
         component: () => import( '../components/WritingDir/Review')
       },
       {
         path: '',
         name: 'Overview',
+        meta: {
+          requireAuth: true,
+          requireAuthor: true
+        },
         component: () => import( '../components/WritingDir/Overview')
       }
     ]

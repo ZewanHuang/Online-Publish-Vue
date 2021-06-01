@@ -2,8 +2,11 @@
   <div id="nav">
     <ul>
       <li>
+        <el-button @click="logout">退出登录</el-button>
+      </li>
+      <li>
         <router-link :to=getUrl()>个人中心</router-link>
-      </li>   
+      </li>
       <li>
         <router-link to="/workspace">工作空间</router-link>
       </li>
@@ -40,7 +43,31 @@ export default {
       return {
         path: '/' + this.username + '/info'
       }
-    }
+    },
+    logout() {
+      const self = this;
+      self.$axios({
+        method: 'GET',
+        url: '/logout/',
+        data: {}
+      })
+          .then(res => {
+            switch (res.data.status_code) {
+              case "2000":
+                alert("登出成功！");
+                // 登出成功后清空前端存储内容，并自动跳转 /login
+                this.$store.dispatch('clear');
+                this.$router.push('/login');
+                break;
+              case "4001":
+                alert("用户未登录！");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          })
+    },
   }
 }
 </script>

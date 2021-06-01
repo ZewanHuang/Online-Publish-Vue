@@ -12,9 +12,14 @@
             <el-row>
               <el-col span="12" class="introduction">个人简介：{{ userinfo.description }}</el-col>
               <el-col span="11" class="button">
-                <a :href="getEmailUrl()"><el-button>联系他</el-button></a>
+                <a :href="getEmailUrl()">
+                  <el-button>联系他</el-button>
+                </a>
                 &emsp;&emsp;
-                <el-button type="primary">编辑个人资料</el-button>
+                <router-link to="/edit">
+                  <el-button type="primary">编辑个人资料</el-button>
+                </router-link>
+
               </el-col>
             </el-row>
           </div>
@@ -57,7 +62,6 @@ export default {
       .then(res => {
         if (res.data.status_code === '2000') {
           this.userinfo = JSON.parse(res.data.user);
-          console.log(this.userinfo.avatar);
           this.setAvatar();
         }
       })
@@ -67,7 +71,6 @@ export default {
   },
   methods: {
     setAvatar() {
-      console.log("white url(" + this.userinfo.avatar + ") no-repeat center");
       this.$refs.AVATAR.style.setProperty("--avatar", "white url(" + this.userinfo.avatar + ") no-repeat center");
     },
     getEmailUrl() {

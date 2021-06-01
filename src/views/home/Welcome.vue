@@ -5,7 +5,7 @@
         <div class="msg-box">
           <el-col class="msg">
             <el-row class="title">
-              <h1>云端出版平台</h1>
+              <h1>网上出版平台</h1>
             </el-row>
             <el-row class="msg-row">
             <span>
@@ -74,8 +74,7 @@ export default {
 
 <style>
 .welcome{
-  background: url("../../assets/welcome-book.png") no-repeat;
-  background-position: center;
+  background: url("../../assets/welcome-book.png") no-repeat center;
   height: 100%;
   width: 100%;
   background-size: cover;

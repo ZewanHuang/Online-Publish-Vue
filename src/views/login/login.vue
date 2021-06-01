@@ -49,6 +49,7 @@ export default {
                 this.$store.dispatch('saveUserInfo', {user: {
                   'username': this.form.username,
                   'confirmed': true,
+                  'usertype': res.data.user_type,
                 }});
                 // 登录成功后自动跳转上一个页面
                 // const redirect = this.$route.query.redirect
@@ -57,7 +58,7 @@ export default {
                 //   //如果redirect存在说明当前用户是进入某页面后未登陆自动跳转到登陆页面来的，所以登陆完成后得再次回跳到该地址
                 //   this.$router.push(redirect)
                 // } else {
-                  this.$router.push('/')
+                  this.$router.push('/' + this.form.username + '/info')
                 // }
                 // this.$router.go(-1)
                 break;

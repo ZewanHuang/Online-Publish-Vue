@@ -54,6 +54,14 @@ router.beforeEach((to, from, next) => {
       // }
     })
   }
+
+  //登录且身份为作者才能访问
+  if ((!userInfo || userInfo.user.usertype === "读者" || userInfo.user.usertype === "审稿人") && to.meta.requireAuthor) {
+    next({
+      name: 'Home',
+    })
+  }
+
   //其它情况不拦截
   next()
 })

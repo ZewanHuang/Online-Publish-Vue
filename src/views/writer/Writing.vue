@@ -2,9 +2,9 @@
   <div class="writing">
     <el-container>
       <el-aside class="user-msg" style="width: 25%">
-        <img class="photo" src="../../assets/portrait.png" alt="portrait">
-        <el-row style="height: 30px; margin-top: 10px"><span class="username">Username</span></el-row>
-        <el-row><span class="real-name">{{username}}</span></el-row>
+        <img class="photo" :src="userinfo.avatar" alt="portrait">
+        <el-row style="height: 30px; margin-top: 10px"><span class="username">{{ userinfo.username }}</span></el-row>
+        <el-row><span class="real-name">{{ userinfo.real_name }}</span></el-row>
         <el-row><el-button class="button">编辑个人信息</el-button></el-row>
       </el-aside>
       <el-main>
@@ -26,13 +26,39 @@
 </template>
 
 <script>
+import user from "@/store/user";
+
 export default {
   name: "Writing",
   data() {
     return {
-      username: "Zuo_zhou",
-      introduction: "北航大二学生，软件学院在读",
+      userinfo: {},
     }
+  },
+  created() {
+    const formData = new FormData();
+    formData.append("username", user.getters.getUser(user.state()).user.username);
+    this.$axios({
+      method: 'post',
+      url: '/writing/',
+      data: formData
+    })
+        .then(res => {
+          switch (res.data.status_code) {
+            case '2000':
+              this.userinfo = JSON.parse(res.data.user);
+              break;
+            case '4001':
+              alert('用户未登录');
+              break;
+            case '4002':
+              alert('请先申请成为作者');
+              break;
+          }
+        })
+        .catch(err => {
+          this.$router.push({name: 'PageNotFound'});
+        })
   },
   methods: {
 
