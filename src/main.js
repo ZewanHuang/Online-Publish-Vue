@@ -7,6 +7,8 @@ import axios from 'axios'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import user from "@/store/user";
+import footnav from"@/components/footer/foot";
+Vue.component("foot-nav",footnav);
 
 Vue.prototype.$axios = axios
 axios.defaults.baseURL = '/api/'
