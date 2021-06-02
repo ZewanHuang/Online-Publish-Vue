@@ -13,8 +13,6 @@
       <el-submenu index="1">
         <template slot="title" id="mine">个人中心</template>
         <el-menu-item index="1-1"><el-button type="text" @click="myhome">我的主页</el-button></el-menu-item>
-        <!-- <el-menu-item index="1-2"><el-button type="text" @click="workspace">工作空间</el-button></el-menu-item>
-        <el-menu-item index="1-3"><el-button type="text" @click="message">消息</el-button></el-menu-item> -->
         <el-menu-item index="1-4"><el-button type="text" @click="set">设置</el-button></el-menu-item>
         <el-menu-item index="1-5"><el-button type="text" @click="logout">退出登录</el-button></el-menu-item>
       </el-submenu>

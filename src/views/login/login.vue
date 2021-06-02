@@ -1,12 +1,22 @@
 <template>
+<div>
+    <div class="background">
+      <img src="../../assets/welcome-book.png" width="100%" height="100%" alt="" />
+  </div>
+  <div>
+        <img class="logoname1" src="../../assets/logo.png" alt="" />
+        <img class="logoname2" src="../../assets/publish-logo.png" alt="" />
+  </div>
   <div class="login">
+    <h1 class="title">登录</h1>
+    <h1><br/></h1>
     <div class="form">
       <el-form :model="form" ref="form" label-width="100px" class="demo-ruleForm">
         <el-form-item label="用户名">
-          <el-input type="username" v-model="form.username" autocomplete="off"></el-input>
+          <el-input placeholder="用户名" type="username" v-model="form.username" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="密码">
-          <el-input type="password" v-model="form.password" autocomplete="off"></el-input>
+          <el-input placeholder="密码" type="password" v-model="form.password" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="login">登录</el-button>
@@ -15,6 +25,7 @@
       </el-form>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -97,11 +108,36 @@ export default {
 <style scoped>
 .login {
   margin: 50px 0 0;
+  padding: 0 30px 0 0;
   width: 400px;
   position: relative;
   display: inline-block;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
 }
 .form {
   margin-top: 50px;
+}
+.background{
+    width:100%;  
+    height:100%;  /**宽高100%是为了图片铺满屏幕 */
+    z-index:-1;
+    position: absolute;
+}
+img.logoname1{
+  margin-top: 20px;
+  padding-top: 10px;
+  width: 7%;
+  height: 7%;
+}
+img.logoname2{
+  margin-top: 20px;
+  padding-top: 15px;
+  width: 14%;
+  height: 14%;
+}
+.title{
+  position: absolute;
+  left: 42%;
 }
 </style>

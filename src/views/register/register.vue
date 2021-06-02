@@ -1,27 +1,36 @@
 <template>
+<div>
+  <div class="background">
+      <img src="../../assets/welcome-book.png" width="100%" height="100%" alt="" />
+  </div>
+
   <div class="register">
-    <h1>Create your account</h1>
+    <h1 class="title">注册</h1>
+    <h1><br/></h1>
     <div class="form">
       <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="用户名" prop="username">
-          <el-input type="username" v-model="ruleForm.username" autocomplete="off"></el-input>
+          <el-input placeholder="用户名" type="username" v-model="ruleForm.username" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
-          <el-input type="email" v-model="ruleForm.email" autocomplete="off"></el-input>
+          <el-input placeholder="邮箱" type="email" v-model="ruleForm.email" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="pass">
-          <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+          <el-input placeholder="密码" type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="确认密码" prop="checkPass">
-          <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
+          <el-input placeholder="确认密码" type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="register('ruleForm')">注册</el-button>
           <el-button @click="resetForm('ruleForm')">重置</el-button>
         </el-form-item>
+        <p class="jumpto1">已有账号？直接<a href="/login" class="jumpto">登录</a></p>
       </el-form>
+      
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -152,11 +161,35 @@ export default {
 <style scoped>
 .register {
   margin: 50px 0 0;
+  padding: 0 30px 0 0;
   width: 400px;
   position: relative;
   display: inline-block;
+  background-color: rgb(255, 255, 255,0.8);
+  border-radius: 20px;
 }
 .form {
   margin-top: 50px;
+}
+.background{
+    width:100%;  
+    height:100%;  /**宽高100%是为了图片铺满屏幕 */
+    z-index:-1;
+    position: absolute;
+}
+.title{
+  position: absolute;
+  left: 42%;
+}
+.jumpto{
+  float: right;
+  font-size: 13px;
+  margin-bottom: 5%;
+  color: blue;
+}
+.jumpto1{
+  float: right;
+  font-size: 13px;
+  margin-bottom: 5%;
 }
 </style>

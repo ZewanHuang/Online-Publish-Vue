@@ -1,87 +1,81 @@
 <template>
-  <div id="foot">
-    <ul>
-      <li>
-        <p>Copyright 2021 zewan.top</p>
-      </li>   
-      <li>
-        <router-link to="/team">团队</router-link>
-      </li>
-      <li>
-        <router-link to="/aboutus">关于我们</router-link>
-      </li>
-      <li>
-        <img src="../../assets/logo.png" alt="logo" height="50px" width="50px">
-      </li>
-      <li>
-        <router-link to="/contactus">联系我们</router-link>
-      </li>
-      <li>
-        <p><a href="https://beian.miit.gov.cn/" target="_blank">备案号：粤ICP备2021021248号-1</a></p>
-      </li>
-    </ul>
-
-    
+  <div id="foot" >
+    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" >
+      <p class="copyright">Copyright 2021 zewan.top</p>
+      <router-link to="/team" class="team">团队</router-link>
+      <router-link to="/aboutus" class="aboutus">关于我们</router-link>
+      <img class="logo" src="../../assets/logo_foot.png" alt="logo" height="40px" width="40px">
+      <p><a href="https://beian.miit.gov.cn/" target="_blank" class="beian">备案号：粤ICP备2021021248号-1</a></p>
+      <router-link to="/contactus" class="contactus">联系我们</router-link>
+    </el-menu>
   </div>
 </template>
 
 <script>
-import user from "@/store/user";
-
 export default {
   name: 'navBar',
 }
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
+  .copyright{
+    text-align: center;
+    float: left;
+    font-size: 12px;
+    padding: 10px;
+  }
 
-a {
-  text-decoration: none;
-}
+  .team{
+    position: absolute;
+    left: 12%;
+    text-align: center;
+    float: left;
+    font-size: 12px;
+    padding: 20px;
+    margin-left: 10%;
+    color: black;
+  }
+  .aboutus{
+    position: absolute;
+    left: 30%;
+    text-align: center;
+    float: left;
+    font-size: 12px;
+    padding: 20px;
+    margin-left: 4%;
+    color: black;
+  }
+  img.logo{
+    position: absolute;
+    left: 50%;
+    float: left;
+    margin-left: 0;
+    margin-top: 8px;
+  }
+  .beian{
+    position: absolute;
+    right: 0;
+    text-align: center;
+    float: right;
+    font-size: 12px;
+    padding-top: 5px;
+    margin-right: 4%;
+    color: black;
+  }
+  .contactus{
+    position: absolute;
+    right: 30%;
+    text-align: center;
+    float:right;
+    font-size: 12px;
+    padding-top: 5px;
+    margin-right: 4%;
+    color: black;
+  }
 
-#foot p{
-  float: right;
-  /* display:inline; */
-}
-
-#foot ul{
-  border-top:1px solid rgb(192, 187, 187);
-  list-style-type: none;
-  overflow: hidden;
-  margin: 20px;
-  padding: 10px;
-  /* padding: 20px,30px,10px,30px; */
-  background-color:white;
-  bottom: 0;
-  font-size: 12px;
-  height: 40px;
-  
-  /* display:inline; */
-}
-
-#foot li {
-  float:left;
-  display: block;
-  text-align: center;
-  /* padding: 17px 16px 3px 16px; */
-  /* margin: 0px,30px,0px,30px; */
-  text-decoration: none;
-  color: black;
-  width: 180px;
-  height: 35px;
-}
-
-#foot li a {
-  display: block;
-  text-align: center;
-  padding: 17px 10px 3px 10px;
-  /* margin: 0px,30px,0px,30px; */
-  text-decoration: none;
-  color: black;
-  width: 180px;
-  height: 35px;
-
-}
-
+  #foot{
+    margin-top: 50px;
+    bottom: 0;
+  }
 </style>
