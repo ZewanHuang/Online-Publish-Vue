@@ -1,30 +1,26 @@
 <template>
   <div id="nav">
-    <ul>
-      <li>
-        <el-button @click="logout">退出登录</el-button>
-      </li>
-      <li>
-        <router-link :to=getUrl()>个人中心</router-link>
-      </li>
-      <li>
-        <router-link to="/workspace">工作空间</router-link>
-      </li>
-      <li>
-        <router-link to="/message">消息</router-link>
-      </li>
-
+    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
       <router-link to="/">
         <img src="../../assets/logo.png" alt="logo">
       </router-link>
       <input type="text" name="search" placeholder="Search or jump to…"/>
-      <el-button icon="el-icon-search" circle></el-button>
+
+      <!-- <el-button icon="el-icon-search" circle></el-button> -->
 
       <router-link to="/help" class="help">Help</router-link>
       <router-link to="/guide" class="help">Guide</router-link>
-    </ul>
-
-    
+      <el-submenu index="1">
+        <template slot="title" id="mine">个人中心</template>
+        <el-menu-item index="1-1"><el-button type="text" @click="myhome">我的主页</el-button></el-menu-item>
+        <!-- <el-menu-item index="1-2"><el-button type="text" @click="workspace">工作空间</el-button></el-menu-item>
+        <el-menu-item index="1-3"><el-button type="text" @click="message">消息</el-button></el-menu-item> -->
+        <el-menu-item index="1-4"><el-button type="text" @click="set">设置</el-button></el-menu-item>
+        <el-menu-item index="1-5"><el-button type="text" @click="logout">退出登录</el-button></el-menu-item>
+      </el-submenu>
+      <el-menu-item index="2"><el-button type="text" @click="workspace">工作空间</el-button></el-menu-item>
+      <el-menu-item index="3"><el-button type="text" @click="message">消息</el-button></el-menu-item>
+    </el-menu>
   </div>
 </template>
 
@@ -68,84 +64,29 @@ export default {
             console.log(err);
           })
     },
+    set(){
+      window.location.href="/set";
+    },
+    myhome(){
+      window.location.href="/myhome";
+    },
+    message(){
+      window.location.href="/message";
+    },
+    workspace(){
+      window.location.href="/workspace";
+    },
   }
 }
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
-
-a {
-  text-decoration: none;
+#mine{
+  position: absolute;
+  right:10%;
 }
-#nav .brand-name {
-  font-family: "Times New Roman", Times, serif;;
-}
-#nav {
-  border: none;
-  box-shadow:0 1px 1px 1px lightgray;
-  text-align: left; 
-}
-
-#nav ul{
-  list-style-type: none;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  background-color:white;
-}
-
-#nav li {
-  float:right;
-}
-
-#nav li a {
-  display: block;
-  text-align: center;
-  padding: 17px 16px 3px 16px;
-  text-decoration: none;
-  font-weight: bold;
-  color: black;
-  width: 80px;
-  height: 35px;
-}
-
-#nav li a.router-link-exact-active {
-  font-weight: bold;
-  color: #0090cc;
-  border-bottom: solid;
-}
-
-#nav img {
-  margin: 0 0 0 10px;
-  padding: 5px;
-  width: 50px;
-  height: 50px;
-  vertical-align:-20px;
-}
-
-#nav span {
-  font-size: 30px;
-  text-align: center;
-}
-
-
-#nav input {
-  font-size: 12px;
-  width: 200px;    
-  height: 10px;        
-  /* margin: px auto;  */
-  /* display: flex; */
-  border: 1px solid black;
-  border-radius: 20px;
-  outline: none;
-  padding: 10px;
-}
-
 .help{
   color: rgb(128, 123, 123);
-  margin: 10px;
+  margin: 25px;
 }
- 
-
 </style>

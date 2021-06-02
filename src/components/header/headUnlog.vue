@@ -22,7 +22,6 @@
       <router-link to="/guide" class="help">Guide</router-link>
     </ul>
 
-    
   </div>
 </template>
 
@@ -32,6 +31,7 @@ import user from "@/store/user";
 export default {
   name: 'navBarNonLogin',
 }
+
 </script>
 
 <style>
@@ -70,12 +70,12 @@ a {
 #nav li a {
   display: block;
   text-align: center;
-  padding: 17px 10px 3px 10px;
+  padding: 17px 20px 15px 20px;
   text-decoration: none;
   font-weight: bold;
   color: black;
-  width: 50px;
-  height: 35px;
+  width: 50%;
+  height: 50%;
 }
 
 #nav li a.router-link-exact-active {
@@ -100,9 +100,9 @@ a {
 
 #nav input {
   font-size: 12px;
-  width: 200px;    
-  height: 10px;        
-  /* margin: px auto;  */
+  width: 200px;
+  height: 10px;
+  /* margin: 15px auto;  */
   /* display: flex; */
   border: 1px solid black;
   border-radius: 20px;
@@ -114,6 +114,6 @@ a {
   color: rgb(128, 123, 123);
   margin: 10px;
 }
- 
+
 
 </style>

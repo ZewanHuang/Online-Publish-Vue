@@ -2,7 +2,8 @@
   <div id="app">
     <nav-bar v-if="is_login"></nav-bar>
     <nav-bar-non-login v-else></nav-bar-non-login>
-    <router-view/>
+    
+    <div id="v-content" v-bind:style="{minHeight: Height+'px'}"><router-view/></div>
     <foot-nav></foot-nav>
   </div>
 </template>
@@ -16,6 +17,7 @@ export default {
   data() {
     return {
       is_login: false,
+      Height: 0
     }
   },
   created() {
@@ -23,6 +25,12 @@ export default {
     if (userInfo) {
       this.is_login = true
     }
+  },
+  mounted(){
+    //动态设置内容高度 让footer始终居底   header+footer的高度是100
+    this.Height = document.documentElement.clientHeight - 100;  
+　　//监听浏览器窗口变化　
+    window.onresize = ()=> {this.Height = document.documentElement.clientHeight -100}
   }
 }
 </script>
