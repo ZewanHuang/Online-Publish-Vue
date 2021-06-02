@@ -72,7 +72,15 @@ export default {
       window.location.href="/message";
     },
     workspace(){
-      window.location.href="/workspace";
+      const userInfo = user.getters.getUser(user.state())
+      switch (userInfo.user.usertype) {
+        case '审稿人':
+          window.location.href="/audit";
+          break;
+        default:
+          window.location.href="/writing";
+          break;
+      }
     },
   }
 }
