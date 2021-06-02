@@ -35,7 +35,7 @@
 <script>
 
 export default {
-  name: "Overview",
+  name: "Writer-Overview",
   data() {
     return {
       articles: [

@@ -4,7 +4,9 @@
       <router-link to="/">
         <img src="../../assets/logo.png" alt="logo">
       </router-link>
-      <input type="text" name="search" placeholder="Search or jump to…"/>
+      <label>
+        <input type="text" name="search" placeholder="Search or jump to…"/>
+      </label>
 
       <!-- <el-button icon="el-icon-search" circle></el-button> -->
 
@@ -13,7 +15,7 @@
       <el-submenu index="1">
         <template slot="title" id="mine">个人中心</template>
         <el-menu-item index="1-1"><el-button type="text" @click="myhome">我的主页</el-button></el-menu-item>
-        <el-menu-item index="1-4"><el-button type="text" @click="set">设置</el-button></el-menu-item>
+        <el-menu-item index="1-4"><el-button type="text" @click="setting">设置</el-button></el-menu-item>
         <el-menu-item index="1-5"><el-button type="text" @click="logout">退出登录</el-button></el-menu-item>
       </el-submenu>
       <el-menu-item index="2"><el-button type="text" @click="workspace">工作空间</el-button></el-menu-item>
@@ -62,11 +64,11 @@ export default {
             console.log(err);
           })
     },
-    set(){
-      window.location.href="/set";
+    setting(){
+      window.location.href="/setting";
     },
     myhome(){
-      window.location.href="/myhome";
+      window.location.href="/" + this.username + "/info";
     },
     message(){
       window.location.href="/message";
@@ -75,10 +77,10 @@ export default {
       const userInfo = user.getters.getUser(user.state())
       switch (userInfo.user.usertype) {
         case '审稿人':
-          window.location.href="/audit";
+          window.location.href="/review/overview";
           break;
         default:
-          window.location.href="/writing";
+          window.location.href="/writing/overview";
           break;
       }
     },

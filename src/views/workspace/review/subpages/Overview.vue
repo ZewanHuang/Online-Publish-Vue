@@ -1,36 +1,32 @@
 <template>
   <div class="overview">
     <el-container>
-        <el-main>
-          <div class="last-article">
-            <el-row><h2>近期审核</h2></el-row>
-            <el-row>
-              <el-col span="8" v-for="article in articles">
-                <el-card class="box-card" >
-                  <el-row class="title">{{article.title}}</el-row>
-                  <el-row class="author"><span style="font-weight: 650">作者：</span>{{article.author}}</el-row>
-                  <el-row class="keywords">
-                    <span style="font-weight: 650">关键字：</span>
-                    <span v-for="word in article.keywords">{{word}}；</span>
-                  </el-row>
-                </el-card>
-              </el-col>
-            </el-row>
-          </div>
-          <div>
-            <el-row><h2>动态</h2></el-row>
-            <news></news>
-          </div>
+      <el-main>
+        <div class="last-article">
+          <el-row><h2>近期审核</h2></el-row>
+          <ArticleOverview :articles="articles"/>
+        </div>
 
+        <div class="news">
+          <el-row><h2>动态</h2></el-row>
+          <NewsOverview :newsList="newsList"/>
+        </div>
 
-        </el-main>
+      </el-main>
     </el-container>
   </div>
 </template>
 
 <script>
+import ArticleOverview from "../../../../components/common/article_overview";
+import ActivityOverview from "../../../../components/common/user_activity";
+
 export default {
-  name: "Overview",
+  name: "Review-Overview",
+  components: {
+    NewsOverview: ActivityOverview,
+    ArticleOverview
+  },
   data() {
     return {
       articles: [
@@ -51,8 +47,43 @@ export default {
           author: '吕俊蓉',
           keywords: ['物联网技术', '远程控制', '恒温恒湿箱', 'web端', 'NB-IoT无线传输模块'],
           abstract: '当今社会,计算机技术的发展和互联网的普及让网络化办公已经成为常态。而移动互联网技术更是改变了传统的办公方式,让企业开始建立移动办公平台,在现有信息化办公状态下进行延伸。然而,传统办公系统和移动办公系统的有机融合成为了移动......'
+        },
+        {
+          title: '远程监控系统设计',
+          author: '吕俊蓉',
+          keywords: ['物联网技术', '远程控制', '恒温恒湿箱', 'web端', 'NB-IoT无线传输模块'],
+          abstract: '当今社会,计算机技术的发展和互联网的普及让网络化办公已经成为常态。而移动互联网技术更是改变了传统的办公方式,让企业开始建立移动办公平台,在现有信息化办公状态下进行延伸。然而,传统办公系统和移动办公系统的有机融合成为了移动......'
         }
-      ]
+      ],
+      newsList: [
+        /*
+        0-修改了文章
+        1-成功修改
+        2-提交了文章
+        3-成功发布
+        4-审核了文章
+         */
+        {
+          status: 4,
+          title: '基于物联网的恒温恒湿箱的远程监控系统设计',
+          date:'2021/05/26'
+        },
+        {
+          status: 4,
+          title: '企业智慧移动办公平台创新型研究',
+          date:'2021/05/01'
+        },
+        {
+          status: 4,
+          title: '远程监控系统设计',
+          date:'2021/05/01'
+        },
+        {
+          status: 4,
+          title: '互联网营销战略概论',
+          date:'2021/05/02'
+        },
+      ],
     }
   }
 }
@@ -62,7 +93,7 @@ export default {
 .overview .el-main{
   padding-top: 10px;
   width: 100%;
-  height: 600px;
+  height: auto;
 }
 
 .overview .el-container{

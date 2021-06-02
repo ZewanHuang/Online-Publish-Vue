@@ -57,37 +57,37 @@ const routes = [
       {
         path: 'article',
         name: 'Article',
-        component: () => import( '../components/InfoDir/Article')
+        component: () => import( '../views/userCenter/subpages/article')
       },
       {
         path: 'collection',
         name: 'Collection',
-        component: () => import( '../components/InfoDir/Collection')
+        component: () => import( '../views/userCenter/subpages/collection')
       },
       {
         path: '',
         name: 'News',
-        component: () => import( '../components/InfoDir/News')
+        component: () => import( '../views/userCenter/subpages/activity')
       }
     ]
   },
   {
     path: '/writing',
     name: 'Writing',
-    component: () => import( '../views/writer/Writing'),
+    component: () => import( '../views/workspace/writer/writer'),
     meta: {
       requireAuth: true,
       requireAuthor: true
     },
     children:[
       {
-        path: 'article',
+        path: 'Article',
         name: 'WriteArticle',
         meta: {
           requireAuth: true,
           requireAuthor: true
         },
-        component: () => import( '../components/WritingDir/Article')
+        component: () => import( '../views/workspace/writer/subpages/Article')
       },
       {
         path: 'review',
@@ -96,16 +96,16 @@ const routes = [
           requireAuth: true,
           requireAuthor: true
         },
-        component: () => import( '../components/WritingDir/Review')
+        component: () => import( '../views/workspace/writer/subpages/Review')
       },
       {
-        path: '',
-        name: 'Overview',
+        path: 'overview',
+        name: 'Writer-Overview',
         meta: {
           requireAuth: true,
           requireAuthor: true
         },
-        component: () => import( '../components/WritingDir/Overview')
+        component: () => import( '../views/workspace/writer/subpages/Overview')
       }
     ]
   },
@@ -125,24 +125,24 @@ const routes = [
     component: () => import( '../views/register/Register-success.vue')
   },
   {
-    path: '/audit',
-    name: 'Audit',
-    component: () => import( '../views/review/Audit.vue'),
+    path: '/review',
+    name: 'Review',
+    component: () => import( '../views/workspace/review/review.vue'),
     children:[
       {
-        path: '',
-        name: 'Overview',
-        component: () => import( '../components/Overview')
+        path: 'overview',
+        name: 'Review-Overview',
+        component: () => import( '../views/workspace/review/subpages/Overview')
       },
       {
-        path: 'finish-audit',
-        name: 'Finish-audit',
-        component: () => import( '../components/Finish-audit')
+        path: 'reviewed',
+        name: 'Reviewed',
+        component: () => import( '../views/workspace/review/subpages/reviewed')
       },
       {
-        path: 'to-audit',
-        name: 'To-audit',
-        component: () => import( '../components/To-audit')
+        path: 'to-review',
+        name: 'To-Review',
+        component: () => import( '../views/workspace/review/subpages/toReview')
       }
     ]
   },

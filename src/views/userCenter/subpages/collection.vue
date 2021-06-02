@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import News from "./News.vue";
+import News from "./activity.vue";
 
 export default {
   name: "Collection",

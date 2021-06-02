@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: "To-audit",
+  name: "ToReview",
   data() {
     return {
       articles: [

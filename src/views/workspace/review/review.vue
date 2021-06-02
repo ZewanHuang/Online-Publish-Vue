@@ -2,7 +2,7 @@
   <div class="audit">
     <el-container>
       <el-aside class="user-msg" style="width: 25%">
-        <img class="photo" src="../../assets/reader.png">
+        <img class="photo" src="../../../assets/reader.png">
         <el-row style="height: 30px;margin-top: 10px"><span class="username">Username</span></el-row>
         <el-row><span class="real-name">真实姓名</span></el-row>
         <el-row><el-button class="button">编辑个人信息</el-button></el-row>
@@ -11,9 +11,9 @@
         <el-row>
           <div class="nav-son">
             <ul>
-              <li><router-link :to="{name: 'Overview'}" >概览</router-link></li>
-              <li><router-link :to="{name: 'To-audit'}" >待审核</router-link></li>
-              <li><router-link :to="{name: 'Finish-audit'}" >已审核</router-link></li>
+              <li><router-link :to="{name: 'Review-Overview'}" >概览</router-link></li>
+              <li><router-link :to="{name: 'To-Review'}" >待审核</router-link></li>
+              <li><router-link :to="{name: 'Reviewed'}" >已审核</router-link></li>
             </ul>
           </div>
         </el-row>

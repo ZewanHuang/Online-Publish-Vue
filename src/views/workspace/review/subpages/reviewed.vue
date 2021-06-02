@@ -1,14 +1,14 @@
 <template>
   <div class="finish-audit">
     <div v-for="article in articles" :key="article.title" class="article-box">
-      <el-row class="title">{{ article.title }}</el-row>
-      <el-row class="author"><span style="font-weight: 650">作者：</span>{{ article.author }}</el-row>
+      <el-row class="title">{{article.title}}</el-row>
+      <el-row class="author"><span style="font-weight: 650">作者：</span>{{article.author}}</el-row>
       <el-row class="keywords">
         <span style="font-weight: 650">关键字：</span>
-        <span v-for="word in article.keywords">{{ word }}；</span>
+        <span v-for="word in article.keywords">{{word}}；</span>
       </el-row>
       <el-row class="abstract">
-        <span style="font-weight: 650">摘要：</span>{{ article.abstract }}
+        <span style="font-weight: 650">摘要：</span>{{article.abstract}}
       </el-row>
       <el-row class="button">
         <el-button type="primary" >查看</el-button>
@@ -19,14 +19,14 @@
 
 <script>
 export default {
-  name: "Finish-audit",
+  name: "Reviewed",
   data() {
     return {
       articles: [
         {
           title: '智能信息采集器软件开发实践',
           author:'傅骏',
-          keywords: ['爬虫技术','信息采集','python','二次开发','xpath'],
+          keywords: [		'爬虫技术','信息采集','python','二次开发','xpath'],
           abstract: '应用爬虫技术开发的智能信息采集器,可以帮助用户及时获得工程学院、铸造院校、焊接行业、军事网站的最新消息。论文选用tkinter进行界面设计,应用python爬虫技术对xpath、抓取到的日期、网址进行了处理,顺利实现抓取消息并获得......'
         },
         {
