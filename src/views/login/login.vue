@@ -69,7 +69,8 @@ export default {
                 //   //如果redirect存在说明当前用户是进入某页面后未登陆自动跳转到登陆页面来的，所以登陆完成后得再次回跳到该地址
                 //   this.$router.push(redirect)
                 // } else {
-                  this.$router.push('/' + this.form.username + '/info')
+                //   this.$router.push('/' + this.form.username + '/info')
+                this.$router.push('/')
                 // }
                 // this.$router.go(-1)
                 break;
@@ -112,7 +113,7 @@ export default {
   width: 400px;
   position: relative;
   display: inline-block;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255,0.8);
   border-radius: 20px;
 }
 .form {
