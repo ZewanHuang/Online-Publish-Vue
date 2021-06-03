@@ -19,7 +19,7 @@
 
 <script>
 import ArticleOverview from "../../../../components/common/article_overview";
-import ActivityOverview from "../../../../components/common/user_activity";
+import ActivityOverview from "../../../../components/common/activity_overview";
 
 export default {
   name: "Review-Overview",

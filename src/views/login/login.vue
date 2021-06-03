@@ -69,6 +69,7 @@ export default {
                 //   this.$router.push(redirect)
                 // } else {
                 //   this.$router.push('/' + this.form.username + '/info')
+                location.reload()
                 this.$router.push('/')
                 // }
                 // this.$router.go(-1)

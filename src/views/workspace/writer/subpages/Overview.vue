@@ -4,27 +4,12 @@
       <el-main>
         <div class="last-article">
           <el-row><h2>受欢迎的文章</h2></el-row>
-          <el-row>
-            <el-carousel :interval="8000" type="card" height="200px">
-              <el-carousel-item v-for="(article, index) in articles" :key="index">
-                <div class="article-card-content">
-                  <h3 class="medium" @click="openArticle(index)">{{article.title}}</h3>
-                  <el-divider></el-divider>
-                  <el-row class="author"><span style="font-weight: bold">作者：</span>{{article.author}}</el-row>
-                  <br>
-                  <el-row class="keywords">
-                    <span style="font-weight: bold">关键字：</span>
-                    <span v-for="word in article.keywords">{{word}}；</span>
-                  </el-row>
-                </div>
-              </el-carousel-item>
-            </el-carousel>
-          </el-row>
+          <ArticleOverview :articles="articles"/>
         </div>
 
         <div class="news">
           <el-row><h2>创作动态</h2></el-row>
-          <news-list></news-list>
+          <ActivityOverview :newsList="newsList"/>
         </div>
 
       </el-main>
@@ -33,9 +18,15 @@
 </template>
 
 <script>
+import ArticleOverview from "../../../../components/common/article_overview";
+import ActivityOverview from "../../../../components/common/activity_overview";
 
 export default {
   name: "Writer-Overview",
+  components: {
+    ActivityOverview,
+    ArticleOverview,
+  },
   data() {
     return {
       articles: [
@@ -63,7 +54,41 @@ export default {
           keywords: ['信息科技', '经济与管理科学'],
           abstract: '当今社会,计算机技术的发展和互联网的普及让网络化办公已经成为常态。而移动互联网技术更是改变了传统的办公方式,让企业开始建立移动办公平台,在现有信息化办公状态下进行延伸。然而,传统办公系统和移动办公系统的有机融合成为了移动......'
         },
-      ]
+      ],
+      newsList: [
+        /*
+        0-修改了文章
+        1-成功修改
+        2-提交了文章
+        3-成功发布
+        4-审核了文章
+         */
+        {
+          status: 1,
+          title: '基于物联网的恒温恒湿箱的远程监控系统设计',
+          date:'2021/05/26'
+        },
+        {
+          status: 2,
+          title: '企业智慧移动办公平台创新型研究',
+          date:'2021/05/01'
+        },
+        {
+          status: 3,
+          title: '远程监控系统设计',
+          date:'2021/05/01'
+        },
+        {
+          status: 0,
+          title: '互联网营销战略概论',
+          date:'2021/05/02'
+        },
+        {
+          status: 5,
+          title: '删除效果',
+          date:'2021/05/02'
+        },
+      ],
     }
   },
   methods: {

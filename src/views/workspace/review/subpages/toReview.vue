@@ -1,23 +1,10 @@
 <template>
-  <div class="to-audit">
-    <div v-for="article in articles" :key="article.title" class="article-box">
-      <el-row class="title">{{article.title}}</el-row>
-      <el-row class="author"><span style="font-weight: 650">作者：</span>{{article.author}}</el-row>
-      <el-row class="keywords">
-        <span style="font-weight: 650">关键字：</span>
-        <span v-for="word in article.keywords">{{word}}；</span>
-      </el-row>
-      <el-row class="abstract">
-        <span style="font-weight: 650">摘要：</span>{{article.abstract}}
-      </el-row>
-      <el-row class="button">
-        <el-button type="primary" >审核</el-button>
-      </el-row>
-    </div>
-  </div>
+  <ArticleList :articles="articles"/>
 </template>
 
 <script>
+import ArticleList from "../../../../components/common/article_list";
+
 export default {
   name: "ToReview",
   data() {
@@ -34,7 +21,10 @@ export default {
           author:	'章明珠',
           keywords: ['混合式教学','金课','教学设计','建构主义','联通主义'],
           abstract: '混合式教学正如火如荼地开展着,然而,如何开展高质量的混合式课程以达到培养学生高阶思维能力的目标？从目前高校混合式教学的现状出发,界定"互联网+"时代,学生能力的培养目标,从建构主义和联通主义学习理论的视角,阐述了......'
-        }
+        },
+        { title: "HTML5技术在融媒体平台建设中的运用", author: "", abstract: "", keywords:[]},
+        { title: "Web系统前端框架和库的相关技术分析", author: "", abstract: "", keywords:[]},
+        { title: "基于Java与HTML5的宁夏数字博物馆系统的设计与实现", author: "", abstract: "", keywords:[]},
       ]
     }
   }

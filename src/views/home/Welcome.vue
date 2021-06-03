@@ -78,7 +78,7 @@ export default {
   height: 100%;
   width: 100%;
   background-size: cover;
-  position: fixed;
+  position: absolute;
 }
 .welcome .msg-box{
   text-align: center;

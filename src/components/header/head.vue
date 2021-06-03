@@ -52,6 +52,7 @@ export default {
               case "2000":
                 alert("登出成功！");
                 // 登出成功后清空前端存储内容，并自动跳转 /login
+                location.reload();
                 this.$store.dispatch('clear');
                 this.$router.push('/login');
                 break;

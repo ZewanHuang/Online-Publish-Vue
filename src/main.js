@@ -4,13 +4,13 @@ import router from './router'
 import store from './store'
 import navBar from './components/header/head.vue'
 import navBarInfo from './views/userCenter/subpages/user_center.vue'
-import newsList from './views/workspace/writer/subpages/NewsList.vue'
 import axios from 'axios'
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import user from "@/store/user";
 import footnav from"@/components/footer/foot";
+import News from "@/views/userCenter/subpages/activity";
 Vue.component("foot-nav",footnav);
 
 Vue.use(ElementUI);
@@ -20,7 +20,7 @@ axios.defaults.baseURL = '/api/'
 
 Vue.component("nav-bar", navBar);
 Vue.component("nav-bar-info", navBarInfo);
-Vue.component("news-list", newsList);
+Vue.component("news", News);
 
 Vue.config.productionTip = false
 

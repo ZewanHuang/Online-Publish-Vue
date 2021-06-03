@@ -1,23 +1,10 @@
 <template>
-  <div class="finish-audit">
-    <div v-for="article in articles" :key="article.title" class="article-box">
-      <el-row class="title">{{article.title}}</el-row>
-      <el-row class="author"><span style="font-weight: 650">作者：</span>{{article.author}}</el-row>
-      <el-row class="keywords">
-        <span style="font-weight: 650">关键字：</span>
-        <span v-for="word in article.keywords">{{word}}；</span>
-      </el-row>
-      <el-row class="abstract">
-        <span style="font-weight: 650">摘要：</span>{{article.abstract}}
-      </el-row>
-      <el-row class="button">
-        <el-button type="primary" >查看</el-button>
-      </el-row>
-    </div>
-  </div>
+  <ArticleList :articles="articles"/>
 </template>
 
 <script>
+import ArticleList from "../../../../components/common/article_list";
+
 export default {
   name: "Reviewed",
   data() {

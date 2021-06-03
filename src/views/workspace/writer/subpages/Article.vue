@@ -27,40 +27,18 @@
    </el-row>
    <hr/>
 
-   <el-row class="article-list" v-for="(article,index) in articleList">
-     <el-card class="card">
-       <div slot="header" class="clearfix" style="text-align: left">
-         <span style="font-weight: bold; color: #409eff">{{article.title}}</span>
-         <el-button style="float: right; padding: 3px 0" type="text">查看文章</el-button>
-       </div>
-       <div slot="default" class="card-body" style="text-align: left">
-         <span style="font-weight: bold">作者：</span>
-         <span>{{article.author}}</span>
-         <br>
-         <br>
-         <span style="font-weight: bold">关键字：</span>
-         <span v-for="word in article.keywords">{{word}} </span>
-       </div>
-     </el-card>
-   </el-row>
-
-   <el-row class="page">
-
-   </el-row>
-
-   <el-row>
-     <el-pagination
-         background
-         layout="prev, pager, next"
-         :total="100">
-     </el-pagination>
-   </el-row>
+   <ArticleList :articles="articles"/>
  </div>
 </template>
 
 <script>
+import ArticleList from "../../../../components/common/article_list";
+
 export default {
   name: "Article",
+  components: {
+    ArticleList,
+  },
   data() {
     return {
       form: {
@@ -81,7 +59,7 @@ export default {
           label: '按作者搜索'
         },
       ],
-      articleList: [
+      articles: [
         {
           title: "图谱建模基础下海量网络流量的数据挖掘",
           author: "易灿 刘彦姝",
@@ -93,7 +71,15 @@ export default {
             "移动互联网","网络流量"
           ]
         },
-        { title: "“互联网+”时代混合式金课教学设计", author: "", abstract: "", keywords:[]},
+        {
+          title: "“互联网+”时代混合式金课教学设计",
+          author: "章明珠",
+          abstract: "混合式教学正如火如荼地开展着,然而,如何开展高质量的混合式课程以达到培养学生高阶思维能力的目标?" +
+              "从目前高校混合式教学的现状出发,界定\"互联网+\"时代,学生能力的培养目标,从建构主义和联通主义学习理论的视角," +
+              "阐述了混合式教学的设计方法,以\"网页设计\"课程中的一节为例,阐述了混合式课程的教学设计。" +
+              "最后,通过评价说明这种混合式教学设计能够达到较好的教学效果。 ",
+          keywords: ["混合式教学", "金课", "教学设计", "建构主义", "联通主义"],
+        },
         { title: "HTML5技术在融媒体平台建设中的运用", author: "", abstract: "", keywords:[]},
         { title: "Web系统前端框架和库的相关技术分析", author: "", abstract: "", keywords:[]},
         { title: "基于Java与HTML5的宁夏数字博物馆系统的设计与实现", author: "", abstract: "", keywords:[]},
@@ -116,9 +102,5 @@ export default {
 
 .article .search {
   text-align: center;
-}
-
-.article .article-list .card {
-  margin: 10px;
 }
 </style>

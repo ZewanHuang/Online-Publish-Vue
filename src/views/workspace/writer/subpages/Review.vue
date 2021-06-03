@@ -114,6 +114,10 @@ export default {
   text-align: left;
 }
 
+.review .button {
+  text-align: right;
+}
+
 .review .review-list .review-title {
   font-size: large;
   font-weight: bold;

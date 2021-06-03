@@ -12,14 +12,12 @@
             <el-row>
               <el-col span="12" class="introduction">个人简介：{{ userinfo.description }}</el-col>
               <el-col span="11" class="button">
-                <a :href="getEmailUrl()">
-                  <el-button>联系他</el-button>
-                </a>
-                &emsp;&emsp;
-                <router-link to="/edit">
+                <router-link to="/edit" v-if="is_self">
                   <el-button type="primary">编辑个人资料</el-button>
                 </router-link>
-
+                <a :href="getEmailUrl()" v-else>
+                  <el-button type="primary">联系他</el-button>
+                </a>
               </el-col>
             </el-row>
           </div>
@@ -45,6 +43,7 @@ export default {
   props: ['username'],
   data() {
     return {
+      is_self: false,
       userinfo: {},
     }
   },
@@ -60,9 +59,16 @@ export default {
       data: formData
     })
       .then(res => {
-        if (res.data.status_code === '2000') {
-          this.userinfo = JSON.parse(res.data.user);
-          this.setAvatar();
+        this.userinfo = JSON.parse(res.data.user);
+        console.log(this.userinfo);
+        this.setAvatar();
+        switch (res.data.status_code) {
+          case '2000':
+            this.is_self = false;
+            break;
+          case '2001':
+            this.is_self = true;
+            break;
         }
       })
       .catch(err => {
