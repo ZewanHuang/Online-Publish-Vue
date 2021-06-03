@@ -4,8 +4,7 @@
       <img src="../../assets/welcome-book.png" width="100%" height="100%" alt="" />
   </div>
   <div>
-        <img class="logoname1" src="../../assets/logo.png" alt="" />
-        <img class="logoname2" src="../../assets/publish-logo.png" alt="" />
+        <img class="logoname" src="../../assets/publish_logo.png" alt="logo" />
   </div>
   <div class="login">
     <h1 class="title">登录</h1>
@@ -108,7 +107,6 @@ export default {
 
 <style scoped>
 .login {
-  margin: 50px 0 0;
   padding: 0 30px 0 0;
   width: 400px;
   position: relative;
@@ -124,18 +122,6 @@ export default {
     height:100%;  /**宽高100%是为了图片铺满屏幕 */
     z-index:-1;
     position: absolute;
-}
-img.logoname1{
-  margin-top: 20px;
-  padding-top: 10px;
-  width: 7%;
-  height: 7%;
-}
-img.logoname2{
-  margin-top: 20px;
-  padding-top: 15px;
-  width: 14%;
-  height: 14%;
 }
 .title{
   position: absolute;

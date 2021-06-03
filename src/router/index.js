@@ -52,7 +52,7 @@ const routes = [
     path: '/:username/info',
     name: 'UserInfo',
     props: true,
-    component: () => import( '../views/user/userinfo'),
+    component: () => import( '../views/userCenter/userinfo'),
     children:[
       {
         path: 'article',

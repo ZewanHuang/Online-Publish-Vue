@@ -4,7 +4,9 @@
       <p class="copyright">Copyright 2021 zewan.top</p>
       <router-link to="/team" class="team">团队</router-link>
       <router-link to="/aboutus" class="aboutus">关于我们</router-link>
-      <img class="logo" src="../../assets/logo_foot.png" alt="logo" height="40px" width="40px">
+      <router-link to="/">
+        <img class="logo" src="../../assets/logo_foot.png" alt="logo" height="40px" width="40px">
+      </router-link>
       <p><a href="https://beian.miit.gov.cn/" target="_blank" class="beian">备案号：粤ICP备2021021248号-1</a></p>
       <router-link to="/contactus" class="contactus">联系我们</router-link>
     </el-menu>

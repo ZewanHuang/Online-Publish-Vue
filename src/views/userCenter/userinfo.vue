@@ -107,10 +107,11 @@ a {
 .info .portrait {
   position: absolute;
   left: 15%;
-  top: 15%;
-  height: 180px;
-  width: 180px;
-  box-shadow: 0 0 4px 2px #c9c9c9;
+  top: 11%;
+  height: 200px;
+  width: 200px;
+  border: solid 3px lightgray;
+  border-radius: 30px;
 
   --avatar: white url('../../assets/portrait.png') no-repeat center;
   background: var(--avatar);
@@ -118,14 +119,15 @@ a {
 }
 
 .info .header-bg {
-  height: 120px;
+  height: 110px;
   background: white url("../../assets/shelf.png") no-repeat 400px;
   background-size: 60%;
 }
 
 .info .header-info {
   background-color: white;
-  border: 2px solid black;
+  border: none;
+  box-shadow: 0 0 5px 0 #646464;
   padding-bottom: 20px;
   height: 100px;
   padding-top: 0;
@@ -133,7 +135,7 @@ a {
 
 .info .header-info-text {
   padding-top: 10px;
-  padding-left: 250px;
+  padding-left: 270px;
   text-align: left;
 }
 
@@ -155,6 +157,7 @@ a {
   height: auto;
   min-height: 350px;
   text-align: center;
-  border: black solid 2px;
+  border: none;
+  box-shadow: 0 0 5px 0 #646464;
 }
 </style>

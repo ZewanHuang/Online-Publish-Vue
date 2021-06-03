@@ -3,9 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import navBar from './components/header/head.vue'
-import navBarInfo from './views/userCenter/user_center.vue'
+import navBarInfo from './views/userCenter/subpages/user_center.vue'
 import newsList from './views/workspace/writer/subpages/NewsList.vue'
-import News from './components/News.vue'
 import axios from 'axios'
 
 import ElementUI from 'element-ui';
@@ -22,7 +21,6 @@ axios.defaults.baseURL = '/api/'
 Vue.component("nav-bar", navBar);
 Vue.component("nav-bar-info", navBarInfo);
 Vue.component("news-list", newsList);
-Vue.component("news", News);
 
 Vue.config.productionTip = false
 
