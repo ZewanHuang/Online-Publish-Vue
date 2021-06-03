@@ -2,12 +2,12 @@
   <div class="overview">
     <el-container>
       <el-main>
-        <div class="last-article">
+        <div class="item">
           <el-row><h2>近期审核</h2></el-row>
           <ArticleOverview :articles="articles"/>
         </div>
 
-        <div class="news">
+        <div class="item">
           <el-row><h2>动态</h2></el-row>
           <NewsOverview :newsList="newsList"/>
         </div>
@@ -91,7 +91,6 @@ export default {
 
 <style>
 .overview .el-main{
-  padding-top: 10px;
   width: 100%;
   height: auto;
 }
@@ -101,30 +100,8 @@ export default {
   height: auto;
   text-align: left;
 }
-.overview .box-card:hover{
-  margin-top: -5px;
-}
 
-.overview .box-card {
-  height: 150px;
-  width: 300px;
-  transition: all .5s;
-  text-align: left;
-}
-.overview .box-card .title{
-  color: #45c8f5;
-  font-size: medium;
-  font-weight: 650;
-  height: 30px;
-}
-.overview .box-card .keywords{
-  height: 30px;
-}
-.overview .box-card .author{
-  height: 30px;
-}
-.overview .box-card .abstract{
-  color: #c9c9c9;
-  height: 50px;
+.overview .item {
+  padding: 0;
 }
 </style>
