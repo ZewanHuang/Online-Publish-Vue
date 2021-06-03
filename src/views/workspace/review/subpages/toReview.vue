@@ -7,6 +7,9 @@ import ArticleList from "../../../../components/common/article_list";
 
 export default {
   name: "ToReview",
+  components: {
+    ArticleList,
+  },
   data() {
     return {
       articles: [
