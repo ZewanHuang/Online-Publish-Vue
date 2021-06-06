@@ -73,7 +73,6 @@ export default {
 
 .edit .button {
   margin-top: 20px;
-  margin-left: 100px;
 }
 
 .edit .el-select {
@@ -81,8 +80,8 @@ export default {
 }
 
 .edit .el-upload-dragger {
-  margin-left: 100px;
-  width: 800px;
+  margin-top: 20px;
+  width: 870px;
 }
 
 .edit .el-form-item__label {
