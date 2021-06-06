@@ -110,6 +110,44 @@ const routes = [
     ]
   },
   {
+    path: '/:article_name/center',
+    name: 'writerArticleCenter',
+    component: () => import( '../views/workspace/writerArticleCenter/writerArticleCenter'),
+    meta: {
+      requireAuth: true,
+      requireAuthor: true
+    },
+    children:[
+      {
+        path: 'info',
+        name: 'Article-Info',
+        meta: {
+          requireAuth: true,
+          requireAuthor: true
+        },
+        component: () => import( '../views/workspace/writerArticleCenter/subpages/info')
+      },
+      {
+        path: 'overview',
+        name: 'Article-Review',
+        meta: {
+          requireAuth: true,
+          requireAuthor: true
+        },
+        component: () => import( '../views/workspace/writerArticleCenter/subpages/review')
+      },
+      {
+        path: 'edit',
+        name: 'Article-Edit',
+        meta: {
+          requireAuth: true,
+          requireAuthor: true
+        },
+        component: () => import( '../views/workspace/writerArticleCenter/subpages/edit')
+      },
+    ]
+  },
+  {
     path: '/welcome',
     name: 'Welcome',
     component: () => import( '../views/home/Welcome.vue')
