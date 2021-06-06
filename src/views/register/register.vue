@@ -1,37 +1,88 @@
 <template>
-<div>
-  <div class="background">
-      <img src="../../assets/welcome-book.png" width="100%" height="100%" alt="" />
-  </div>
-
   <div class="register">
-    <h1 class="title">注册</h1>
-    <h1><br/></h1>
-    <div class="form">
-      <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="用户名" prop="username">
-          <el-input placeholder="用户名" type="username" v-model="ruleForm.username" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input placeholder="邮箱" type="email" v-model="ruleForm.email" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="密码" prop="pass">
-          <el-input placeholder="密码" type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="确认密码" prop="checkPass">
-          <el-input placeholder="确认密码" type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="register('ruleForm')">注册</el-button>
-          <el-button @click="resetForm('ruleForm')">重置</el-button>
-        </el-form-item>
-        <p class="jumpto1">已有账号？直接<a href="/login" class="jumpto">登录</a></p>
-      </el-form>
-      
+    <div>
+      <img class="logo-name" src="../../assets/publish_logo.png" alt="logo" @click="handleToHome"/>
+    </div>
+
+    <div class="register-wrap">
+      <h1 class="title">注册</h1>
+      <div class="form">
+        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
+          <el-form-item prop="username">
+            <el-input placeholder="用户名" type="username" v-model="ruleForm.username" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item prop="email">
+            <el-input placeholder="邮箱" type="email" v-model="ruleForm.email" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item prop="pass">
+            <el-input placeholder="密码" type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item prop="checkPass">
+            <el-input
+                placeholder="确认密码"
+                type="password"
+                v-model="ruleForm.checkPass"
+                autocomplete="off"
+                @keyup.enter.native="register('ruleForm')"
+            ></el-input>
+          </el-form-item>
+          <el-form-item class="register-btn">
+            <el-button type="primary" @click="register('ruleForm')">注 册</el-button>
+          </el-form-item>
+        </el-form>
+        <div class="login-text">
+          <p @click="handleCommand">已有账号？直接登录</p>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 </template>
+
+
+<style scoped>
+.register-btn {
+  margin-top: 25px;
+  text-align: center;
+}
+.register-btn button{
+  width:100%;
+  height:38px;
+}
+.logo-name {
+  margin-top: 30px;
+  width: 300px;
+  height: 150px;
+  cursor: pointer;
+  overflow: hidden;
+}
+.login-text {
+  font-size:14px;
+  line-height:10px;
+  color:#999;
+  cursor: pointer;
+  float:right;
+}
+.register {
+  width: 100%;
+  height: 740px;
+  background: url("../../assets/welcome-book.png") no-repeat;
+  background-size: cover;
+}
+.title{
+  text-align: center;
+  margin-top: 0;
+}
+.register-wrap {
+  width: 350px;
+  height: 430px;
+  padding: 30px 25px 0 25px;
+  line-height: 40px;
+  position: relative;
+  display: inline-block;
+  background-color: rgb(255, 255, 255,0.8);
+  border-radius: 20px;
+}
+</style>
 
 <script>
 export default {
@@ -125,20 +176,19 @@ export default {
               .then(res => {
                 switch (res.data.status_code) {
                   case "2000":
-                    alert('注册成功！');
                     this.$router.push('/login');
                     break;
                   case "3001":
-                    alert('请检查填写的内容！');
+                    this.$message.warning('请检查填写的内容！');
                     break;
                   case "4001":
-                    alert('用户名已注册！');
+                    this.$message.warning('用户名已注册！');
                     break;
                   case "4002":
-                    alert('邮箱已注册或不可用！');
+                    this.$message.error('邮箱已注册或不可用！');
                     break;
                   case "4005":
-                    alert('邮件验证码发送失败，请检查邮箱是否填写正确！');
+                    this.$message.error('邮件验证码发送失败，请检查邮箱是否填写正确！');
                     break;
                 }
               })
@@ -153,43 +203,13 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
+    },
+    handleCommand() {
+      this.$router.push("/login");
+    },
+    handleToHome() {
+      this.$router.push('/');
     }
   }
 }
 </script>
-
-<style scoped>
-.register {
-  margin: 50px 0 0;
-  padding: 0 30px 0 0;
-  width: 400px;
-  position: relative;
-  display: inline-block;
-  background-color: rgb(255, 255, 255,0.8);
-  border-radius: 20px;
-}
-.form {
-  margin-top: 50px;
-}
-.background{
-    width:100%;  
-    height:100%;  /**宽高100%是为了图片铺满屏幕 */
-    z-index:-1;
-    position: absolute;
-}
-.title{
-  position: absolute;
-  left: 42%;
-}
-.jumpto{
-  float: right;
-  font-size: 13px;
-  margin-bottom: 5%;
-  color: blue;
-}
-.jumpto1{
-  float: right;
-  font-size: 13px;
-  margin-bottom: 5%;
-}
-</style>

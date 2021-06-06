@@ -27,10 +27,10 @@ export default {
           this.success = true;
           break;
         case '4001':
-          alert('无效的确认请求');
+          this.$message.error('无效的确认请求');
           break;
         case '4002':
-          alert('验证码已过期，请重新注册');
+          this.$message.error('验证码已过期，请重新注册');
           break;
       }
     })

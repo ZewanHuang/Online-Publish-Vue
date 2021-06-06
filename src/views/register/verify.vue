@@ -40,16 +40,16 @@ export default {
       .then(res => {
         switch (res.data.status_code) {
           case '2000':
-            alert('邮件发送成功！');
+            this.$message.success('邮件发送成功！');
             break;
           case '4001':
-            alert('用户未登录！');
+            this.$message.warning('用户未登录！');
             break;
           case '4002':
-            alert('用户已验证，无需重新验证！');
+            this.$message.warning('用户已验证，无需重新验证！');
             break;
           case '4003':
-            alert('邮件发送失败！');
+            this.$message.error('邮件发送失败！');
             break;
         }
       })

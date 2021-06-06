@@ -39,6 +39,9 @@ export default {
 .el-col{
   height: 50px;
 }
+.newsList {
+  margin-top: 20px;
+}
 .newsList .new{
   padding-bottom: 70px;
   margin: 0;

@@ -50,14 +50,13 @@ export default {
           .then(res => {
             switch (res.data.status_code) {
               case "2000":
-                alert("登出成功！");
+                this.$message.success("登出成功！");
                 // 登出成功后清空前端存储内容，并自动跳转 /login
                 location.reload();
                 this.$store.dispatch('clear');
-                this.$router.push('/login');
                 break;
               case "4001":
-                alert("用户未登录！");
+                this.$message.warning("用户未登录！");
                 break;
             }
           })

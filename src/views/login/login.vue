@@ -1,31 +1,95 @@
 <template>
-<div>
-    <div class="background">
-      <img src="../../assets/welcome-book.png" width="100%" height="100%" alt="" />
-  </div>
-  <div>
-        <img class="logoname" src="../../assets/publish_logo.png" alt="logo" />
-  </div>
   <div class="login">
-    <h1 class="title">登录</h1>
-    <h1><br/></h1>
-    <div class="form">
-      <el-form :model="form" ref="form" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="用户名">
+    <div>
+      <img class="logo-name" src="../../assets/publish_logo.png" alt="logo" @click="handleToHome"/>
+    </div>
+    <div class="login-wrap">
+      <h1 class="title">登录</h1>
+      <el-form :model="form" ref="form" class="demo-ruleForm">
+        <el-form-item prop="username">
           <el-input placeholder="用户名" type="username" v-model="form.username" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="密码">
-          <el-input placeholder="密码" type="password" v-model="form.password" autocomplete="off"></el-input>
+        <el-form-item id="password" prop="pass">
+          <el-input
+              placeholder="密码"
+              type="password"
+              v-model="form.password"
+              autocomplete="off"
+              @keyup.enter.native="login"
+          ></el-input>
         </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="login">登录</el-button>
-          <el-button @click="resetForm('form')">重置</el-button>
+        <el-form-item class="login-btn">
+          <el-button type="primary" @click="login">登 录</el-button>
         </el-form-item>
       </el-form>
+      <div class="register-text">
+        <p @click="handleCommand">注册帐号</p>
+      </div>
     </div>
   </div>
-</div>
 </template>
+
+
+<style scoped>
+.logo-name {
+  margin-top: 30px;
+  width: 300px;
+  height: 150px;
+  cursor: pointer;
+  overflow: hidden;
+}
+.login {
+  width: 100%;
+  height: 740px;
+  background: url("../../assets/welcome-book.png") no-repeat;
+  background-size: cover;
+}
+.login-wrap {
+  width: 350px;
+  height: 300px;
+  padding: 30px 25px 0 25px;
+  line-height: 40px;
+  position: relative;
+  display: inline-block;
+  background-color: rgb(255, 255, 255,0.8);
+  border-radius: 20px;
+}
+h3 {
+  color: #0babeab8;
+  font-size: 24px;
+}
+hr {
+  background-color: #444;
+  margin: 20px auto;
+}
+a {
+  text-decoration: none;
+  color: #aaa;
+  font-size: 15px;
+}
+a:hover {
+  color: coral;
+}
+.login-btn {
+  margin-top: 25px;
+  text-align: center;
+}
+.login-btn button{
+  width:100%;
+  height:38px;
+}
+.register-text {
+  font-size:14px;
+  line-height:10px;
+  color:#999;
+  cursor: pointer;
+  float:right;
+}
+.title{
+  text-align: center;
+  margin-top: 0;
+}
+</style>
 
 <script>
 export default {
@@ -54,7 +118,6 @@ export default {
           .then(res => {
             switch (res.data.status_code) {
               case "2000":
-                alert('登录成功！');
                 // 前端保存用户信息
                 this.$store.dispatch('saveUserInfo', {user: {
                   'username': this.form.username,
@@ -69,25 +132,23 @@ export default {
                 //   this.$router.push(redirect)
                 // } else {
                 //   this.$router.push('/' + this.form.username + '/info')
-                location.reload()
-                this.$router.push('/')
+                this.$router.go(0);
                 // }
-                // this.$router.go(-1)
                 break;
               case "3001":
-                alert('请检查填写的内容！');
+                this.$message.error('请检查填写的内容！');
                 break;
               case "4001":
-                alert('用户已登录！');
+                this.$message.warning('用户已登录！');
                 break;
               case "4002":
-                alert('用户名不存在！');
+                this.$message.error('用户名不存在！');
                 break;
               case "4003":
-                alert('用户名或密码错误！');
+                this.$message.error('用户名或密码错误！');
                 break;
               case "4004":
-                alert('用户未通过邮件确认，请及时确认！');
+                this.$message.warning('用户未通过邮件确认，请及时确认！');
                 this.$store.dispatch('saveUserInfo', {user: {
                   'username': this.form.username,
                   'confirmed': false,
@@ -101,31 +162,13 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
-    }
+    },
+    handleCommand() {
+      this.$router.push("/register");
+    },
+    handleToHome() {
+      this.$router.push('/');
+    },
   }
 }
 </script>
-
-<style scoped>
-.login {
-  padding: 0 30px 0 0;
-  width: 400px;
-  position: relative;
-  display: inline-block;
-  background-color: rgb(255, 255, 255,0.8);
-  border-radius: 20px;
-}
-.form {
-  margin-top: 50px;
-}
-.background{
-    width:100%;  
-    height:100%;  /**宽高100%是为了图片铺满屏幕 */
-    z-index:-1;
-    position: absolute;
-}
-.title{
-  position: absolute;
-  left: 42%;
-}
-</style>

@@ -20,14 +20,18 @@ const routes = [
     name: 'Login',
     component: () => import('../views/login/login.vue'),
     meta: {
-      requireNotAuth: true
+      requireNotAuth: true,
+      showNav: true,
     }
 
   },
   {
     path: '/register',
     name: 'Register',
-    component: () => import( '../views/register/register.vue')
+    component: () => import( '../views/register/register.vue'),
+    meta: {
+      showNav: true,
+    }
   },
   {
     path: '/unverified_email',

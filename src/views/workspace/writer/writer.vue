@@ -49,10 +49,10 @@ export default {
               this.userinfo = JSON.parse(res.data.user);
               break;
             case '4001':
-              alert('用户未登录');
+              this.$message.warning('用户未登录');
               break;
             case '4002':
-              alert('请先申请成为作者');
+              this.$message.warning('请先申请成为作者');
               break;
           }
         })
