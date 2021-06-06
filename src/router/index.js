@@ -23,7 +23,6 @@ const routes = [
       requireNotAuth: true,
       showNav: true,
     }
-
   },
   {
     path: '/register',

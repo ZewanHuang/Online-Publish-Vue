@@ -64,18 +64,18 @@
 }
 .register {
   width: 100%;
-  height: 740px;
+  height: 810px;
   background: url("../../assets/welcome-book.png") no-repeat;
   background-size: cover;
 }
 .title{
   text-align: center;
-  margin-top: 0;
+  margin-bottom: 15px;
 }
 .register-wrap {
   width: 350px;
   height: 430px;
-  padding: 30px 25px 0 25px;
+  padding: 20px 25px 0 25px;
   line-height: 40px;
   position: relative;
   display: inline-block;

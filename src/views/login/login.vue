@@ -40,14 +40,14 @@
 }
 .login {
   width: 100%;
-  height: 740px;
+  height: 810px;
   background: url("../../assets/welcome-book.png") no-repeat;
   background-size: cover;
 }
 .login-wrap {
   width: 350px;
-  height: 300px;
-  padding: 30px 25px 0 25px;
+  height: 307px;
+  padding: 20px 25px 0 25px;
   line-height: 40px;
   position: relative;
   display: inline-block;
@@ -87,7 +87,7 @@ a:hover {
 }
 .title{
   text-align: center;
-  margin-top: 0;
+  margin-bottom: 15px;
 }
 </style>
 
@@ -124,16 +124,8 @@ export default {
                   'confirmed': true,
                   'usertype': res.data.user_type,
                 }});
-                // 登录成功后自动跳转上一个页面
-                // const redirect = this.$route.query.redirect
-                // console.log(redirect);
-                // if (redirect) {
-                //   //如果redirect存在说明当前用户是进入某页面后未登陆自动跳转到登陆页面来的，所以登陆完成后得再次回跳到该地址
-                //   this.$router.push(redirect)
-                // } else {
-                //   this.$router.push('/' + this.form.username + '/info')
+                // this.$router.push('/' + this.form.username + '/info')
                 this.$router.go(0);
-                // }
                 break;
               case "3001":
                 this.$message.error('请检查填写的内容！');
