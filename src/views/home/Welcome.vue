@@ -17,7 +17,7 @@
               <el-button @click="gotohome">进入</el-button>
             </el-row>
             <el-row class="data-row">
-              <el-col span="5" offset="2">
+              <el-col span=5 offset=2>
                 <el-row>
                   用户
                 </el-row>
@@ -25,7 +25,7 @@
                   <span style="font-weight: bold;font-size: 30px">600</span>万+
                 </el-row>
               </el-col>
-              <el-col span="5">
+              <el-col span=5>
                 <el-row>
                   作者
                 </el-row>
@@ -33,7 +33,7 @@
                   <span style="font-weight: bold;font-size: 30px">200</span>万+
                 </el-row>
               </el-col>
-              <el-col span="5">
+              <el-col span=5>
                 <el-row>
                   审稿人
                 </el-row>
@@ -41,7 +41,7 @@
                   <span style="font-weight: bold;font-size: 30px">10</span>万+
                 </el-row>
               </el-col>
-              <el-col span="5">
+              <el-col span=5>
                 <el-row>
                   文章
                 </el-row>

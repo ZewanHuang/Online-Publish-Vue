@@ -1,6 +1,6 @@
 <template>
   <div class="article">
-    <div class="article-isAuthor" v-if="isAuthor">
+    <div class="article-isAuthor" v-if="showArticle">
 <!--      <el-button-->
 <!--          type="success"-->
 <!--          icon="el-icon-plus"-->
@@ -11,8 +11,8 @@
       <el-card v-for="(article, index) in articleList" class="box-card">
         <div slot="header" class="clearfix">
           <el-row>
-            <el-col span="12">{{article.title}}</el-col>
-            <el-col span="12" class="button">
+            <el-col span=12>{{article.title}}</el-col>
+            <el-col span=12 class="button">
               <el-button type="primary" icon="el-icon-search" circle @click="openArticle(index)"></el-button>
             </el-col>
           </el-row>
@@ -30,18 +30,22 @@
     <div class="article-isNotAuthor" v-else>
       <i class="el-icon-edit"></i>
       <br>
-      <el-button class="el-button" type="primary" @click="isAuthor = !isAuthor">点击成为作者</el-button>
+      <el-button class="el-button" type="primary" @click="applyToAuthor">点击成为作者</el-button>
     </div>
   </div>
 </template>
 
 <script>
-import router from "../../../router";
+import user from "../../../store/user";
 
 export default {
   name: "Article",
+  props: ['username'],
   data() {
     return {
+      is_self: false,
+      isAuthor: false,
+      showArticle: false,
       articleList: [
         {
           title: "图谱建模基础下海量网络流量的数据挖掘",
@@ -56,8 +60,41 @@ export default {
         { title: "Web系统前端框架和库的相关技术分析", author: "", abstract: ""},
         { title: "基于Java与HTML5的宁夏数字博物馆系统的设计与实现", author: "", abstract: ""},
       ],
-      isAuthor: false,
     }
+  },
+  mounted() {
+    if (this.is_self) {
+      this.showArticle = this.isAuthor;
+    } else {
+      this.showArticle = true;
+    }
+  },
+  created() {
+    const userInfo = user.getters.getUser(user.state());
+    if (userInfo && userInfo.user.usertype === '作者') {
+        this.isAuthor = true;
+    }
+
+    const formData = new FormData();
+    formData.append("username", userInfo.user.username);
+    this.$axios({
+      method: 'post',
+      url: '/userinfo/',
+      data: formData
+    })
+        .then(res => {
+          switch (res.data.status_code) {
+            case '2000':
+              this.is_self = false;
+              break;
+            case '2001':
+              this.is_self = true;
+              break;
+          }
+        })
+        .catch(err => {
+          this.$router.push('PageNotFound');
+        })
   },
   methods: {
     openArticle: function(index) {
@@ -65,7 +102,45 @@ export default {
     },
     writeNewArticle: function() {
       alert("let's go")
-    }
+    },
+    applyToAuthor() {
+      this.$axios({
+        method: 'GET',
+        url: '/apply/',
+      })
+      .then(res => {
+        switch (res.data.status_code) {
+          case '2000':
+            this.$message.success('申请成功！');
+            this.$store.dispatch('saveUserInfo', {user: {
+                'usertype': '作者',
+                'username': user.getters.getUser(user.state()).user.username,
+                'confirmed': user.getters.getUser(user.state()).user.confirmed,
+              }});
+            this.$router.push('/' + user.getters.getUser(user.state()).user.username + '/info/activity');
+            break;
+          case '4001':
+            this.$message.warning('请先完成邮箱验证！');
+            setTimeout(()=> {
+              this.$router.push('/unverified_email');
+            },1500);
+            break;
+          case '4002':
+            this.$message.warning('请完善个人资料！');
+            setTimeout(()=> {
+              this.$router.push('/edit');
+            },1500);
+            break;
+          case '4003':
+            this.$message.warning('您已是作者，请勿重复申请！');
+            break;
+          default:
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    },
   },
 }
 </script>

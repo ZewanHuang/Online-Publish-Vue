@@ -4,7 +4,7 @@
     <hr/>
     <div class="button">
       <el-row>
-        <el-col :span=5 :offset="7">
+        <el-col :span=5 :offset=7>
           <el-button type="primary" icon="el-icon-view" @click="read">在线阅读</el-button>
         </el-col>
         <el-col :span=5>

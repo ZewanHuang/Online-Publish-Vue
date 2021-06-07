@@ -30,7 +30,19 @@ Vue.config.productionTip = false
 router.beforeEach((to, from, next) => {
   //此处获取登陆的用户信息，参考 store/index.js and user.js
   const userInfo = user.getters.getUser(user.state())
-  console.log(userInfo)
+  // let userInfo = {}
+  // this.$axios({
+  //   method: 'get',
+  //   url: '/get-session/',
+  // })
+  // .then(res => {
+  //     userInfo = JSON.parse(res.data.user);
+  //     console.log(userInfo);
+  // })
+  //     .catch(err=> {
+  //       console.log(err);
+  //       this.$router.push({name: 'PageNotFound'});
+  //     })
 
   //要求登录后不能访问的页面
   if (userInfo && to.meta.requireNotAuth) {
@@ -56,6 +68,13 @@ router.beforeEach((to, from, next) => {
 
   //登录且身份为作者才能访问
   if ((!userInfo || userInfo.user.usertype === "读者" || userInfo.user.usertype === "审稿人") && to.meta.requireAuthor) {
+    next({
+      name: 'Home',
+    })
+  }
+
+  //登录且身份为审稿人才能访问
+  if ((!userInfo || userInfo.user.usertype === "读者" || userInfo.user.usertype === "作者") && to.meta.requireReview) {
     next({
       name: 'Home',
     })

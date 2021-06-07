@@ -68,7 +68,7 @@ const routes = [
         component: () => import( '../views/userCenter/subpages/collection')
       },
       {
-        path: '',
+        path: 'activity',
         name: 'News',
         component: () => import( '../views/userCenter/subpages/activity')
       }
@@ -94,7 +94,7 @@ const routes = [
       },
       {
         path: 'review',
-        name: 'Review',
+        name: 'Writing-Review',
         meta: {
           requireAuth: true,
           requireAuthor: true
@@ -113,7 +113,7 @@ const routes = [
     ]
   },
   {
-    path: '/:article_name/center',
+    path: '/:article_id/center',
     name: 'writerArticleCenter',
     component: () => import( '../views/workspace/writerArticleCenter/writerArticleCenter'),
     meta: {
@@ -161,29 +161,40 @@ const routes = [
     component: () => import( '../views/user/Apply.vue')
   },
   {
-    path: '/register/success',
-    name: 'Register-success',
-    component: () => import( '../views/register/Register-success.vue')
-  },
-  {
     path: '/review',
     name: 'Review',
     component: () => import( '../views/workspace/review/review.vue'),
+    meta: {
+      requireAuth: true,
+      requireReview: true,
+    },
     children:[
       {
         path: 'overview',
         name: 'Review-Overview',
-        component: () => import( '../views/workspace/review/subpages/Overview')
+        component: () => import( '../views/workspace/review/subpages/Overview'),
+        meta: {
+          requireAuth: true,
+          requireReview: true,
+        },
       },
       {
         path: 'reviewed',
         name: 'Reviewed',
-        component: () => import( '../views/workspace/review/subpages/reviewed')
+        component: () => import( '../views/workspace/review/subpages/reviewed'),
+        meta: {
+          requireAuth: true,
+          requireReview: true,
+        },
       },
       {
         path: 'to-review',
         name: 'To-Review',
-        component: () => import( '../views/workspace/review/subpages/toReview')
+        component: () => import( '../views/workspace/review/subpages/toReview'),
+        meta: {
+          requireAuth: true,
+          requireReview: true,
+        },
       }
     ]
   },

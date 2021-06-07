@@ -11,28 +11,28 @@
 
     <div class="content">
       <el-row class="content-item">
-        <el-col :span="2" class="item-title">
+        <el-col :span=2 class="item-title">
           摘要：
         </el-col>
-        <el-col :span="22" class="item-text">
+        <el-col :span=22 class="item-text">
           {{ article.abstract }}
         </el-col>
       </el-row>
 
       <el-row class="content-item">
-        <el-col :span="2" class="item-title">
+        <el-col :span=2 class="item-title">
           关键词：
         </el-col>
-        <el-col :span="22" class="item-text">
+        <el-col :span=22 class="item-text">
           {{ article.keywords }}
         </el-col>
       </el-row>
 
       <el-row class="content-item">
-        <el-col :span="2" class="item-title">
+        <el-col :span=2 class="item-title">
           类别：
         </el-col>
-        <el-col :span="22" class="item-text">
+        <el-col :span=22 class="item-text">
           {{ article.type }}
         </el-col>
       </el-row>

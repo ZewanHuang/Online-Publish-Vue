@@ -115,42 +115,43 @@ export default {
         url: '/login/',
         data: formData,
       })
-          .then(res => {
-            switch (res.data.status_code) {
-              case "2000":
-                // 前端保存用户信息
-                this.$store.dispatch('saveUserInfo', {user: {
-                  'username': this.form.username,
-                  'confirmed': true,
-                  'usertype': res.data.user_type,
-                }});
-                // this.$router.push('/' + this.form.username + '/info')
-                this.$router.go(0);
-                break;
-              case "3001":
-                this.$message.error('请检查填写的内容！');
-                break;
-              case "4001":
-                this.$message.warning('用户已登录！');
-                break;
-              case "4002":
-                this.$message.error('用户名不存在！');
-                break;
-              case "4003":
-                this.$message.error('用户名或密码错误！');
-                break;
-              case "4004":
-                this.$message.warning('用户未通过邮件确认，请及时确认！');
-                this.$store.dispatch('saveUserInfo', {user: {
-                  'username': this.form.username,
-                  'confirmed': false,
-                }});
-                break;
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          })
+      .then(res => {
+        switch (res.data.status_code) {
+          case "2000":
+            this.$router.go(0);
+            // 前端保存用户信息
+            this.$store.dispatch('saveUserInfo', {user: {
+              'username': this.form.username,
+              'confirmed': true,
+              'usertype': res.data.user_type,
+            }});
+            // this.$router.push('/' + this.form.username + '/info')
+            break;
+          case "3001":
+            this.$message.error('请检查填写的内容！');
+            break;
+          case "4001":
+            this.$message.warning('用户已登录！');
+            break;
+          case "4002":
+            this.$message.error('用户名不存在！');
+            break;
+          case "4003":
+            this.$message.error('用户名或密码错误！');
+            break;
+          case "4004":
+            this.$message.warning('用户未通过邮件确认，请及时确认！');
+            this.$store.dispatch('saveUserInfo', {user: {
+              'username': this.form.username,
+              'confirmed': false,
+            }});
+            this.$router.push('/unverified_email');
+            break;
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();

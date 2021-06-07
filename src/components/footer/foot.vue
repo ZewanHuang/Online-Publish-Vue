@@ -1,6 +1,6 @@
 <template>
   <div id="foot" >
-    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" >
+    <el-menu class="el-menu-demo" mode="horizontal" >
       <p class="copyright">Copyright 2021 zewan.top</p>
       <router-link to="/team" class="team">团队</router-link>
       <router-link to="/aboutus" class="aboutus">关于我们</router-link>

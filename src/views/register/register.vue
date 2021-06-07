@@ -9,13 +9,31 @@
       <div class="form">
         <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
           <el-form-item prop="username">
-            <el-input placeholder="用户名" type="username" v-model="ruleForm.username" autocomplete="off"></el-input>
+            <el-input
+                placeholder="用户名"
+                type="username"
+                v-model="ruleForm.username"
+                autocomplete="off"
+                @keyup.enter.native="register('ruleForm')"
+            ></el-input>
           </el-form-item>
           <el-form-item prop="email">
-            <el-input placeholder="邮箱" type="email" v-model="ruleForm.email" autocomplete="off"></el-input>
+            <el-input
+                placeholder="邮箱"
+                type="email"
+                v-model="ruleForm.email"
+                autocomplete="off"
+                @keyup.enter.native="register('ruleForm')"
+            ></el-input>
           </el-form-item>
           <el-form-item prop="pass">
-            <el-input placeholder="密码" type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+            <el-input
+                placeholder="密码"
+                type="password"
+                v-model="ruleForm.pass"
+                autocomplete="off"
+                @keyup.enter.native="register('ruleForm')"
+            ></el-input>
           </el-form-item>
           <el-form-item prop="checkPass">
             <el-input
@@ -173,28 +191,36 @@ export default {
             url: '/register/',
             data: formData,
           })
-              .then(res => {
-                switch (res.data.status_code) {
-                  case "2000":
-                    this.$router.push('/login');
-                    break;
-                  case "3001":
-                    this.$message.warning('请检查填写的内容！');
-                    break;
-                  case "4001":
-                    this.$message.warning('用户名已注册！');
-                    break;
-                  case "4002":
-                    this.$message.error('邮箱已注册或不可用！');
-                    break;
-                  case "4005":
-                    this.$message.error('邮件验证码发送失败，请检查邮箱是否填写正确！');
-                    break;
-                }
-              })
-              .catch(err => {
-                console.log(err);
-              })
+          .then(res => {
+            switch (res.data.status_code) {
+              case "2000":
+                this.$store.dispatch('saveUserInfo', {user: {
+                    'username': this.ruleForm.username,
+                    'confirmed': false,
+                    'usertype': '读者',
+                  }});
+                this.$message.success('注册成功！');
+                setTimeout(()=> {
+                  this.$router.push('/unverified_email');
+                },1500);
+                break;
+              case "3001":
+                this.$message.warning('请检查填写的内容！');
+                break;
+              case "4001":
+                this.$message.warning('用户名已注册！');
+                break;
+              case "4002":
+                this.$message.error('邮箱已注册或不可用！');
+                break;
+              case "4005":
+                this.$message.error('邮件验证码发送失败，请检查邮箱是否填写正确！');
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          })
         } else {
           console.log('提交失败!!');
           return false;

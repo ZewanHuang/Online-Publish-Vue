@@ -1,6 +1,6 @@
 <template>
   <div id="nav">
-    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
+    <el-menu class="el-menu-demo" mode="horizontal">
       <router-link to="/">
         <img src="../../assets/logo.png" alt="logo">
       </router-link>
@@ -16,7 +16,7 @@
         <el-menu-item index="1-5" @click="logout">退出登录</el-menu-item>
       </el-submenu>
       <el-menu-item index="2" @click="workspace">工作空间</el-menu-item>
-      <el-menu-item index="3">消息</el-menu-item>
+      <el-menu-item index="3" @click="message">消息</el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -47,10 +47,10 @@ export default {
           .then(res => {
             switch (res.data.status_code) {
               case "2000":
+                this.$router.go(0);
+                this.$router.push('/login');
                 // 登出成功后清空前端存储内容，并自动跳转 /login
                 this.$store.dispatch('clear');
-                location.reload();
-                // this.$router.push('/login');
                 break;
               case "4001":
                 this.$message.error("用户未登录！");
@@ -65,7 +65,7 @@ export default {
       window.location.href="/setting";
     },
     myhome(){
-      window.location.href="/" + this.username + "/info";
+      window.location.href="/" + this.username + "/info/activity";
     },
     message(){
       window.location.href="/message";
@@ -76,8 +76,14 @@ export default {
         case '审稿人':
           window.location.href="/review/overview";
           break;
-        default:
+        case '作者':
           window.location.href="/writing/overview";
+          break;
+        case '编辑':
+          window.location.href="/editor";
+          break;
+        default:
+          this.$message.warning("请到个人中心申请成为作者！");
           break;
       }
     },

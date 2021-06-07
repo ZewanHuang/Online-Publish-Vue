@@ -10,7 +10,7 @@
     </div>
 
     <div class="subpage">
-      <router-view></router-view>
+      <router-view/>
     </div>
 
   </div>
