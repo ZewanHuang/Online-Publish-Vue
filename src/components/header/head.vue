@@ -66,6 +66,7 @@ export default {
     },
     myhome(){
       window.location.href="/" + this.username + "/info/activity";
+      console.log(this.username);
     },
     message(){
       window.location.href="/message";

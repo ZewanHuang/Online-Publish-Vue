@@ -3,7 +3,7 @@
     <div v-if="success" class="register-success">
       <el-row>
         <div class="msg">
-          <h1>恭喜你验证成功！</h1>
+          <h1>恭喜您验证成功！</h1>
         </div>
       </el-row>
       <el-row>
@@ -22,7 +22,7 @@
           </el-card>
         </el-col>
         <el-col :span=6>
-          <el-card class="box-card" @click.native="applyToAuthor">
+          <el-card class="box-card" @click="applyToAuthor">
             <div slot="header" class="clearfix">
               <h4>成为作者</h4>
             </div>
@@ -123,6 +123,9 @@ export default {
 </script>
 
 <style scoped>
+.confirm {
+  margin-top: 15px;
+}
 .el-card__header {
   padding: 0;
   margin: 0;
@@ -140,6 +143,7 @@ export default {
   width: 300px;
   transition: all .5s;
   text-align: center;
+  cursor: pointer;
 }
 
 .image {

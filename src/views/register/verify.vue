@@ -9,47 +9,34 @@ export default {
   name: "verify",
   data() {
     return {
-      resend: '',
+      email: '',
+      username: '',
     }
-  },
-  created() {
-    this.$axios({
-      method: 'get',
-      url: '/unverified_email/',
-    })
-        .then(res => {
-          if (res.data.status_code === '4002') {
-            this.$router.push('/');
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        })
   },
   methods: {
     send_email() {
-      const self = this;
-      const formData = new FormData();
-      formData.append('resend', '1');
-
-      self.$axios({
-        method: 'POST',
+      this.$axios({
+        method: 'GET',
         url: '/unverified_email/',
-        data: formData,
       })
       .then(res => {
         switch (res.data.status_code) {
           case '2000':
-            this.$message.success('邮件发送成功！');
+            this.$message.success('验证邮件发送成功！');
+            this.username = res.data.username;
+            this.email = res.data.email;
             break;
           case '4001':
             this.$message.warning('用户未登录！');
             break;
           case '4002':
             this.$message.warning('用户已验证，无需重新验证！');
+            setTimeout(()=> {
+              this.$router.push('/');
+            }, 1500)
             break;
           case '4003':
-            this.$message.error('邮件发送失败！');
+            this.$message.error('邮件地址错误，请重新注册！');
             break;
         }
       })
