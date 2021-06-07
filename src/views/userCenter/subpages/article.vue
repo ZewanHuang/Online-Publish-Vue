@@ -62,13 +62,6 @@ export default {
       ],
     }
   },
-  mounted() {
-    if (this.is_self) {
-      this.showArticle = this.isAuthor;
-    } else {
-      this.showArticle = true;
-    }
-  },
   created() {
     const userInfo = user.getters.getUser(user.state());
     if (userInfo && userInfo.user.usertype === '作者') {
@@ -82,19 +75,21 @@ export default {
       url: '/userinfo/',
       data: formData
     })
-        .then(res => {
-          switch (res.data.status_code) {
-            case '2000':
-              this.is_self = false;
-              break;
-            case '2001':
-              this.is_self = true;
-              break;
-          }
-        })
-        .catch(err => {
-          this.$router.push('PageNotFound');
-        })
+    .then(res => {
+      switch (res.data.status_code) {
+        case '2001':
+          this.is_self = true;
+          this.showArticle = this.isAuthor;
+          break;
+        default:
+          this.is_self = false;
+          this.showArticle = true;
+          break;
+      }
+    })
+    .catch(err => {
+      this.$router.push('PageNotFound');
+    })
   },
   methods: {
     openArticle: function(index) {

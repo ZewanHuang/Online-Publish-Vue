@@ -199,10 +199,33 @@ const routes = [
     ]
   },
   {
+    path: '/editor',
+    name: 'Edit',
+    component: () => import( '../views/workspace/edit/Edit.vue'),
+    children:[
+      {
+        path: 'article_manage',
+        name: 'Article_manage',
+        component: () => import( '../views/workspace/edit/subpage/article_manage.vue')
+      },
+      {
+        path: 'person_manage',
+        name: 'Person_manage',
+        component: () => import( '../views/workspace/edit/subpage/person_manage.vue')
+      },
+      {
+        path: 'message_manage',
+        name: 'Message_manage',
+        component: () => import( '../views/workspace/edit/subpage/message_manage.vue')
+      },
+    ]
+  },
+  {
     path: '/*',
     name: 'PageNotFound',
     component: () => import('../views/error/PageNotFound'),
-  }
+  },
+
 
 ]
 
