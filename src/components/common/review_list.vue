@@ -3,8 +3,10 @@
     <el-row class="review" v-for="(review, index) in reviewList">
 
       <el-row>
-        <el-col :span=12 class="review-author">
-          审稿人：{{ review.reviewer }}
+        <el-col :span=2 class="review-portrait">
+        </el-col>
+        <el-col :span=10 class="review-author">
+          {{ review.reviewer }}
         </el-col>
         <el-col :span=4 :offset=8 class="review-button">
           <el-button icon="el-icon-message" @click="contact(index)">
@@ -26,8 +28,6 @@
 </template>
 
 <script>
-import review from "../../views/workspace/writerArticleCenter/subpages/review";
-
 export default {
   name: "review_list",
   props: {
@@ -55,13 +55,25 @@ export default {
   margin-bottom: 20px;
 }
 
+.review-list .review-portrait {
+  background-image: url('../../assets/portrait.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 60px;
+  height: 60px;
+  vertical-align: middle;
+}
+
 .review-list .review-author {
-  padding-top: 7px;
+  padding-left: 15px;
   font-size: 20px;
   font-weight: bold;
+  line-height: 60px;
 }
 
 .review-list .review-button {
+  line-height: 60px;
   text-align: right;
 }
 
