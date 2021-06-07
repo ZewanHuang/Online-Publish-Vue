@@ -202,7 +202,7 @@ const routes = [
     path: '/editor',
     name: 'Edit',
     component: () => import( '../views/workspace/edit/Edit.vue'),
-    children:[
+    children: [
       {
         path: 'article_manage',
         name: 'Article_manage',
@@ -218,6 +218,28 @@ const routes = [
         name: 'Message_manage',
         component: () => import( '../views/workspace/edit/subpage/message_manage.vue')
       },
+    ],
+  },
+  {
+    path: '/reviewArticleCenter',
+    name: 'reviewArticleCenter',
+    component: () => import('../views/workspace/reviewArticleCenter/reviewArticleCenter'),
+    children:[
+      {
+        path: 'ReviewEdit',
+        name: 'reviewArticleCenter-ReviewEdit',
+        component: () => import( '../views/workspace/reviewArticleCenter/subpages/ReviewEdit')
+      },
+      {
+        path: 'AllReview',
+        name: 'reviewArticleCenter-AllReview',
+        component: () => import( '../views/workspace/reviewArticleCenter/subpages/AllReview')
+      },
+      {
+        path: 'Article',
+        name: 'reviewArticleCenter-Article',
+        component: () => import( '../views/workspace/reviewArticleCenter/subpages/Article')
+      }
     ]
   },
   {
@@ -225,8 +247,6 @@ const routes = [
     name: 'PageNotFound',
     component: () => import('../views/error/PageNotFound'),
   },
-
-
 ]
 
 const router = new VueRouter({
