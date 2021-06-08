@@ -47,8 +47,10 @@ export default {
           .then(res => {
             switch (res.data.status_code) {
               case "2000":
-                this.$router.go(0);
-                this.$router.push('/login');
+                this.$message.success('退出成功！');
+                setTimeout(()=> {
+                  location.reload();
+                }, 2000);
                 // 登出成功后清空前端存储内容，并自动跳转 /login
                 this.$store.dispatch('clear');
                 break;
