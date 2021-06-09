@@ -97,11 +97,7 @@
   line-height: 40px;
   position: relative;
   display: inline-block;
-<<<<<<< HEAD
-  background-color: rgb(255, 255, 255,0.8);
-=======
   background-color: rgb(255, 255, 255, 0.8);
->>>>>>> gr
   border-radius: 20px;
 }
 </style>
