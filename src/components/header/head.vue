@@ -1,31 +1,28 @@
 <template>
   <div id="nav">
-    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+    <el-menu class="el-menu-demo" mode="horizontal">
       <router-link to="/">
         <img src="../../assets/logo.png" alt="logo">
       </router-link>
       <label>
         <input type="text" name="search" placeholder="Search or jump to…"/>
       </label>
-
-      <!-- <el-button icon="el-icon-search" circle></el-button> -->
-
       <router-link to="/help" class="help">Help</router-link>
       <router-link to="/guide" class="help">Guide</router-link>
       <el-submenu index="1">
         <template slot="title" id="mine">个人中心</template>
-        <el-menu-item index="1-1"><el-button type="text" @click="myhome">我的主页</el-button></el-menu-item>
-        <el-menu-item index="1-4"><el-button type="text" @click="setting">设置</el-button></el-menu-item>
-        <el-menu-item index="1-5"><el-button type="text" @click="logout">退出登录</el-button></el-menu-item>
+        <el-menu-item index="1-1" @click="myhome">我的主页</el-menu-item>
+        <el-menu-item index="1-4" @click="setting">设置</el-menu-item>
+        <el-menu-item index="1-5" @click="logout">退出登录</el-menu-item>
       </el-submenu>
-      <el-menu-item index="2"><el-button type="text" @click="workspace">工作空间</el-button></el-menu-item>
-      <el-menu-item index="3"><el-button type="text" @click="message">消息</el-button></el-menu-item>
+      <el-menu-item index="2" @click="workspace">工作空间</el-menu-item>
+      <el-menu-item index="3" @click="message">消息</el-menu-item>
     </el-menu>
   </div>
 </template>
 
 <script>
-import user from "@/store/user";
+import user from "../../store/user";
 
 export default {
   name: 'navBar',
@@ -50,14 +47,13 @@ export default {
           .then(res => {
             switch (res.data.status_code) {
               case "2000":
-                alert("登出成功！");
-                // 登出成功后清空前端存储内容，并自动跳转 /login
-                location.reload();
-                this.$store.dispatch('clear');
+                this.$router.go(0);
                 this.$router.push('/login');
+                // 登出成功后清空前端存储内容，并自动跳转 /login
+                this.$store.dispatch('clear');
                 break;
               case "4001":
-                alert("用户未登录！");
+                this.$message.error("用户未登录！");
                 break;
             }
           })
@@ -69,7 +65,8 @@ export default {
       window.location.href="/setting";
     },
     myhome(){
-      window.location.href="/" + this.username + "/info";
+      window.location.href="/" + this.username + "/info/activity";
+      console.log(this.username);
     },
     message(){
       window.location.href="/message";
@@ -80,8 +77,14 @@ export default {
         case '审稿人':
           window.location.href="/review/overview";
           break;
-        default:
+        case '作者':
           window.location.href="/writing/overview";
+          break;
+        case '编辑':
+          window.location.href="/editor";
+          break;
+        default:
+          this.$message.warning("请到个人中心申请成为作者！");
           break;
       }
     },
@@ -90,6 +93,12 @@ export default {
 </script>
 
 <style>
+#nav .el-submenu__title {
+  font-size: 16px;
+}
+#nav .el-menu-item {
+  font-size: 16px;
+}
 #mine{
   position: absolute;
   right:10%;
@@ -97,5 +106,11 @@ export default {
 .help{
   color: rgb(128, 123, 123);
   margin: 25px;
+}
+img {
+  margin-right: 8px;
+}
+#nav .el-menu.el-menu--horizontal {
+  border-bottom: solid 0 #e6e6e6;
 }
 </style>

@@ -10,10 +10,10 @@
               <span>{{ userinfo.username }}</span>
             </el-row>
             <el-row>
-              <el-col span="12" class="introduction">个人简介：{{ userinfo.description }}</el-col>
-              <el-col span="11" class="button">
+              <el-col span=12 class="introduction">个人简介：{{ userinfo.description }}</el-col>
+              <el-col span=11 class="button">
                 <router-link to="/edit" v-if="is_self">
-                  <el-button type="primary">编辑个人资料</el-button>
+                  <el-button type="primary" @click="editInfo">编辑个人资料</el-button>
                 </router-link>
                 <a :href="getEmailUrl()" v-else>
                   <el-button type="primary">联系他</el-button>
@@ -60,7 +60,6 @@ export default {
     })
       .then(res => {
         this.userinfo = JSON.parse(res.data.user);
-        console.log(this.userinfo);
         this.setAvatar();
         switch (res.data.status_code) {
           case '2000':
@@ -72,7 +71,7 @@ export default {
         }
       })
       .catch(err => {
-        this.$router.push({name: 'PageNotFound'});
+        this.$router.push('PageNotFound');
       })
   },
   methods: {
@@ -81,6 +80,9 @@ export default {
     },
     getEmailUrl() {
       return 'mailto:' + this.userinfo.email
+    },
+    editInfo() {
+      this.$router.push("/edit");
     }
   },
 }

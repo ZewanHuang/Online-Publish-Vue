@@ -35,6 +35,7 @@ export default {
 </script>
 
 <style>
+
 .to-audit .article-box{
   margin-top: 30px;
   margin-bottom: 1px;

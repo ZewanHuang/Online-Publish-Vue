@@ -19,6 +19,7 @@
 <script>
 export default {
   name: "News",
+  props: ['username'],
   data() {
     return {
       newsList: [

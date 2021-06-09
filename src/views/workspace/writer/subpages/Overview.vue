@@ -2,12 +2,12 @@
   <div class="overview">
     <el-container>
       <el-main>
-        <div class="last-article">
+        <div class="item">
           <el-row><h2>受欢迎的文章</h2></el-row>
           <ArticleOverview :articles="articles"/>
         </div>
 
-        <div class="news">
+        <div class="item">
           <el-row><h2>创作动态</h2></el-row>
           <ActivityOverview :newsList="newsList"/>
         </div>
@@ -101,8 +101,8 @@ export default {
 
 <style>
 .overview .el-main{
-  padding-top: 10px;
   width: 100%;
+  height: auto;
 }
 
 .overview .el-container{
@@ -111,28 +111,7 @@ export default {
   text-align: left;
 }
 
-.overview .article-card-content {
-  padding:0 20px;
-}
-
-.overview .article-card-content .medium {
-  color: #409eff;
-}
-
-
-.overview .article-card-content .medium:hover {
-  color: #007dff;
-}
-
-.el-carousel__item {
-  box-shadow: 0 3px 3px 1px lightgray;
-}
-
-.el-carousel__item:nth-child(2n) {
-  background-color: #eff8ff;
-}
-
-.el-carousel__item:nth-child(2n+1) {
-  background-color: #fafafa;
+.overview .item {
+  padding: 0;
 }
 </style>

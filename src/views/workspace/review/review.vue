@@ -2,10 +2,10 @@
   <div class="audit">
     <el-container>
       <el-aside class="user-msg" style="width: 25%">
-        <img class="photo" src="../../../assets/reader.png">
-        <el-row style="height: 30px;margin-top: 10px"><span class="username">Username</span></el-row>
-        <el-row><span class="real-name">真实姓名</span></el-row>
-        <el-row><el-button class="button">编辑个人信息</el-button></el-row>
+        <img class="photo" :src="userinfo.avatar" alt="portrait">
+        <el-row style="height: 30px;margin-top: 10px"><span class="username">{{ userinfo.username }}</span></el-row>
+        <el-row><span class="real-name">{{ userinfo.real_name }}</span></el-row>
+        <el-row><el-button class="button" @click="editInfo">编辑个人信息</el-button></el-row>
       </el-aside>
       <el-main>
         <el-row>
@@ -29,9 +29,6 @@
 .audit .el-aside{
   height: 100%;
 }
-
-
-
 .audit .el-container{
   width: 100%;
   height: auto;
@@ -104,3 +101,49 @@
   border-bottom: solid;
 }
 </style>
+
+<script>
+import user from "../../../store/user";
+
+export default {
+  name: "Writing",
+  data() {
+    return {
+      userinfo: {},
+    }
+  },
+  created() {
+    const formData = new FormData();
+    formData.append("username", user.getters.getUser(user.state()).user.username);
+    this.$axios({
+      method: 'post',
+      url: '/review/',
+      data: formData
+    })
+    .then(res => {
+      switch (res.data.status_code) {
+        case '2000':
+          this.userinfo = JSON.parse(res.data.user);
+          break;
+        case '4001':
+          this.$message.warning('用户未登录');
+          break;
+        case '4002':
+          this.$message.warning('您不是审稿人');
+          break;
+      }
+    })
+    .catch(err => {
+      this.$router.push({real_name: 'PageNotFound'});
+    })
+  },
+  methods: {
+    editInfo() {
+      this.$router.push('/edit');
+    }
+  },
+  compute: {
+
+  },
+}
+</script>

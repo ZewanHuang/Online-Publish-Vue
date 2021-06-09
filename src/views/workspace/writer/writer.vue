@@ -5,7 +5,7 @@
         <img class="photo" :src="userinfo.avatar" alt="portrait">
         <el-row style="height: 30px; margin-top: 10px"><span class="username">{{ userinfo.username }}</span></el-row>
         <el-row><span class="real-name">{{ userinfo.real_name }}</span></el-row>
-        <el-row><el-button class="button">编辑个人信息</el-button></el-row>
+        <el-row><el-button class="button" @click="editInfo">编辑个人信息</el-button></el-row>
       </el-aside>
       <el-main>
         <el-row>
@@ -13,7 +13,7 @@
             <ul>
               <li><router-link :to="{name: 'Writer-Overview'}" >概览</router-link></li>
               <li><router-link :to="{name: 'WriteArticle'}" >文章</router-link></li>
-              <li><router-link :to="{name: 'Review'}" >评论</router-link></li>
+              <li><router-link :to="{name: 'Writing-Review'}" >评论</router-link></li>
             </ul>
           </div>
         </el-row>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import user from "@/store/user";
+import user from "../../../store/user";
 
 export default {
   name: "Writing",
@@ -43,25 +43,27 @@ export default {
       url: '/writing/',
       data: formData
     })
-        .then(res => {
-          switch (res.data.status_code) {
-            case '2000':
-              this.userinfo = JSON.parse(res.data.user);
-              break;
-            case '4001':
-              alert('用户未登录');
-              break;
-            case '4002':
-              alert('请先申请成为作者');
-              break;
-          }
-        })
-        .catch(err => {
-          this.$router.push({name: 'PageNotFound'});
-        })
+    .then(res => {
+      switch (res.data.status_code) {
+        case '2000':
+          this.userinfo = JSON.parse(res.data.user);
+          break;
+        case '4001':
+          this.$message.warning('用户未登录');
+          break;
+        case '4002':
+          this.$message.warning('请先申请成为作者');
+          break;
+      }
+    })
+    .catch(err => {
+      this.$router.push({real_name: 'PageNotFound'});
+    })
   },
   methods: {
-
+    editInfo() {
+      this.$router.push('/edit');
+    }
   },
   compute: {
 

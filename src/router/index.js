@@ -16,18 +16,26 @@ const routes = [
     component: () => import( '../views/home/Guide.vue')
   },
   {
+    path: '/article/:id',
+    name: 'article:id',
+    component: () => import( '../views/reader/article')
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('../views/login/login.vue'),
     meta: {
-      requireNotAuth: true
+      requireNotAuth: true,
+      showNav: true,
     }
-
   },
   {
     path: '/register',
     name: 'Register',
-    component: () => import( '../views/register/register.vue')
+    component: () => import( '../views/register/register.vue'),
+    meta: {
+      showNav: true,
+    }
   },
   {
     path: '/unverified_email',
@@ -65,7 +73,7 @@ const routes = [
         component: () => import( '../views/userCenter/subpages/collection')
       },
       {
-        path: '',
+        path: 'activity',
         name: 'News',
         component: () => import( '../views/userCenter/subpages/activity')
       }
@@ -91,7 +99,7 @@ const routes = [
       },
       {
         path: 'review',
-        name: 'Review',
+        name: 'Writing-Review',
         meta: {
           requireAuth: true,
           requireAuthor: true
@@ -110,6 +118,44 @@ const routes = [
     ]
   },
   {
+    path: '/:article_id/center',
+    name: 'writerArticleCenter',
+    component: () => import( '../views/workspace/writerArticleCenter/writerArticleCenter'),
+    meta: {
+      requireAuth: true,
+      requireAuthor: true
+    },
+    children:[
+      {
+        path: 'info',
+        name: 'Article-Info',
+        meta: {
+          requireAuth: true,
+          requireAuthor: true
+        },
+        component: () => import( '../views/workspace/writerArticleCenter/subpages/info')
+      },
+      {
+        path: 'overview',
+        name: 'Article-Review',
+        meta: {
+          requireAuth: true,
+          requireAuthor: true
+        },
+        component: () => import( '../views/workspace/writerArticleCenter/subpages/review')
+      },
+      {
+        path: 'edit',
+        name: 'Article-Edit',
+        meta: {
+          requireAuth: true,
+          requireAuthor: true
+        },
+        component: () => import( '../views/workspace/writerArticleCenter/subpages/edit')
+      },
+    ]
+  },
+  {
     path: '/welcome',
     name: 'Welcome',
     component: () => import( '../views/home/Welcome.vue')
@@ -120,29 +166,84 @@ const routes = [
     component: () => import( '../views/user/Apply.vue')
   },
   {
-    path: '/register/success',
-    name: 'Register-success',
-    component: () => import( '../views/register/Register-success.vue')
-  },
-  {
     path: '/review',
     name: 'Review',
     component: () => import( '../views/workspace/review/review.vue'),
+    meta: {
+      requireAuth: true,
+      requireReview: true,
+    },
     children:[
       {
         path: 'overview',
         name: 'Review-Overview',
-        component: () => import( '../views/workspace/review/subpages/Overview')
+        component: () => import( '../views/workspace/review/subpages/Overview'),
+        meta: {
+          requireAuth: true,
+          requireReview: true,
+        },
       },
       {
         path: 'reviewed',
         name: 'Reviewed',
-        component: () => import( '../views/workspace/review/subpages/reviewed')
+        component: () => import( '../views/workspace/review/subpages/reviewed'),
+        meta: {
+          requireAuth: true,
+          requireReview: true,
+        },
       },
       {
         path: 'to-review',
         name: 'To-Review',
-        component: () => import( '../views/workspace/review/subpages/toReview')
+        component: () => import( '../views/workspace/review/subpages/toReview'),
+        meta: {
+          requireAuth: true,
+          requireReview: true,
+        },
+      }
+    ]
+  },
+  {
+    path: '/editor',
+    name: 'Edit',
+    component: () => import( '../views/workspace/edit/Edit.vue'),
+    children: [
+      {
+        path: 'article_manage',
+        name: 'Article_manage',
+        component: () => import( '../views/workspace/edit/subpage/article_manage.vue')
+      },
+      {
+        path: 'person_manage',
+        name: 'Person_manage',
+        component: () => import( '../views/workspace/edit/subpage/person_manage.vue')
+      },
+      {
+        path: 'message_manage',
+        name: 'Message_manage',
+        component: () => import( '../views/workspace/edit/subpage/message_manage.vue')
+      },
+    ],
+  },
+  {
+    path: '/reviewArticleCenter',
+    name: 'reviewArticleCenter',
+    component: () => import('../views/workspace/reviewArticleCenter/reviewArticleCenter'),
+    children:[
+      {
+        path: 'ReviewEdit',
+        name: 'reviewArticleCenter-ReviewEdit',
+        component: () => import( '../views/workspace/reviewArticleCenter/subpages/ReviewEdit')
+      },
+      {
+        path: 'AllReview',
+        name: 'reviewArticleCenter-AllReview',
+        component: () => import( '../views/workspace/reviewArticleCenter/subpages/AllReview')
+      },
+      {
+        path: 'Article',
+        name: 'reviewArticleCenter-Article',
+        component: () => import( '../views/workspace/reviewArticleCenter/subpages/Article')
       }
     ]
   },
@@ -150,8 +251,7 @@ const routes = [
     path: '/*',
     name: 'PageNotFound',
     component: () => import('../views/error/PageNotFound'),
-  }
-
+  },
 ]
 
 const router = new VueRouter({
