@@ -16,6 +16,9 @@
       <el-col :span="7" >
         <el-input id="search" v-model="input" placeholder="请输入要查找的书籍..." @focus="changeStyle"></el-input>
       </el-col>
+      <el-col :span="1">
+        <el-button type="primary" icon="el-icon-search" @click="searchArticle" >搜索</el-button>
+      </el-col>
     </el-row>
     <div class="hotArticle" v-if="isSearching">
       <el-row style="text-align: left">
@@ -56,8 +59,6 @@ export default {
   components: {
     ArticleList,
   },
-
-
   data() {
     return {
       isSearching:false,
@@ -90,6 +91,15 @@ export default {
     }
   },
   methods: {
+    searchArticle:function (){
+      if (this.value==='')  this.$message({
+        message:"请选择搜索条件",type:"warning"
+      })
+      else if (this.input==='') this.$message({
+        message:"请输入搜索内容",type:"warning"
+      })
+      else this.$message('您'+this.value+'搜索了：'+this.input)
+    },
     changeStyle: function() {
       this.imgStyle.height = '120px';
       this.isSearching=true;
