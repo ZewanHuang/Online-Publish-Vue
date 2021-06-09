@@ -1,9 +1,9 @@
 <template>
   <div id="nav">
-    <el-row>
+    <el-row class="nav-row">
       <el-col :span=10 class="left">
         <router-link to="/">
-          <img src="../../assets/logo.png" alt="logo">
+          <img src="../../assets/logo.png" alt="logo" class="nav-logo">
           <span class="brand-name"> 网上出版系统</span>
         </router-link>
       </el-col>
@@ -39,6 +39,13 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
+#nav{
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.nav-row{
+  padding-bottom: 3px;
+}
 
 .left {
   text-align: left;
@@ -56,13 +63,19 @@ a {
   text-decoration: none;
 }
 #nav .logo {
-  margin-top: 4px;
+  margin-top: 1px;
 }
+
+#nav .nav-logo{
+  margin: 0;
+}
+
 #nav .brand-name {
-  font-family: 'Noto Sans TC', sans-serif;
+  font-family: headTitle, sans-serif;
   font-size: 23px;
   color: #0090cc;
-  margin-top: 4px;
+  margin-top: 8px;
+  padding-top: 10px;
 }
 #nav {
   border: none;
@@ -76,7 +89,7 @@ a {
   overflow: hidden;
   margin: 0;
   padding: 0;
-  background-color:white;
+  background-color: #ffffff;
 }
 #nav li {
   float:right;
@@ -117,5 +130,8 @@ a {
   outline: none;
   padding: 10px;
 }
-
+@font-face {
+  font-family: headTitle;
+  src: url('../../font/HYZhengYuan-45W.ttf');
+}
 </style>

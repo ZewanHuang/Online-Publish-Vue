@@ -74,7 +74,7 @@ export default {
 
 <style>
 .welcome{
-  background: url("../../assets/welcome-book.png") no-repeat center;
+  background: url("../../assets/2.png") no-repeat center;
   height: 100%;
   width: 100%;
   background-size: cover;
@@ -83,7 +83,7 @@ export default {
 .welcome .msg-box{
   text-align: center;
   margin-top: 100px;
-  margin-left: 50px;
+  margin-left: 120px;
   height: 400px;
   width: 40%;
 }
@@ -114,5 +114,9 @@ export default {
   width: 200px;
   height: 50px;
   margin: 10px 20px;
+}
+@font-face {
+  font-family: test;
+  src: url('../../font/hanyixingkai.ttf');
 }
 </style>
