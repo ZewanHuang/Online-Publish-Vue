@@ -52,9 +52,7 @@ export default {
   data() {
     return {
       imageUrl: '',
-      userinfo: {
-        username:"测试用户"
-      },
+      userinfo: {},
       ruleForm: {
         real_name: '',
         education: '',
@@ -78,13 +76,14 @@ export default {
       }
     };
   },
-  mounted() {
+  created() {
     this.$axios({
       method: 'get',
       url: '/get_session/',
     })
     .then(res => {
         this.userinfo = JSON.parse(res.data.user);
+        this.imageUrl = this.userinfo.avatar;
     })
     .catch(err => {
       console.log(err);
@@ -114,6 +113,9 @@ export default {
                 break;
               case "4001":
                 this.$message.error("用户未登录！");
+                break;
+              case '3001':
+                this.$message.warning('请填写完整信息!');
                 break;
               case "4002":
                 console.log("发生错误！");
@@ -195,7 +197,7 @@ export default {
 }
 
 .edit .header {
-  width: 75%;
+  width: 65%;
   height: auto;
   text-align: center;
   margin: 10px auto;
@@ -204,19 +206,19 @@ export default {
 
 .edit .portrait {
   position: absolute;
-  left: 15%;
+  left: 22%;
   top: 11%;
-  height: 200px;
-  width: 200px;
+  height: 180px;
+  width: 180px;
   border: solid 3px lightgray;
-  border-radius: 30px;
+  /*border-radius: 30px;*/
   background-size: 100% 100%;
 }
 
 .edit .header-bg {
   height: 110px;
   background: white url("../../assets/shelf.png") no-repeat 400px;
-  background-size: 60%;
+  background-size: 50%;
 }
 
 

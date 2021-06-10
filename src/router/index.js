@@ -360,7 +360,7 @@ const routes = [
   {
     path: '/editor',
     name: 'Edit',
-    component: () => import( '../views/workspace/editor/Edit.vue'),
+    component: () => import( '../views/workspace/editor/Editor.vue'),
     meta: {
       requireAuth: true,
       requireEditor: true

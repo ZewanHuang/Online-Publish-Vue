@@ -6,7 +6,7 @@
             <img src="../../../../assets/reader.png" class="image" alt="reader">
             <div style="padding: 14px;">
                 <span>读者</span><br>
-                <span class="num">3000</span>
+                <span class="num">{{ user.reader }}</span>
                 <span>人</span>
                 <div class="bottom clearfix">
                 <el-button type="text" class="button" @click="goReader">查看详情</el-button>
@@ -20,7 +20,7 @@
             <img src="../../../../assets/writer.jpg" class="image" alt="writer">
             <div style="padding: 14px;">
                 <span>作者</span><br>
-                <span class="num">500</span>
+                <span class="num">{{ user.writer }}</span>
                 <span>人</span>
                 <div class="bottom clearfix">
                 <el-button type="text" class="button" @click="goWriter">查看详情</el-button>
@@ -33,7 +33,7 @@
             <img src="../../../../assets/taster.png" class="image" alt="taster">
             <div style="padding: 14px;">
                 <span>审稿人</span><br>
-                <span class="num">100</span>
+                <span class="num">{{ user.review }}</span>
                 <span>人</span>
                 <div class="bottom clearfix">
                 <el-button type="text" class="button" @click="goReview">查看详情</el-button>
@@ -49,7 +49,7 @@
             <img src="../../../../assets/reviews.png" class="image" alt="reviews">
             <div style="padding: 14px;">
                 <span>评论</span><br>
-                <span class="num">2300</span>
+                <span class="num">{{ remarkCount }}</span>
                 <span>条</span>
                 <div class="bottom clearfix">
                 <!-- <el-button type="text" class="button" @click="goComment">查看详情</el-button> -->
@@ -64,7 +64,7 @@
             <img src="../../../../assets/art.jpg" class="image" alt="art">
             <div style="padding: 14px;">
                 <span>文章</span><br>
-                <span class="num">1500</span>
+                <span class="num">{{ articleCount }}</span>
                 <span>篇</span>
                 <div class="bottom clearfix">
                 </div>
@@ -76,28 +76,28 @@
           <el-col :span="8" class="item">
             <el-card shadow="always" class="item">
               <span>待审核文章 </span>
-              <a href="toJudge_art" class="num2">100</a>
+              <a href="toJudge_art" class="num2">{{ article.testing }}</a>
               <span> 篇</span>
             </el-card>
           </el-col>
           <el-col :span="8" class="item">
             <el-card shadow="always" class="item">
               <span>已分配文章 </span>
-              <a href="judged_art" class="num2">100</a>
+              <a href="judged_art" class="num2">{{ article.contribute }}</a>
               <span> 篇</span>
             </el-card>
           </el-col>
           <el-col :span="8" class="item">
             <el-card shadow="always" class="item">
               <span>待处理文章 </span>
-              <a href="toDeal_art" class="num2">100</a>
+              <a href="toDeal_art" class="num2">{{ article.toDeal }}</a>
               <span> 篇</span>
             </el-card>
           </el-col>
           <el-col :span="8" class="item">
             <el-card shadow="always" class="item">
               <span>已发布文章 </span>
-              <a href="published_art" class="num2">1200</a>
+              <a href="published_art" class="num2">{{ article.done }}</a>
               <span> 篇</span>
             </el-card>
           </el-col>
@@ -165,8 +165,28 @@
 export default {
   data() {
     return {
-      currentDate: new Date()
+      currentDate: new Date(),
+
+      user: {},
+      article: {},
+      remarkCount: 0,
+      articleCount: 0,
     };
+  },
+  mounted() {
+    this.$axios({
+      method: 'get',
+      url: '/editor/count/',
+    })
+    .then(res => {
+      this.user = JSON.parse(res.data.user)
+      this.article = JSON.parse(res.data.article)
+      this.remarkCount = res.data.remarkCount
+      this.articleCount = res.data.articleCount
+    })
+    .catch(err => {
+      console.log(err);
+    })
   },
   methods:{
     goReader(){
