@@ -48,11 +48,31 @@
         prop="subtime"
         width="100px">
       </el-table-column>
-      <el-table-column label="操作" width="100px">
+      <el-table-column label="操作" width="300px">
         <template slot-scope="scope">
           <el-button
             size="mini"
-            @click="openArt">审批</el-button>
+            @click="openArt">查看文章</el-button>
+
+        <!-- <el-form>
+          <el-form-item>
+              <el-select  placeholder="请选择活动区域" multiple v-model="citys">
+                    <el-option v-for="item in cities" :label="item.label" :value="item.value" :key="item.value"></el-option>
+              </el-select>
+            </el-form-item>
+        </el-form> -->
+
+          <el-dropdown @command="handleCommand">
+              <el-button type="primary" size="mini" style="margin: 10px">
+                分配<i class="el-icon-arrow-down el-icon--right"></i>
+              </el-button>
+            <el-dropdown-menu slot="dropdown" >
+              <el-dropdown-item command="王大明">王大明</el-dropdown-item>
+              <el-dropdown-item command="王二明">王二明</el-dropdown-item>
+              <el-dropdown-item command="王三明">王三明</el-dropdown-item>
+            </el-dropdown-menu>
+
+          </el-dropdown>
         </template>
       </el-table-column>
     </el-table>
@@ -120,19 +140,41 @@ export default {
           },]
         }
       },
+      // data() {
+      //   return {
+      //     cities: [
+      //         {value: 'Beijing',label: '北京'}, 
+      //         {value: 'Shanghai',label: '上海'}, 
+      //         {value: 'Nanjing',label: '南京'}, 
+      //         {value: 'Chengdu',label: '成都'}, 
+      //         {value: 'Shenzhen',label: '深圳'}, 
+      //         {value: 'Guangzhou',label: '广州'}
+      //     ],
+      //   }
+      //       },
   methods:{
     openArt(){
-      alert("打开更新文章表单审核并分配审稿人" );
+      alert("打开文章" );
     },
     addArt(){
       alert("打开添加文章表单" );
-    }
+    },
+      handleCommand(command) {
+        this.$message('设置'+ command+'为审稿人');
+      }
   }
 }
 
 </script>
 
 <style>
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
   input{
   font-size: 12px;
   width: 650px;

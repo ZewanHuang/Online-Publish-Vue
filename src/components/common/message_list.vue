@@ -1,7 +1,7 @@
 <template>
   <div class="component-list">
     <el-row class="submessage-list" v-for="(submessage,index) in submessages">
-        <el-timeline-item  placement="top">
+        <el-timeline-item  timestamp="2018/4/12" placement="top">
         <el-card>
             <h4  @click="lookMessage">{{submessage.context}}</h4>
             <p>{{submessage.author}} 提交于 {{submessage.time}}</p>
