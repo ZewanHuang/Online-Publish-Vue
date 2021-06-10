@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import articleDetail from "../../../../components/common/article_detail";
+import articleDetail from "../../../../../components/common/article_detail";
 
 export default {
   name: "info",

@@ -26,7 +26,7 @@ Vue.component("news", News);
 Vue.config.productionTip = false
 
 
-//全局路由导航钩子
+// 全局路由导航钩子
 router.beforeEach((to, from, next) => {
   //此处获取登陆的用户信息，参考 store/index.js and user.js
   const userInfo = user.getters.getUser(user.state())

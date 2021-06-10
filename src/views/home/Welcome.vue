@@ -66,7 +66,7 @@ export default {
       this.$router.replace('/register')
     },
     gotohome() {
-      this.$router.replace('/')
+      this.$router.replace('/home')
     },
   }
 }
@@ -74,7 +74,7 @@ export default {
 
 <style>
 .welcome{
-  background: url("../../assets/2.png") no-repeat center;
+  background: url("../../assets/vl.png") no-repeat center;
   height: 100%;
   width: 100%;
   background-size: cover;

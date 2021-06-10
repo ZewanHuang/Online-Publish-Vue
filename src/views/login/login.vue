@@ -118,14 +118,13 @@ export default {
       .then(res => {
         switch (res.data.status_code) {
           case "2000":
-            this.$router.go(0);
+            location.reload();
             // 前端保存用户信息
             this.$store.dispatch('saveUserInfo', {user: {
               'username': this.form.username,
               'confirmed': true,
               'usertype': res.data.user_type,
             }});
-            // this.$router.push('/' + this.form.username + '/info')
             break;
           case "3001":
             this.$message.error('请检查填写的内容！');

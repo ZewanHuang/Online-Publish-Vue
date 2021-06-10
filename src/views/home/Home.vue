@@ -55,6 +55,7 @@
 
 <script>
 import ArticleList from "../../components/common/article_list";
+import user from "../../store/user";
 export default {
   components: {
     ArticleList,
