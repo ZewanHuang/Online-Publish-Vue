@@ -2,6 +2,9 @@
 node_modules
 /dist
 
+# vscode counter
+.VSCodeCounter
+
 
 # local env files
 .env.local

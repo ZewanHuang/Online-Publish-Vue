@@ -24,8 +24,9 @@ const routes = [
     component: () => import( '../views/home/Guide.vue')
   },
   {
-    path: '/article/:id',
-    name: 'article:id',
+    path: '/article/:aid',
+    name: 'article:aid',
+    props: true,
     component: () => import( '../views/reader/article')
   },
   {

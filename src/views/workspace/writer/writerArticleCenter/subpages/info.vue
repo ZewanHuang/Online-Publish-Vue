@@ -15,11 +15,6 @@
                 @click="download"
           >下载文章</el-button>
           </a>
-<!--          <el-button-->
-<!--              type="default"-->
-<!--              icon="el-icon-download"-->
-<!--              @click="download"-->
-<!--          >下载文章</el-button>-->
         </el-col>
       </el-row>
     </div>
