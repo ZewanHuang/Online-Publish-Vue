@@ -57,7 +57,7 @@ export default {
       }
     })
     .catch(err => {
-      this.$router.push({real_name: 'PageNotFound'});
+      this.$router.push('/PageNotFound');
     })
   },
   methods: {
