@@ -2,7 +2,7 @@
   <div>
     <input v-model="input" placeholder="请输入内容"/>
     <el-button icon="el-icon-search" circle></el-button>
-    <el-button circle icon="el-icon-plus"></el-button>
+    <el-button circle icon="el-icon-plus" @click="addArt"></el-button>
 
     <el-table
       :data="tableData"
@@ -111,6 +111,9 @@ export default {
   methods:{
     openArt(){
       alert("打开更新文章表单" );
+    },
+    addArt(){
+      alert("打开添加文章表单" );
     }
   }
 }

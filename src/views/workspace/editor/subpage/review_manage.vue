@@ -1,9 +1,8 @@
 <template>
     <div>
-        <!-- <p>人员信息管理界面</p> -->
     <input v-model="input" placeholder="请输入内容"/>
     <el-button icon="el-icon-search" circle></el-button>
-    <el-button circle icon="el-icon-plus"></el-button>
+    <el-button circle icon="el-icon-plus" @click="addPerson"></el-button>
 
     <el-table
       :data="tableData"
@@ -17,12 +16,22 @@
       <el-table-column
         prop="name"
         label="姓名"
-        width="250">
+        width="150">
       </el-table-column>
       <el-table-column
         prop="email"
         label="邮箱"
         width="350">
+      </el-table-column>
+      <el-table-column label="操作" width="150px">
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            @click="opencenter">访问</el-button>
+          <el-button
+            size="mini"
+            @click="openform">管理</el-button>
+        </template>
       </el-table-column>
     </el-table>
     <el-pagination
@@ -80,7 +89,13 @@ export default {
       },
     methods:{
         opencenter() {
-            this.$router.push({path: '/center'})
+            this.$router.push({path: '/:username/info'})
+        },
+        addPerson(){
+            alert("打开添加人员表单");
+        },
+        openform(){
+          alert("打开人员表单");
         }
     }
 }

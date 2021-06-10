@@ -1,11 +1,13 @@
-
-
 <template>
-  <ArticleList :articles="articles"/>
+  <div>
+    <input v-model="input" placeholder="请输入内容"/>
+    <el-button icon="el-icon-search" circle></el-button>
+    <ArticleList :articles="articles"/>
+  </div>
 </template>
 
 <script>
-import ArticleList from "../../../../components/common/comment_list";
+import ArticleList from "../../../../components/common/comment_list.vue";
 
 export default {
   name: "published_art",
@@ -36,6 +38,17 @@ export default {
 </script>
 
 <style>
+
+  input{
+  font-size: 12px;
+  width: 650px;
+  height: 15px;
+  border: 1px solid black;
+  border-radius: 20px;
+  outline: none;
+  padding: 10px;
+  left: 0;
+  }
 .to-audit .article-box{
   margin-top: 30px;
   margin-bottom: 1px;

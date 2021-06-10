@@ -234,52 +234,18 @@ const routes = [
     ]
   },
   {
-    path: '/reviewArticleCenter',
-    name: 'reviewArticleCenter',
-    component: () => import('../views/workspace/reviewArticleCenter/reviewArticleCenter'),
-    children:[
-      {
-        path: 'ReviewEdit',
-        name: 'reviewArticleCenter-ReviewEdit',
-        component: () => import( '../views/workspace/reviewArticleCenter/subpages/ReviewEdit')
-      },
-      {
-        path: 'AllReview',
-        name: 'reviewArticleCenter-AllReview',
-        component: () => import( '../views/workspace/reviewArticleCenter/subpages/AllReview')
-      },
-      {
-        path: 'Article',
-        name: 'reviewArticleCenter-Article',
-        component: () => import( '../views/workspace/reviewArticleCenter/subpages/Article')
-      }
-    ]
-  },
-  {
     path: '/editor',
-    name: 'Edit',
-    component: () => import( '../views/workspace/editor/Edit.vue'),
-    meta: {
-      requireAuth: true,
-      requireEditor: true
-    },
+    name: 'Editor',
+    component: () => import( '../views/workspace/editor/Editor.vue'),
     children:[
       {
         path: 'reader_manage',
         name: 'reader_manage',
-        meta: {
-          requireAuth: true,
-          requireEditor: true
-        },
         component: () => import( '../views/workspace/editor/subpage/reader_manage.vue')
       },
       {
         path: 'writer_manage',
         name: 'writer_manage',
-        meta: {
-          requireAuth: true,
-          requireEditor: true
-        },
         component: () => import( '../views/workspace/editor/subpage/writer_manage.vue')
       },
       {
@@ -317,6 +283,28 @@ const routes = [
         name: 'editMessage',
         component: () => import( '../views/workspace/editor/subpage/editMessage.vue')
       },
+    ]
+  },
+  {
+    path: '/reviewArticleCenter',
+    name: 'reviewArticleCenter',
+    component: () => import('../views/workspace/reviewArticleCenter/reviewArticleCenter'),
+    children:[
+      {
+        path: 'ReviewEdit',
+        name: 'reviewArticleCenter-ReviewEdit',
+        component: () => import( '../views/workspace/reviewArticleCenter/subpages/ReviewEdit')
+      },
+      {
+        path: 'AllReview',
+        name: 'reviewArticleCenter-AllReview',
+        component: () => import( '../views/workspace/reviewArticleCenter/subpages/AllReview')
+      },
+      {
+        path: 'Article',
+        name: 'reviewArticleCenter-Article',
+        component: () => import( '../views/workspace/reviewArticleCenter/subpages/Article')
+      }
     ]
   },
   {

@@ -1,14 +1,12 @@
 <template>
     <div>
-        <!-- <p>人员信息管理界面</p> -->
     <input v-model="input" placeholder="请输入内容"/>
     <el-button icon="el-icon-search" circle></el-button>
-    <el-button circle icon="el-icon-plus"></el-button>
+    <el-button circle icon="el-icon-plus" @click="addPerson"></el-button>
 
     <el-table
       :data="tableData"
-      style="width: 100%"
-      @row-click="opencenter">
+      style="width: 100%">
       <el-table-column
         prop="id"
         label="用户名"
@@ -23,7 +21,17 @@
       <el-table-column
         prop="time"
         label="最近活跃时间"
-        width="300">
+        width="200">
+      </el-table-column>
+      <el-table-column label="操作" width="150px">
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            @click="opencenter">访问</el-button>
+          <el-button
+            size="mini"
+            @click="openform">管理</el-button>
+        </template>
       </el-table-column>
     </el-table>
     <el-pagination
@@ -33,7 +41,6 @@
       style="margin: 20px">
     </el-pagination>
     </div> 
-   
 </template>
 
 <script>
@@ -81,7 +88,13 @@ export default {
       },
     methods:{
         opencenter() {
-      this.$router.push({path: '/center'})
+          this.$router.push({path: '/:username/info'})
+        },
+        addPerson(){
+            alert("打开添加人员表单");
+        },
+        openform(){
+          alert("打开人员表单");
         }
     }
 }
@@ -98,6 +111,8 @@ export default {
   outline: none;
   padding: 10px;
   left: 0;
-  margin: 5px;
   }
+  .box {
+    margin: 20px;
+}
 </style>

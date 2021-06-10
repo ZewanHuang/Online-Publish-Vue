@@ -51,34 +51,34 @@ router.beforeEach((to, from, next) => {
     })
   }
   //邮箱验证后不能访问的页面 如再次验证邮箱
-  if (userInfo && userInfo.user.confirmed && to.meta.requireAuthNotConfirmed) {
-    next({
-      name: 'Home',
-    })
-  }
+  // if (userInfo && userInfo.user.confirmed && to.meta.requireAuthNotConfirmed) {
+  //   next({
+  //     name: 'Home',
+  //   })
+  // }
   //不登录时 或者登录但邮箱没验证时 不能访问 比如在线阅读和下载文章
-  if (!userInfo && to.meta.requireAuth) {
-    next({
-      name: 'Login',
+  // if (!userInfo && to.meta.requireAuth) {
+  //   next({
+  //     name: 'Login',
       // query: {
       //   redirect: to.fullPath//当前页面的地址
       // }
-    })
-  }
+  //   })
+  // }
 
   //登录且身份为作者才能访问
-  if ((!userInfo || userInfo.user.usertype === "读者" || userInfo.user.usertype === "审稿人") && to.meta.requireAuthor) {
-    next({
-      name: 'Home',
-    })
-  }
+  // if ((!userInfo || userInfo.user.usertype === "读者" || userInfo.user.usertype === "审稿人") && to.meta.requireAuthor) {
+  //   next({
+  //     name: 'Home',
+  //   })
+  // }
 
   //登录且身份为审稿人才能访问
-  if ((!userInfo || userInfo.user.usertype === "读者" || userInfo.user.usertype === "作者") && to.meta.requireReview) {
-    next({
-      name: 'Home',
-    })
-  }
+  // if ((!userInfo || userInfo.user.usertype === "读者" || userInfo.user.usertype === "作者") && to.meta.requireReview) {
+  //   next({
+  //     name: 'Home',
+  //   })
+  // }
 
   //其它情况不拦截
   next()
