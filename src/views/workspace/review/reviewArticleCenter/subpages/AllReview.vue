@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import reviewList from "../../../../components/common/review_list";
+import reviewList from "../../../../../components/common/review_list";
 
 export default {
   name: "reviewArticleCenter-AllReview",

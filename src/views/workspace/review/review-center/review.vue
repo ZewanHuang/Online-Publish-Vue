@@ -103,7 +103,7 @@
 </style>
 
 <script>
-import user from "../../../store/user";
+import user from "../../../../store/user";
 
 export default {
   name: "Writing",

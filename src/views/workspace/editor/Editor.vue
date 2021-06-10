@@ -9,9 +9,9 @@
 <script>
 import sidebar from './sidebar'
 export default {
-    components:{
-        sidebar
-    }
+  components:{
+    sidebar
+  }
 };
 </script>
 <style scoped>
@@ -20,6 +20,7 @@ a {
 }
 .box {
   display: flex;
+  margin-top: 20px;
 }
 
 </style>

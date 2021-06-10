@@ -59,56 +59,52 @@ export default {
   name: "writer_manage",
   data() {
     return {
-      input: ''
+      input: '',
+      tableData: [{
+        id: '19373000',
+        name: '王小虎',
+        password: 'abcwxh',
+        email: '1141415388@126.com',
+        education: 'xxxx',
+        workplace: 'BUAA'
+      }, {
+        id: '19373100',
+        name: '王中虎',
+        password: 'abcwzh',
+        email: '1141415388@163.com',
+        education: 'xxxx',
+        workplace: 'BUAA'
+      },{
+        id: '19373200',
+        name: '王大虎',
+        password: 'abcwdh',
+        email: '1141415388@qq.com',
+        education: 'xxxx',
+        workplace: 'BUAA'
+      },{
+        id: '19373000',
+        name: '王小虎',
+        password: 'abcwxh',
+        email: '1141415388@126.com',
+        education: 'xxxx',
+        workplace: 'BUAA'
+      }, {
+        id: '19373100',
+        name: '王中虎',
+        password: 'abcwzh',
+        email: '1141415388@163.com',
+        education: 'xxxx',
+        workplace: 'BUAA'
+      },{
+        id: '19373200',
+        name: '王大虎',
+        password: 'abcwdh',
+        email: '1141415388@qq.com',
+        education: 'xxxx',
+        workplace: 'BUAA'
+      },]
     }
   },
-  data() {
-        return {
-          tableData: [{
-            id: '19373000',
-            name: '王小虎',
-            password: 'abcwxh',
-            email: '1141415388@126.com',
-            education: 'xxxx',
-            workplace: 'BUAA'
-          }, {
-            id: '19373100',
-            name: '王中虎',
-            password: 'abcwzh',
-            email: '1141415388@163.com',
-            education: 'xxxx',
-            workplace: 'BUAA'
-          },{
-            id: '19373200',
-            name: '王大虎',
-            password: 'abcwdh',
-            email: '1141415388@qq.com',
-            education: 'xxxx',
-            workplace: 'BUAA'
-          },{
-            id: '19373000',
-            name: '王小虎',
-            password: 'abcwxh',
-            email: '1141415388@126.com',
-            education: 'xxxx',
-            workplace: 'BUAA'
-          }, {
-            id: '19373100',
-            name: '王中虎',
-            password: 'abcwzh',
-            email: '1141415388@163.com',
-            education: 'xxxx',
-            workplace: 'BUAA'
-          },{
-            id: '19373200',
-            name: '王大虎',
-            password: 'abcwdh',
-            email: '1141415388@qq.com',
-            education: 'xxxx',
-            workplace: 'BUAA'
-          },]
-        }
-      },
   methods:{
     opencenter() {
       this.$router.push({path: '/:username/info'})

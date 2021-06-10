@@ -83,7 +83,7 @@ export default {
           window.location.href="/writing/overview";
           break;
         case '编辑':
-          window.location.href="/editor";
+          window.location.href="/editor/information";
           break;
         default:
           this.$message.warning("请到个人中心申请成为作者！");

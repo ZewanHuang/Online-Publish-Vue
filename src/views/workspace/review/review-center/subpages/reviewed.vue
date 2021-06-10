@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ArticleList from "../../../../components/common/article_list";
+import ArticleList from "../../../../../components/common/article_list";
 
 export default {
   name: "Reviewed",

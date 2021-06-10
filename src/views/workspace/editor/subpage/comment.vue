@@ -39,7 +39,7 @@ export default {
 
 <style>
 
-  input{
+input{
   font-size: 12px;
   width: 650px;
   height: 15px;
@@ -48,7 +48,8 @@ export default {
   outline: none;
   padding: 10px;
   left: 0;
-  }
+  margin-bottom: 10px;
+}
 .to-audit .article-box{
   margin-top: 30px;
   margin-bottom: 1px;
