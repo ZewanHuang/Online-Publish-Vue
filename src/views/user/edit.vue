@@ -1,38 +1,47 @@
 <template>
   <div class="edit">
-    <h2>头像</h2>
-    <el-upload
+    <div class="portrait" ><el-upload
         class="avatar-uploader"
         action="http://localhost:8080/api/upload_image/"
         :show-file-list="false"
-        :on-success="handleAvatarSuccess"
-        :before-upload="beforeAvatarUpload">
+      :on-success="handleAvatarSuccess"
+      :before-upload="beforeAvatarUpload">
       <img v-if="imageUrl" :src="imageUrl" class="avatar" alt="avatar">
       <i v-else class="el-icon-plus avatar-uploader-icon"></i>
     </el-upload>
-    <h2>用户名 {{ userinfo.username }}</h2>
-    <p>下面是表单</p>
-
-    <div class="form">
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="真实姓名" prop="name">
-          <el-input v-model="ruleForm.real_name" placeholder="请填写真实姓名"></el-input>
-        </el-form-item>
-        <el-form-item label="教育经历" prop="education">
-          <el-input type="textarea" v-model="ruleForm.education" placeholder="教育经历要求不超过200字"></el-input>
-        </el-form-item>
-        <el-form-item label="职业经历" prop="job">
-          <el-input type="textarea" v-model="ruleForm.job" placeholder="职业经历要求不超过200字"></el-input>
-        </el-form-item>
-        <el-form-item label="个人简介" prop="desc">
-          <el-input type="textarea" v-model="ruleForm.description" placeholder="个人简介要求不超过200字"></el-input>
-        </el-form-item>
-        <el-form-item class="login-btn">
-          <el-button type="primary" @click="submitForm('ruleForm')">保存更改</el-button>
-        </el-form-item>
-      </el-form>
     </div>
 
+      <div class="header">
+        <div class="header-bg"></div>
+        <div class="header-info">
+          <div class="header-info-text">
+            <el-row class="username">
+              <span>{{ userinfo.username }}</span>
+              <span></span>
+            </el-row>
+          </div>
+        </div>
+      </div>
+
+        <div class="form">
+          <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+            <el-form-item label="真实姓名" prop="name" style="font-size: 20px">
+              <el-input v-model="ruleForm.real_name" placeholder="请填写真实姓名"></el-input>
+            </el-form-item>
+            <el-form-item label="教育经历" :rows="4" prop="education">
+              <el-input :rows="5" type="textarea" v-model="ruleForm.education" placeholder="教育经历要求不超过200字"></el-input>
+            </el-form-item>
+            <el-form-item label="职业经历" :rows="4" prop="job">
+              <el-input :rows="5" type="textarea" v-model="ruleForm.job" placeholder="职业经历要求不超过200字"></el-input>
+            </el-form-item>
+            <el-form-item label="个人简介" prop="desc" >
+              <el-input :rows="5" type="textarea" v-model="ruleForm.description" placeholder="个人简介要求不超过200字"></el-input>
+            </el-form-item>
+            <el-form-item class="login-btn">
+              <el-button type="primary" @click="submitForm('ruleForm')">保存更改</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
   </div>
 </template>
 
@@ -43,8 +52,9 @@ export default {
   data() {
     return {
       imageUrl: '',
-      userinfo: {},
-
+      userinfo: {
+        username:"测试用户"
+      },
       ruleForm: {
         real_name: '',
         education: '',
@@ -144,17 +154,17 @@ export default {
 </script>
 
 <style scoped>
-.avatar-uploader .el-upload {
+.edit .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
 }
-.avatar-uploader .el-upload:hover {
+.edit .avatar-uploader .el-upload:hover {
   border-color: #409EFF;
 }
-.avatar-uploader-icon {
+.edit .avatar-uploader-icon {
   font-size: 28px;
   color: #8c939d;
   width: 178px;
@@ -162,24 +172,73 @@ export default {
   line-height: 178px;
   text-align: center;
 }
-.avatar {
+.edit .login-btn {
+  margin-top: 25px;
+  text-align: center;
+}
+.edit .login-btn button{
+  height: 38px;
+}
+.edit .avatar {
   width: 178px;
   height: 178px;
   display: inline-block;
 }
-.form {
-  margin-top: 50px;
-  width: 60%;
-  height: 700px;
-  position: relative;
-  display: inline-block;
+.edit .form{
+  width: 50%;
+  margin: auto;
+  padding-top: 50px;
 }
-.login-btn {
-  margin-top: 25px;
+
+.edit {
+  height: auto;
+}
+
+.edit .header {
+  width: 75%;
+  height: auto;
   text-align: center;
+  margin: 10px auto;
 }
-.login-btn button{
-  height: 38px;
+
+
+.edit .portrait {
+  position: absolute;
+  left: 15%;
+  top: 11%;
+  height: 200px;
+  width: 200px;
+  border: solid 3px lightgray;
+  border-radius: 30px;
+  background-size: 100% 100%;
+}
+
+.edit .header-bg {
+  height: 110px;
+  background: white url("../../assets/shelf.png") no-repeat 400px;
+  background-size: 60%;
+}
+
+
+.edit .header-info {
+  background-color: white;
+  border: none;
+  box-shadow: 0 0 5px 0 #646464;
+  padding-bottom: 20px;
+  height: 100px;
+  padding-top: 0;
+}
+
+.edit .header-info-text {
+  padding-top: 40px;
+  padding-left: 270px;
+  text-align: left;
+}
+
+.edit .username {
+  margin: 0;
+  padding: 10px;
+  font-size: 30px;
 }
 
 </style>
