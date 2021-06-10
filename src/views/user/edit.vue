@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1>Edit</h1>
+  <div class="edit">
     <h2>头像</h2>
     <el-upload
         class="avatar-uploader"
@@ -17,16 +16,16 @@
     <div class="form">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="真实姓名" prop="name">
-          <el-input v-model="ruleForm.real_name"></el-input>
+          <el-input v-model="ruleForm.real_name" placeholder="请填写真实姓名"></el-input>
         </el-form-item>
         <el-form-item label="教育经历" prop="education">
-          <el-input type="textarea" v-model="ruleForm.education"></el-input>
+          <el-input type="textarea" v-model="ruleForm.education" placeholder="教育经历要求不超过200字"></el-input>
         </el-form-item>
         <el-form-item label="职业经历" prop="job">
-          <el-input type="textarea" v-model="ruleForm.job"></el-input>
+          <el-input type="textarea" v-model="ruleForm.job" placeholder="职业经历要求不超过200字"></el-input>
         </el-form-item>
         <el-form-item label="个人简介" prop="desc">
-          <el-input type="textarea" v-model="ruleForm.description"></el-input>
+          <el-input type="textarea" v-model="ruleForm.description" placeholder="个人简介要求不超过200字"></el-input>
         </el-form-item>
         <el-form-item class="login-btn">
           <el-button type="primary" @click="submitForm('ruleForm')">保存更改</el-button>
@@ -182,4 +181,5 @@ export default {
 .login-btn button{
   height: 38px;
 }
+
 </style>

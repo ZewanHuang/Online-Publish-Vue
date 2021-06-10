@@ -59,35 +59,13 @@ export default {
     this.$axios({
       method: 'post',
       url: '/userinfo/',
-      data: formData
+      data: formData,
     })
     .then(res => {
       switch (res.data.status_code) {
         case '2001':
           this.is_self = true;
           this.showArticle = this.isAuthor;
-
-          // get articles
-          this.$axios({
-            method: 'post',
-            url: '/search_list/',
-            data: formData,
-          })
-          .then(res => {
-            switch (res.data.status_code) {
-              case '2000':
-                this.hasArticles = true;
-                this.articleList = JSON.parse(res.data.articles);
-                break;
-              case '4002':
-                this.hasArticles = false;
-                break;
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          })
-
           break;
         default:
           this.is_self = false;
@@ -96,7 +74,31 @@ export default {
       }
     })
     .catch(err => {
-      this.$router.push('PageNotFound');
+      this.$router.replace('/PageNotFound');
+    })
+  },
+  mounted() {
+    const form_data = new FormData();
+    form_data.append('username', this.username);
+    // get articles
+    this.$axios({
+      method: 'post',
+      url: '/search_list/',
+      data: form_data,
+    })
+    .then(res => {
+      switch (res.data.status_code) {
+        case '2000':
+          this.hasArticles = true;
+          this.articleList = JSON.parse(res.data.articles);
+          break;
+        case '4002':
+          this.hasArticles = false;
+          break;
+      }
+    })
+    .catch(err => {
+      console.log(err);
     })
   },
   methods: {

@@ -5,7 +5,7 @@
 
         <div slot="header" class="clearfix" style="text-align: left">
           <span  class="card-title">{{article.title}}</span>
-          <el-button class="card-button" @click="openArticle(index)" type="text">查看文章</el-button>
+          <el-button class="card-button" @click="openArticle(article.article_id)" type="text">查看文章</el-button>
         </div>
 
         <div slot="default" class="card-body">
@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     openArticle: function(index) {
-      alert("打开：" + this.articles[index].title);
+      window.location.href = '/article/center/' + index + "/info";
     },
     getAbstract: function(index) {
       const str = this.articles[index].abstract

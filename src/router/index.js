@@ -149,8 +149,9 @@ const routes = [
     ]
   },
   {
-    path: '/article/center/:article_id',
+    path: '/article/center/:aid',
     name: 'writerArticleCenter',
+    props: true,
     component: () => import( '../views/workspace/writer/writerArticleCenter/writerArticleCenter'),
     meta: {
       requireAuth: true,
@@ -160,6 +161,7 @@ const routes = [
       {
         path: 'info',
         name: 'Article-Info',
+        props: true,
         meta: {
           requireAuth: true,
           requireAuthor: true
@@ -169,6 +171,7 @@ const routes = [
       {
         path: 'overview',
         name: 'Article-Review',
+        props: true,
         meta: {
           requireAuth: true,
           requireAuthor: true
@@ -178,6 +181,7 @@ const routes = [
       {
         path: 'edit',
         name: 'Article-Edit',
+        props: true,
         meta: {
           requireAuth: true,
           requireAuthor: true
