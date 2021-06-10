@@ -107,7 +107,7 @@ export default {
         switch (res.data.status_code) {
           case '2000':
             this.$message.success('保存成功!');
-            const url = '/article/center/'+this.aid+'/info';
+            const url = '/article/center/'+this.aid+'/info/collection';
             setTimeout(()=> {
               this.$router.replace(url);
             }, 1000);

@@ -15,8 +15,8 @@ export default {
       articles: [
         {
           title: '智能信息采集器软件开发实践',
-          author:'傅骏',
-          keywords: [		'爬虫技术','信息采集','python','二次开发','xpath'],
+          writer:'傅骏',
+          key: ['爬虫技术','信息采集','python','二次开发','xpath'],
           abstract: '应用爬虫技术开发的智能信息采集器,可以帮助用户及时获得工程学院、铸造院校、焊接行业、军事网站的最新消息。论文选用tkinter进行界面设计,应用python爬虫技术对xpath、抓取到的日期、网址进行了处理,顺利实现抓取消息并获得......'
         },
         {
