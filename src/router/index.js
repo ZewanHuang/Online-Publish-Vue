@@ -243,6 +243,11 @@ const routes = [
     ]
   },
   {
+    path: '/message',
+    name: 'Message',
+    component: () => import('../views/message'),
+  },
+  {
     path: '/*',
     name: 'PageNotFound',
     component: () => import('../views/error/PageNotFound'),
