@@ -200,25 +200,55 @@ const routes = [
   },
   {
     path: '/editor',
-    name: 'Edit',
-    component: () => import( '../views/workspace/edit/Edit.vue'),
-    children: [
+    name: 'Editor',
+    component: () => import( '../views/workspace/edit/Editor.vue'),
+    children:[
       {
-        path: 'article_manage',
-        name: 'Article_manage',
-        component: () => import( '../views/workspace/edit/subpage/article_manage.vue')
+        path: 'reader_manage',
+        name: 'reader_manage',
+        component: () => import( '../views/workspace/edit/subpage/reader_manage.vue')
       },
       {
-        path: 'person_manage',
-        name: 'Person_manage',
-        component: () => import( '../views/workspace/edit/subpage/person_manage.vue')
+        path: 'writer_manage',
+        name: 'writer_manage',
+        component: () => import( '../views/workspace/edit/subpage/writer_manage.vue')
       },
       {
-        path: 'message_manage',
-        name: 'Message_manage',
-        component: () => import( '../views/workspace/edit/subpage/message_manage.vue')
+        path: 'review_manage',
+        name: 'review_manage',
+        component: () => import( '../views/workspace/edit/subpage/review_manage.vue')
       },
-    ],
+      {
+        path: 'published_art',
+        name: 'published_art',
+        component: () => import( '../views/workspace/edit/subpage/Published_art.vue')
+      },
+      {
+        path: 'toJudge_art',
+        name: 'toJudge_art',
+        component: () => import( '../views/workspace/edit/subpage/toJudge_art.vue')
+      },
+      {
+        path: 'judged_art',
+        name: 'judged_art',
+        component: () => import( '../views/workspace/edit/subpage/judged_art.vue')
+      },
+      {
+        path: 'toDeal_art',
+        name: 'toDeal_art',
+        component: () => import( '../views/workspace/edit/subpage/toDeal_art.vue')
+      },
+      {
+        path: 'comment',
+        name: 'comment',
+        component: () => import( '../views/workspace/edit/subpage/comment.vue')
+      },
+      {
+        path: 'editMessage',
+        name: 'editMessage',
+        component: () => import( '../views/workspace/edit/subpage/editMessage.vue')
+      },
+    ]
   },
   {
     path: '/reviewArticleCenter',
