@@ -84,7 +84,6 @@ a {
   box-shadow: 0 0 0 1px lightgray;
   height: 60px;
 }
-
 #nav ul{
   list-style-type: none;
   overflow: hidden;
@@ -92,7 +91,6 @@ a {
   padding: 0;
   background-color: #ffffff;
 }
-
 #nav li {
   float:right;
   margin-left: 13px;
@@ -112,7 +110,6 @@ a {
   color: #0090cc;
   border-bottom: solid;
 }
-
 #nav img {
   padding: 5px;
   width: 40px;

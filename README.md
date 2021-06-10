@@ -20,4 +20,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 部署
 
-记得修改头像上传的网址
+记得修改头像上传/文件上传的网址

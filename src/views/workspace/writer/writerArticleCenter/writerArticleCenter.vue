@@ -18,7 +18,8 @@
 
 <script>
 export default {
-  name: "writerArticleCenter"
+  name: "writerArticleCenter",
+  props: ['aid']
 }
 </script>
 

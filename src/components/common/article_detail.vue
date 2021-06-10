@@ -6,7 +6,7 @@
     </div>
 
     <div class="author">
-      {{article.author}}
+      {{article.writer}}
     </div>
 
     <div class="content">
@@ -24,7 +24,7 @@
           关键词：
         </el-col>
         <el-col :span=22 class="item-text">
-          {{ article.keywords }}
+          {{ article.key }}
         </el-col>
       </el-row>
 
@@ -33,13 +33,13 @@
           类别：
         </el-col>
         <el-col :span=22 class="item-text">
-          {{ article.type }}
+          {{ article.category }}
         </el-col>
       </el-row>
     </div>
 
     <div class="copyright">
-      <i class="el-icon-s-promotion">云端出版系统网络首发。未经许可，禁止转载、摘编。</i>
+      <i class="el-icon-s-promotion">网上出版系统网络首发。未经许可，禁止转载、摘编。</i>
     </div>
   </div>
 </template>

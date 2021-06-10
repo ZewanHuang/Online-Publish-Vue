@@ -1,6 +1,6 @@
 <template>
   <div class="collection">
-    <el-collapse accordion>
+    <el-collapse accordion v-if="hasCollection">
       <el-collapse-item v-for="(collection, index) in collectionList" :title=collection.title :name=index>
         <span class="item-title">作者：</span>
         <span class="item-content">{{collection.author}}</span>
@@ -14,6 +14,11 @@
         </div>
       </el-collapse-item>
     </el-collapse>
+    <div class="non-collections">
+      <p>
+        用户未收藏文章
+      </p>
+    </div>
   </div>
 </template>
 
@@ -22,23 +27,35 @@ import News from "./activity.vue";
 
 export default {
   name: "Collection",
+  props:　['username'],
   data() {
     return {
-      collectionList: [
-        {
-          title: "图谱建模基础下海量网络流量的数据挖掘",
-          author: "易灿 刘彦姝",
-          abstract: "随着移动网络流量数据在无线通信网络流量中的比例大幅增长,使其在语音通信业务逐渐饱和的趋势下," +
-              "必须通过良好的互联网业务流量来进行网络端口的运营。文章首先对网络流量数据挖掘的重要意义进行说明;" +
-              "其次,通过分析用户网页浏览过程。创建出请求依赖图;" +
-              "最后,提出网络流量数据挖掘的有效识别算法,为流量挖掘提供图谱建模基础。"
-        },
-        { title: "“互联网+”时代混合式金课教学设计", author: "", abstract: ""},
-        { title: "HTML5技术在融媒体平台建设中的运用", author: "", abstract: ""},
-        { title: "Web系统前端框架和库的相关技术分析", author: "", abstract: ""},
-        { title: "基于Java与HTML5的宁夏数字博物馆系统的设计与实现", author: "", abstract: ""},
-      ]
+      hasCollection: false,
+      collectionList: []
     }
+  },
+  created() {
+    const formData = new FormData();
+    formData.append('username', this.username);
+    this.$axios({
+      method: 'post',
+      url: '/get_collect/',
+      data: formData
+    })
+    .then(res => {
+      switch (res.data.status_code) {
+        case '2000':
+          this.hasCollection = true;
+          this.collectionList = JSON.parse(res.data.collections);
+          break;
+        case '4002':
+          this.hasCollection = false;
+          break;
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
   },
   methods: {
     openArticle: function(index) {
@@ -80,6 +97,11 @@ export default {
   text-align: right;
   font-size: large;
   font-weight: bold;
+}
+
+.non-collections {
+  text-align: center;
+  padding-top: 50px;
 }
 
 </style>

@@ -47,8 +47,11 @@ export default {
           .then(res => {
             switch (res.data.status_code) {
               case "2000":
-                this.$router.go(0);
-                this.$router.push('/login');
+                this.$message.success('退出成功！');
+                setTimeout(()=> {
+                  this.$router.replace('/login');
+                  location.reload();
+                }, 1500);
                 // 登出成功后清空前端存储内容，并自动跳转 /login
                 this.$store.dispatch('clear');
                 break;
@@ -65,8 +68,7 @@ export default {
       window.location.href="/setting";
     },
     myhome(){
-      window.location.href="/" + this.username + "/info/activity";
-      console.log(this.username);
+      window.location.href="/" + this.username + "/info/collection";
     },
     message(){
       window.location.href="/message";

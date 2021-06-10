@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import user from "../../../store/user";
+import user from "../../../../store/user";
 
 export default {
   name: "Writing",
@@ -57,7 +57,7 @@ export default {
       }
     })
     .catch(err => {
-      this.$router.push({real_name: 'PageNotFound'});
+      this.$router.push('/PageNotFound');
     })
   },
   methods: {
