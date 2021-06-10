@@ -283,6 +283,11 @@ const routes = [
         name: 'editMessage',
         component: () => import( '../views/workspace/editor/subpage/editMessage.vue')
       },
+      {
+        path: 'information',
+        name: 'information',
+        component: () => import( '../views/workspace/editor/subpage/information.vue')
+      },
     ]
   },
   {

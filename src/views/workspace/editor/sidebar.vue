@@ -12,9 +12,15 @@
                 @open="handleOpen"
                 @close="handleClose"
                 router>
+                <router-link :to="{name:'information'}">
+                    <el-menu-item >
+                    <i class="el-icon-s-data"></i>
+                    <span slot="title">信息统计</span>
+                    </el-menu-item>
+                </router-link>
                 <el-submenu index="1">
                 <template slot="title">
-                    <i class="el-icon-document"></i>
+                    <i class="el-icon-s-custom"></i>
                     <span>人员管理</span>
                 </template>
                 <el-menu-item-group>
@@ -32,7 +38,7 @@
 
                 <el-submenu index="2">
                 <template slot="title">
-                    <i class="el-icon-document"></i>
+                    <i class="el-icon-reading"></i>
                     <span>文章管理</span>
                 </template>
                 <el-menu-item-group>
@@ -59,7 +65,7 @@
                 </router-link>
                 <router-link :to="{name:'editMessage'}">
                   <el-menu-item >
-                  <i class="el-icon-location"></i>
+                  <i class="el-icon-chat-dot-round"></i>
                   <span slot="title">消息</span>
                   </el-menu-item>
                 </router-link>
@@ -99,6 +105,9 @@
   text-decoration:none !important;
 } */
 
+.audit {
+  margin-left: 5%;
+}
 a {
   text-decoration: none;
 }
