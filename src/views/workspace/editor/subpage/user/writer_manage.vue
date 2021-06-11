@@ -9,12 +9,12 @@
         :data="tableData"
         style="width: 100%">
         <el-table-column
-          prop="id"
+          prop="username"
           label="用户名"
           width="120px">
         </el-table-column>
         <el-table-column
-          prop="name"
+          prop="realName"
           label="姓名"
           width="120px">
         </el-table-column>
@@ -29,7 +29,7 @@
           width="150px">
         </el-table-column>
         <el-table-column
-          prop="workplace"
+          prop="job"
           label="工作单位"
           width="120px">
         </el-table-column>
@@ -37,7 +37,7 @@
           <template slot-scope="scope">
             <el-button
               size="mini"
-              @click="opencenter">访问</el-button>
+              @click="opencenter(scope.row.username)">访问</el-button>
             <el-button
             size="mini"
             @click="openform">管理</el-button>
@@ -60,54 +60,24 @@ export default {
   data() {
     return {
       input: '',
-      tableData: [{
-        id: '19373000',
-        name: '王小虎',
-        password: 'abcwxh',
-        email: '1141415388@126.com',
-        education: 'xxxx',
-        workplace: 'BUAA'
-      }, {
-        id: '19373100',
-        name: '王中虎',
-        password: 'abcwzh',
-        email: '1141415388@163.com',
-        education: 'xxxx',
-        workplace: 'BUAA'
-      },{
-        id: '19373200',
-        name: '王大虎',
-        password: 'abcwdh',
-        email: '1141415388@qq.com',
-        education: 'xxxx',
-        workplace: 'BUAA'
-      },{
-        id: '19373000',
-        name: '王小虎',
-        password: 'abcwxh',
-        email: '1141415388@126.com',
-        education: 'xxxx',
-        workplace: 'BUAA'
-      }, {
-        id: '19373100',
-        name: '王中虎',
-        password: 'abcwzh',
-        email: '1141415388@163.com',
-        education: 'xxxx',
-        workplace: 'BUAA'
-      },{
-        id: '19373200',
-        name: '王大虎',
-        password: 'abcwdh',
-        email: '1141415388@qq.com',
-        education: 'xxxx',
-        workplace: 'BUAA'
-      },]
+      tableData: [],
     }
   },
+  mounted() {
+    this.$axios({
+      method: 'get',
+      url: '/editor/get_authors/',
+    })
+    .then(res => {
+      this.tableData = JSON.parse(res.data.authors);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  },
   methods:{
-    opencenter() {
-      this.$router.push({path: '/:username/info'})
+    opencenter(index) {
+      this.$router.push('/' + index +'/info')
     },
     addPerson(){
         alert("打开添加人员表单");

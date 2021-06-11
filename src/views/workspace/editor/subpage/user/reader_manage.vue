@@ -8,7 +8,7 @@
       :data="tableData"
       style="width: 100%">
       <el-table-column
-        prop="id"
+        prop="username"
         label="用户名"
         width="200">
       </el-table-column>
@@ -20,14 +20,14 @@
       </el-table-column>
       <el-table-column
         prop="time"
-        label="最近活跃时间"
+        label="注册时间"
         width="200">
       </el-table-column>
       <el-table-column label="操作" width="150px">
         <template slot-scope="scope">
           <el-button
             size="mini"
-            @click="opencenter">访问</el-button>
+            @click="opencenter(scope.row.username)">访问</el-button>
           <el-button
             size="mini"
             @click="openform">管理</el-button>
@@ -37,7 +37,7 @@
     <el-pagination
       background
       layout="prev, pager, next"
-      :total="1000"
+      :total="10"
       style="margin: 20px">
     </el-pagination>
     </div> 
@@ -48,55 +48,33 @@ export default {
   name: "reader_manage",
   data() {
     return {
-      input: ''
+      input: '',
+      tableData: []
     }
   },
-  data() {
-        return {
-          tableData: [{
-            id: '19373000',
-            name: '王小虎',
-            time: '2021/1/1',
-            email: '1141415388@126.com'
-          }, {
-            id: '19373100',
-            name: '王中虎',
-            time: '2021/1/1',
-            email: '1141415388@163.com'
-          },{
-            id: '19373200',
-            name: '王大虎',
-            time: '2021/1/1',
-            email: '1141415388@qq.com'
-          },{
-            id: '19373000',
-            name: '王小虎',
-            time: '2021/1/1',
-            email: '1141415388@126.com'
-          }, {
-            id: '19373100',
-            name: '王中虎',
-            time: '2021/1/1',
-            email: '1141415388@163.com'
-          },{
-            id: '19373200',
-            name: '王大虎',
-            time: '2021/1/1',
-            email: '1141415388@qq.com'
-          },]
-        }
-      },
-    methods:{
-        opencenter() {
-          this.$router.push({path: '/:username/info'})
-        },
-        addPerson(){
-            alert("打开添加人员表单");
-        },
-        openform(){
-          alert("打开人员表单");
-        }
+  mounted() {
+    this.$axios({
+      method: 'get',
+      url: '/editor/get_readers/',
+    })
+    .then(res => {
+      this.tableData = JSON.parse(res.data.readers);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  },
+  methods:{
+    opencenter(index) {
+      this.$router.push('/' + index +'/info')
+    },
+    addPerson(){
+        alert("打开添加人员表单");
+    },
+    openform(){
+      alert("打开人员表单");
     }
+  }
 }
 
 </script>

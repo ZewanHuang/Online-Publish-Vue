@@ -49,7 +49,6 @@ export default {
               case "2000":
                 this.$message.success('退出成功！');
                 setTimeout(()=> {
-                  this.$router.replace('/login');
                   location.reload();
                 }, 1500);
                 // 登出成功后清空前端存储内容，并自动跳转 /login

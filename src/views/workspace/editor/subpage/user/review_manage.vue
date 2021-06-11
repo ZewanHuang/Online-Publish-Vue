@@ -9,12 +9,12 @@
       style="width: 100%"
       @row-click="opencenter">
       <el-table-column
-        prop="id"
+        prop="username"
         label="用户名"
         width="200">
       </el-table-column>
       <el-table-column
-        prop="name"
+        prop="realName"
         label="姓名"
         width="150">
       </el-table-column>
@@ -27,7 +27,7 @@
         <template slot-scope="scope">
           <el-button
             size="mini"
-            @click="opencenter">访问</el-button>
+            @click="opencenter(scope.row.username)">访问</el-button>
           <el-button
             size="mini"
             @click="openform">管理</el-button>
@@ -49,55 +49,34 @@ export default {
   name: "review_manage",
   data() {
     return {
-      input: ''
+      input: '',
+
+      tableData: []
     }
   },
-  data() {
-        return {
-          tableData: [{
-            id: '19373000',
-            name: '王小虎',
-            password: 'abcwxh',
-            email: '1141415388@126.com'
-          }, {
-            id: '19373100',
-            name: '王中虎',
-            password: 'abcwzh',
-            email: '1141415388@163.com'
-          },{
-            id: '19373200',
-            name: '王大虎',
-            password: 'abcwdh',
-            email: '1141415388@qq.com'
-          },{
-            id: '19373000',
-            name: '王小虎',
-            password: 'abcwxh',
-            email: '1141415388@126.com'
-          }, {
-            id: '19373100',
-            name: '王中虎',
-            password: 'abcwzh',
-            email: '1141415388@163.com'
-          },{
-            id: '19373200',
-            name: '王大虎',
-            password: 'abcwdh',
-            email: '1141415388@qq.com'
-          },]
-        }
-      },
-    methods:{
-        opencenter() {
-            this.$router.push({path: '/:username/info'})
-        },
-        addPerson(){
-            alert("打开添加人员表单");
-        },
-        openform(){
-          alert("打开人员表单");
-        }
+  mounted() {
+    this.$axios({
+      method: 'get',
+      url: '/editor/get_reviews/',
+    })
+    .then(res => {
+      this.tableData = JSON.parse(res.data.reviews);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  },
+  methods:{
+    opencenter(index) {
+      this.$router.push('/' + index +'/info')
+    },
+    addPerson(){
+      alert("打开添加人员表单");
+    },
+    openform(){
+      alert("打开人员表单");
     }
+  }
 }
 
 </script>

@@ -10,57 +10,49 @@
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
-            <el-form-item label="作者id">
-              <span>{{ props.row.writerid }}</span>
-            </el-form-item>
             <el-form-item label="作者">
-              <span>{{ props.row.writer }}</span>
+              <span>{{ props.row.realName }}</span>
+            </el-form-item>
+            <el-form-item label="分类">
+              <span>{{ props.row.type }}</span>
             </el-form-item>
             <el-form-item label="文章名">
-              <span>{{ props.row.article_name }}</span>
+              <span>{{ props.row.title }}</span>
             </el-form-item>
             <el-form-item label="关键词">
-              <span>{{ props.row.keyword }}</span>
+              <span>{{ props.row.key }}</span>
             </el-form-item>
             <el-form-item label="摘要">
-              <span >{{ props.row.abstract }}</span>
+              <span>{{ props.row.abstract }}</span>
             </el-form-item>
           </el-form>
         </template>
       </el-table-column>
       <el-table-column
         label="作者"
-        prop="writer"
+        prop="realName"
         width="80px">
       </el-table-column>
       <el-table-column
         label="文章名"
-        prop="article_name"
+        prop="title"
         width="300px">
       </el-table-column>
       <el-table-column
         label="关键词"
-        prop="keyword"
+        prop="key"
         width="250px">
       </el-table-column>
       <el-table-column
         label="提交时间"
-        prop="subtime"
+        prop="time"
         width="100px">
       </el-table-column>
       <el-table-column label="操作" width="300px">
         <template slot-scope="scope">
           <el-button
             size="mini"
-            @click="openArt">查看文章</el-button>
-
-        <!-- <el-form>
-          <el-form-item>
-              <el-select  placeholder="请选择活动区域" multiple v-model="citys">
-                    <el-option v-for="item in cities" :label="item.label" :value="item.value" :key="item.value"></el-option>
-              </el-select>
-            </el-form-item>
-        </el-form> -->
+            @click="openArt(scope.row.aid)">查看文章</el-button>
 
           <el-dropdown @command="handleCommand">
               <el-button type="primary" size="mini" style="margin: 10px">
@@ -79,7 +71,7 @@
     <el-pagination
       background
       layout="prev, pager, next"
-      :total="1000"
+      :total="50"
       style="margin: 20px">
     </el-pagination>
   </div>
@@ -90,71 +82,26 @@ export default {
   name: "Published_art",
   data() {
     return {
-      input: ''
+      input: '',
+
+      tableData: [],
     }
   },
-  data() {
-        return {
-          tableData: [{
-            writerid:'19373000',
-            writer: '易灿',
-            subtime:'2021/6/10',
-            article_name:'图谱建模基础下海量网络流量的数据挖掘',
-            keyword:'图谱建模 流量识别 数据挖掘',
-            abstract:'随着移动网络流量数据在无线通信网络流量中的比例大幅增长,使其在语音通信业务逐渐饱和的趋势下,必须通过良好的互联网业务流量来进行网络端口的运营。文章首先对网络流量数据挖掘的重要意义进行说明;其次,......'
-          }, {
-            writerid:'19373000',
-            writer: '易灿',
-            subtime:'2021/6/10',
-            article_name:'图谱建模基础下海量网络流量的数据挖掘',
-            keyword:'图谱建模 流量识别 数据挖掘',
-            abstract:'随着移动网络流量数据在无线通信网络流量中的比例大幅增长,使其在语音通信业务逐渐饱和的趋势下,必须通过良好的互联网业务流量来进行网络端口的运营。文章首先对网络流量数据挖掘的重要意义进行说明;其次,......'
-          },{
-            writerid:'19373000',
-            writer: '易灿',
-            subtime:'2021/6/10',
-            article_name:'图谱建模基础下海量网络流量的数据挖掘',
-            keyword:'图谱建模 流量识别 数据挖掘',
-            abstract:'随着移动网络流量数据在无线通信网络流量中的比例大幅增长,使其在语音通信业务逐渐饱和的趋势下,必须通过良好的互联网业务流量来进行网络端口的运营。文章首先对网络流量数据挖掘的重要意义进行说明;其次,......'
-          },{
-            writerid:'19373000',
-            writer: '易灿',
-            subtime:'2021/6/10',
-            article_name:'图谱建模基础下海量网络流量的数据挖掘',
-            keyword:'图谱建模 流量识别 数据挖掘',
-            abstract:'随着移动网络流量数据在无线通信网络流量中的比例大幅增长,使其在语音通信业务逐渐饱和的趋势下,必须通过良好的互联网业务流量来进行网络端口的运营。文章首先对网络流量数据挖掘的重要意义进行说明;其次,......'
-          }, {
-            writerid:'19373000',
-            writer: '易灿',
-            subtime:'2021/6/10',
-            article_name:'图谱建模基础下海量网络流量的数据挖掘',
-            keyword:'图谱建模 流量识别 数据挖掘',
-            abstract:'随着移动网络流量数据在无线通信网络流量中的比例大幅增长,使其在语音通信业务逐渐饱和的趋势下,必须通过良好的互联网业务流量来进行网络端口的运营。文章首先对网络流量数据挖掘的重要意义进行说明;其次,......'
-          },{
-            writerid:'19373000',
-            writer: '易灿',
-            subtime:'2021/6/10',
-            article_name:'图谱建模基础下海量网络流量的数据挖掘',
-            keyword:'图谱建模 流量识别 数据挖掘',
-            abstract:'随着移动网络流量数据在无线通信网络流量中的比例大幅增长,使其在语音通信业务逐渐饱和的趋势下,必须通过良好的互联网业务流量来进行网络端口的运营。文章首先对网络流量数据挖掘的重要意义进行说明;其次,......'
-          },]
-        }
-      },
-      // data() {
-      //   return {
-      //     cities: [
-      //         {value: 'Beijing',label: '北京'}, 
-      //         {value: 'Shanghai',label: '上海'}, 
-      //         {value: 'Nanjing',label: '南京'}, 
-      //         {value: 'Chengdu',label: '成都'}, 
-      //         {value: 'Shenzhen',label: '深圳'}, 
-      //         {value: 'Guangzhou',label: '广州'}
-      //     ],
-      //   }
-      //       },
+  mounted() {
+    this.$axios({
+      method: 'get',
+      url: '/editor/get_articles_0/',
+    })
+    .then(res => {
+      this.tableData = JSON.parse(res.data.info);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  },
   methods:{
-    openArt(){
-      alert("打开文章" );
+    openArt(index){
+      this.$router.push('/article/' + index);
     },
     addArt(){
       alert("打开添加文章表单" );

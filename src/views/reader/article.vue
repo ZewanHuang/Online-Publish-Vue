@@ -56,9 +56,23 @@ export default {
   methods: {
     read: function () {
       window.open(this.url, '_blank');
+      this.$axios({
+        method: 'post',
+        url: '/add_read_times/',
+      })
+      .catch(err => {
+        console.log(err);
+      })
     },
     download: function () {
       this.$message.success('下载成功!');
+      this.$axios({
+        method: 'post',
+        url: '/add_download_times/',
+      })
+      .catch(err => {
+        console.log(err);
+      })
     }
   }
 }

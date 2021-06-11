@@ -80,6 +80,13 @@ router.beforeEach((to, from, next) => {
     })
   }
 
+  //登录且身份为编辑才能访问
+  if ((!userInfo || userInfo.user.usertype !== '编辑') && to.meta.requireEditor) {
+    next({
+      name: 'Home',
+    })
+  }
+
   //其它情况不拦截
   next()
 })
