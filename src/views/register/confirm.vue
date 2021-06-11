@@ -7,7 +7,7 @@
         </div>
       </el-row>
       <el-row>
-        <el-col span=8 offset=2><h4 style="color: #808080">身份选择:</h4><br></el-col>
+        <el-col span=8 offset=2><h4 style="color: #808080">身份介绍:</h4><br></el-col>
 
       </el-row>
       <el-row class="identity-choose">
@@ -18,17 +18,27 @@
             </div>
             <img class="image" src="../../assets/reader.png"><br>
             <span >读者是注册后的默认选项，无需申请</span>
-            <div style="color: #808080;margin-top: 10px">这里是关于读者的描述...</div>
+            <div style="color: #808080;margin-top: 10px">查找、阅读、下载文献...</div>
           </el-card>
         </el-col>
         <el-col :span=6>
           <el-card class="box-card" @click="applyToAuthor">
             <div slot="header" class="clearfix">
-              <h4>成为作者</h4>
+              <h4>作者</h4>
             </div>
             <img class="image" src="../../assets/taster.png"><br>
-            <span >点击申请成为作者</span>
-            <div style="color: #808080;margin-top: 10px">这里是关于作者的描述...</div>
+            <span >完善个人信息后可申请成为作者</span>
+            <div style="color: #808080;margin-top: 10px">发表文章，审核成功后出版...</div>
+          </el-card>
+        </el-col>
+        <el-col :span=6>
+          <el-card class="box-card" @click="applyToAuthor">
+            <div slot="header" class="clearfix">
+              <h4>审稿人</h4>
+            </div>
+            <img class="image" src="../../assets/editor.png"><br>
+            <span >审稿人无法申请</span>
+            <div style="color: #808080;margin-top: 10px">审核作者提交的文章...</div>
           </el-card>
         </el-col>
       </el-row>

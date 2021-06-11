@@ -22,7 +22,7 @@
                   用户
                 </el-row>
                 <el-row>
-                  <span style="font-weight: bold;font-size: 30px">600</span>万+
+                  <span style="font-weight: bold;font-size: 30px">{{ readers }}</span>+
                 </el-row>
               </el-col>
               <el-col span=5>
@@ -30,7 +30,7 @@
                   作者
                 </el-row>
                 <el-row>
-                  <span style="font-weight: bold;font-size: 30px">200</span>万+
+                  <span style="font-weight: bold;font-size: 30px">{{ writers }}</span>+
                 </el-row>
               </el-col>
               <el-col span=5>
@@ -38,7 +38,7 @@
                   审稿人
                 </el-row>
                 <el-row>
-                  <span style="font-weight: bold;font-size: 30px">10</span>万+
+                  <span style="font-weight: bold;font-size: 30px">{{ reviews }}</span>+
                 </el-row>
               </el-col>
               <el-col span=5>
@@ -46,7 +46,7 @@
                   文章
                 </el-row>
                 <el-row>
-                  <span style="font-weight: bold;font-size: 30px">1000</span>万+
+                  <span style="font-weight: bold;font-size: 30px">{{ articles }}</span>+
                 </el-row>
               </el-col>
             </el-row>
@@ -61,6 +61,26 @@
 <script>
 export default {
   name:'welcome',
+  data() {
+    return {
+      readers: 0,
+      writers: 0,
+      reviews: 0,
+      articles: 0,
+    }
+  },
+  created() {
+    this.$axios({
+      method: 'get',
+      url: '/statistic/',
+    })
+    .then(res => {
+      this.readers = res.data.readers;
+      this.writers = res.data.writers;
+      this.reviews = res.data.reviews;
+      this.articles = res.data.articles;
+    })
+  },
   methods: {
     gotoregister() {
       this.$router.replace('/register')

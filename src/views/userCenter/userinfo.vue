@@ -2,7 +2,7 @@
   <div class="info">
     <div class="portrait" ref="AVATAR"></div>
     <el-container>
-      <div class="header">
+      <div class="title">
         <div class="header-bg"></div>
         <div class="header-info">
           <div class="header-info-text">
@@ -96,7 +96,7 @@ a {
   height: auto;
 }
 
-.info .header {
+.info .title {
   width: 75%;
   height: auto;
   text-align: center;

@@ -1,6 +1,13 @@
 <template>
   <div class="verify">
-    <el-button @click="send_email">重新发送邮件</el-button>
+    <div class="title">
+      <h1>邮件发送成功！</h1>
+      <p class="subtitle">邮件验证码将于3天后失效！</p>
+    </div>
+    <div class="btn">
+      <el-button @click="reload">刷新登录</el-button>
+      <el-button @click="send_email" type="primary">重新发送邮件</el-button>
+    </div>
   </div>
 </template>
 
@@ -43,6 +50,9 @@ export default {
       .catch(err => {
         console.log(err);
       })
+    },
+    reload() {
+      location.reload();
     }
   },
 
@@ -50,5 +60,13 @@ export default {
 </script>
 
 <style scoped>
-
+.title {
+  margin: 20px;
+}
+.subtitle {
+  margin-top: 30px;
+}
+.btn {
+  margin-top: 30px;
+}
 </style>

@@ -11,7 +11,7 @@
     </el-upload>
     </div>
 
-      <div class="header">
+      <div class="title">
         <div class="header-bg"></div>
         <div class="header-info">
           <div class="header-info-text">
@@ -196,7 +196,7 @@ export default {
   height: auto;
 }
 
-.edit .header {
+.edit .title {
   width: 65%;
   height: auto;
   text-align: center;
