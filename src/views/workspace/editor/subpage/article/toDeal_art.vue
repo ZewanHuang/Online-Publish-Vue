@@ -1,8 +1,8 @@
 <template>
   <div>
-    <input v-model="input" placeholder="请输入内容"/>
-    <el-button icon="el-icon-search" circle></el-button>
-    <el-button circle icon="el-icon-plus" @click="addArt"></el-button>
+<!--    <input v-model="input" placeholder="请输入内容"/>-->
+<!--    <el-button icon="el-icon-search" circle></el-button>-->
+<!--    <el-button circle icon="el-icon-plus" @click="addArt"></el-button>-->
 
     <el-table
       :data="tableData"
@@ -10,14 +10,14 @@
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
+            <el-form-item label="文章名">
+              <span>{{ props.row.title }}</span>
+            </el-form-item>
             <el-form-item label="作者">
               <span>{{ props.row.realName }}</span>
             </el-form-item>
             <el-form-item label="分类">
               <span>{{ props.row.type }}</span>
-            </el-form-item>
-            <el-form-item label="文章名">
-              <span>{{ props.row.title }}</span>
             </el-form-item>
             <el-form-item label="关键词">
               <span>{{ props.row.key }}</span>
@@ -29,18 +29,24 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="作者"
-        prop="realName"
-        width="100px">
+          label="作者"
+          prop="realName"
+          width="100px">
       </el-table-column>
       <el-table-column
-        label="文章名"
-        prop="title"
-        width="300px">
+          label="文章名"
+          prop="title"
+          width="350px">
       </el-table-column>
       <el-table-column
-        label="关键词"
-        prop="key">
+          label="分类"
+          prop="type"
+          width="100px">
+      </el-table-column>
+      <el-table-column
+          label="提交时间"
+          prop="time"
+          width="200px">
       </el-table-column>
       <el-table-column label="操作" width="100px">
         <template slot-scope="scope">

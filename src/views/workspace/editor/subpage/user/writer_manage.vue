@@ -40,7 +40,7 @@
               @click="opencenter(scope.row.username)">访问</el-button>
             <el-button
             size="mini"
-            @click="openform">管理</el-button>
+            @click="deleteWriter(scope.row.username)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -79,12 +79,9 @@ export default {
     opencenter(index) {
       this.$router.push('/' + index +'/info')
     },
-    addPerson(){
-        alert("打开添加人员表单");
+    deleteWriter(index) {
+
     },
-    openform(){
-      alert("打开人员表单");
-    }
   }
 }
 

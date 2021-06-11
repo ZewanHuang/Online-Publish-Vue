@@ -1,8 +1,8 @@
 <template>
   <div>
-    <input v-model="input" placeholder="请输入内容"/>
-    <el-button icon="el-icon-search" circle></el-button>
-    <el-button circle icon="el-icon-plus" @click="addArt"></el-button>
+<!--    <input v-model="input" placeholder="请输入内容"/>-->
+<!--    <el-button icon="el-icon-search" circle></el-button>-->
+<!--    <el-button circle icon="el-icon-plus" @click="addArt"></el-button>-->
 
     <el-table
       :data="tableData"
@@ -10,14 +10,14 @@
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
+            <el-form-item label="文章名">
+              <span>{{ props.row.title }}</span>
+            </el-form-item>
             <el-form-item label="作者">
               <span>{{ props.row.realName }}</span>
             </el-form-item>
             <el-form-item label="分类">
               <span>{{ props.row.type }}</span>
-            </el-form-item>
-            <el-form-item label="文章名">
-              <span>{{ props.row.title }}</span>
             </el-form-item>
             <el-form-item label="关键词">
               <span>{{ props.row.key }}</span>
@@ -31,22 +31,22 @@
       <el-table-column
         label="作者"
         prop="realName"
-        width="80px">
+        width="100px">
       </el-table-column>
       <el-table-column
         label="文章名"
         prop="title"
-        width="300px">
+        width="350px">
       </el-table-column>
       <el-table-column
-        label="关键词"
-        prop="key"
-        width="250px">
+        label="分类"
+        prop="type"
+        width="100px">
       </el-table-column>
       <el-table-column
         label="提交时间"
         prop="time"
-        width="100px">
+        width="200px">
       </el-table-column>
       <el-table-column label="操作" width="300px">
         <template slot-scope="scope">
@@ -55,30 +55,21 @@
             @click="openArt(scope.row.aid)">查看文章</el-button>
 
 
-          <el-button type="primary" @click="dialogVisible = true" size="mini">分配</el-button>
-            <el-dialog
-            class="abow_dialog"
-            title="分配审稿人"
-            :visible.sync="dialogVisible"
-            width="30%"
-            :before-close="handleClose">
-              <el-checkbox-group v-model="checkList">
-                <el-checkbox label="王大明" class="choice"></el-checkbox>
-                <el-checkbox label="王二明" class="choice"></el-checkbox>
-                <el-checkbox label="王三明" class="choice"></el-checkbox>
-                <el-checkbox label="王4明" class="choice"></el-checkbox>
-                <el-checkbox label="王5明" class="choice"></el-checkbox>
-                <el-checkbox label="王6明" class="choice"></el-checkbox>
-                <el-checkbox label="王7明" class="choice"></el-checkbox>
-                <el-checkbox label="王8明" class="choice"></el-checkbox>
-                <el-checkbox label="王9明" class="choice"></el-checkbox>
-                <el-checkbox label="10大明" class="choice"></el-checkbox>
-                <el-checkbox label="10二明" class="choice"></el-checkbox>
-                <el-checkbox label="10三明" class="choice"></el-checkbox>
-              </el-checkbox-group>
+          <el-button type="primary" @click="openBox" size="mini">分配</el-button>
+          <el-dialog
+              class="abow_dialog"
+              title="分配审稿人"
+              :visible.sync="dialogVisible"
+              width="30%"
+              :before-close="handleClose">
+
+            <el-checkbox-group v-model="checkList" v-for="review in reviewList" @change="selectBox">
+              <el-checkbox :label=review.name class="choice"></el-checkbox>
+            </el-checkbox-group>
+
             <span slot="footer" class="dialog-footer">
               <el-button @click="dialogVisible = false">取 消</el-button>
-              <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+              <el-button type="primary" @click="handleReview(scope.row.aid)">确 定</el-button>
             </span>
           </el-dialog>
 
@@ -103,7 +94,10 @@ export default {
 
       tableData: [],
       checkList: [],
-      dialogVisible: false
+      reviewList:[],
+      dialogVisible: false,
+
+      reviews: '',
     };
   },
   mounted() {
@@ -118,23 +112,65 @@ export default {
       console.log(err);
     })
   },
-  methods:{
+  methods: {
     openArt(index){
       this.$router.push('/article/' + index);
     },
-    addArt(){
-      alert("打开添加文章表单" );
+    handleClose(done) {
+      this.$confirm('确认关闭？')
+        .then(_ => {
+          done();
+        })
+        .catch(_ => {});
     },
-    handleCommand(command) {
-      this.$message('设置'+ command+'为审稿人');
+    openBox() {
+      this.$axios({
+        method: 'get',
+        url: '/editor/get_reviews_name/',
+      })
+      .then(res => {
+        this.reviewList = JSON.parse(res.data.reviews)
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      this.dialogVisible = true;
     },
-      handleClose(done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
-      }
+    handleReview(index) {
+      const formData = new FormData();
+      formData.append('reviews', this.reviews);
+      formData.append('aid', index);
+
+      this.$axios({
+        method: 'post',
+        url: '/editor/allot/',
+        data: formData,
+      })
+      .then(res => {
+        switch (res.data.status_code) {
+          case '2000':
+            this.$message.success('成功为文章分配指定审稿人！');
+            location.reload();
+            break;
+          case '2001':
+            this.$message.success('成功为文章随机分配一位审稿人！');
+            break;
+          case '4005':
+            this.$message.error('您指定的审稿人不存在！');
+            break;
+          default:
+            this.$message.error('分配审稿人失败！');
+            break;
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      this.dialogVisible = false;
+    },
+    selectBox(val) {
+      this.reviews = val.toString();
+    },
   }
 }
 
