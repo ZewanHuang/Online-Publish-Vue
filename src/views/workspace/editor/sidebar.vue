@@ -63,12 +63,12 @@
                     <span slot="title">评论管理</span>
                     </el-menu-item>
                 </router-link>
-                <router-link :to="{name:'editMessage'}">
-                  <el-menu-item >
-                  <i class="el-icon-chat-dot-round"></i>
-                  <span slot="title">消息</span>
-                  </el-menu-item>
-                </router-link>
+<!--                <router-link :to="{name:'editMessage'}">-->
+<!--                  <el-menu-item >-->
+<!--                  <i class="el-icon-chat-dot-round"></i>-->
+<!--                  <span slot="title">消息</span>-->
+<!--                  </el-menu-item>-->
+<!--                </router-link>-->
                 <!-- <el-menu-item index="5">
                 <i class="el-icon-setting"></i>
                 <span slot="title">设置</span>

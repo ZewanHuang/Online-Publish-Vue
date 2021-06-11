@@ -313,7 +313,7 @@ const routes = [
           requireAuth: true,
           requireEditor: true,
         },
-        component: () => import( '../views/workspace/editor/subpage/comment.vue')
+        component: () => import( '../views/workspace/editor/subpage/remark/comment.vue')
       },
       {
         path: 'editMessage',
