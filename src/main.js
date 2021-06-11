@@ -57,14 +57,14 @@ router.beforeEach((to, from, next) => {
     })
   }
   //不登录时 或者登录但邮箱没验证时 不能访问 比如在线阅读和下载文章
-  if (!userInfo && to.meta.requireAuth) {
-    next({
-      name: 'Login',
-      query: {
-        redirect: to.fullPath//当前页面的地址
-      }
-    })
-  }
+  // if (!userInfo && to.meta.requireAuth) {
+  //   next({
+  //     name: 'Login',
+  //     query: {
+  //       redirect: to.fullPath//当前页面的地址
+  //     }
+  //   })
+  // }
 
   //登录且身份为作者才能访问
   if ((!userInfo || userInfo.user.usertype === "读者" || userInfo.user.usertype === "审稿人") && to.meta.requireAuthor) {
@@ -81,11 +81,11 @@ router.beforeEach((to, from, next) => {
   }
 
   //登录且身份为编辑才能访问
-  if ((!userInfo || userInfo.user.usertype !== '编辑') && to.meta.requireEditor) {
-    next({
-      name: 'Home',
-    })
-  }
+  // if ((!userInfo || userInfo.user.usertype !== '编辑') && to.meta.requireEditor) {
+  //   next({
+  //     name: 'Home',
+  //   })
+  // }
 
   //其它情况不拦截
   next()

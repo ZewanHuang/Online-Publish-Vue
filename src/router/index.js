@@ -286,7 +286,18 @@ const routes = [
           requireAuth: true,
           requireEditor: true,
         },
-        component: () => import( '../views/workspace/editor/subpage/article/toJudge_art.vue')
+        component: () => import( '../views/workspace/editor/subpage/article/toJudge_art.vue'),
+        // children:[
+        //   {
+        //     path: 'select',
+        //     name: 'select',
+        //     meta: {
+        //       requireAuth: true,
+        //       requireEditor: true,
+        //     },
+        //     component: () => import( '../views/workspace/editor/subpage/article/chooseRe.vue'),
+        //   }
+        // ]
       },
       {
         path: 'judged_art',
