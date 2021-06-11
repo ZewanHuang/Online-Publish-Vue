@@ -307,13 +307,22 @@ const routes = [
         component: () => import( '../views/workspace/editor/subpage/article/toDeal_art.vue')
       },
       {
-        path: 'comment',
-        name: 'comment',
+        path: 'comment_undo',
+        name: 'comment_undo',
         meta: {
           requireAuth: true,
           requireEditor: true,
         },
-        component: () => import( '../views/workspace/editor/subpage/remark/comment.vue')
+        component: () => import( '../views/workspace/editor/subpage/remark/comment_undo.vue')
+      },
+      {
+        path: 'comment_done',
+        name: 'comment_done',
+        meta: {
+          requireAuth: true,
+          requireEditor: true,
+        },
+        component: () => import( '../views/workspace/editor/subpage/remark/comment_done.vue')
       },
       {
         path: 'editMessage',

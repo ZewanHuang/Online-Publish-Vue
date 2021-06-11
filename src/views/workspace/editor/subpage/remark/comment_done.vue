@@ -39,6 +39,11 @@
           prop="review"
           width="160px">
       </el-table-column>
+      <el-table-column
+          label="提交时间"
+          prop="review"
+          width="160px">
+      </el-table-column>
       <el-table-column label="操作" width="100px">
         <template slot-scope="scope">
           <el-button
@@ -51,13 +56,8 @@
 </template>
 
 <script>
-import ArticleList from "../../../../../components/common/comment_list.vue";
-
 export default {
-  name: "published_art",
-  components: {
-    ArticleList,
-  },
+  name: "comment_done",
   data() {
     return {
       input: '',
@@ -67,7 +67,7 @@ export default {
   mounted() {
     this.$axios({
       method: 'get',
-      url: '/editor/get_remarks_all/',
+      url: '/editor/get_remarks_done/',
     })
   },
   methods:{

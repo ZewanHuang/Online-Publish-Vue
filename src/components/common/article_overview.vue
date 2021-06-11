@@ -3,13 +3,13 @@
     <el-carousel :interval="8000" type="card" height="200px">
       <el-carousel-item v-for="(article, index) in articles" :key="index">
         <div class="card-content">
-          <h3 class="medium" @click="openArticle(index)">{{article.title}}</h3>
+          <h3 class="medium" @click="openArticle(index)">{{ article.title }}</h3>
           <el-divider></el-divider>
-          <el-row class="author"><span style="font-weight: bold">作者：</span>{{article.author}}</el-row>
+          <el-row class="author"><span style="font-weight: bold">作者：</span>{{ article.writer }}</el-row>
           <br>
           <el-row class="keywords">
             <span style="font-weight: bold">关键字：</span>
-            <span v-for="word in article.keywords">{{word}}；</span>
+            <span>{{ article.key }}</span>
           </el-row>
         </div>
       </el-carousel-item>
@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     openArticle: function(index) {
-      alert("打开：" + this.articles[index].title);
+      this.$router.push('/article/center/' + this.articles[index].aid + '/info');
     }
   }
 }

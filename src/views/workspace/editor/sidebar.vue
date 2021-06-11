@@ -18,6 +18,7 @@
                     <span slot="title">信息统计</span>
                     </el-menu-item>
                 </router-link>
+
                 <el-submenu index="1">
                 <template slot="title">
                     <i class="el-icon-s-custom"></i>
@@ -57,12 +58,21 @@
                 </el-menu-item-group>
                 </el-submenu>
 
-                <router-link :to="{name:'comment'}">
-                    <el-menu-item >
-                    <i class="el-icon-menu"></i>
-                    <span slot="title">评论管理</span>
-                    </el-menu-item>
-                </router-link>
+              <el-submenu index="3">
+                <template slot="title">
+                  <i class="el-icon-menu"></i>
+                  <span>评论管理</span>
+                </template>
+                <el-menu-item-group>
+                  <router-link :to="{name: 'comment_undo'}">
+                    <el-menu-item >待发布评论</el-menu-item>
+                  </router-link>
+                  <router-link :to="{name:'comment_done'}">
+                    <el-menu-item >已发布评论</el-menu-item>
+                  </router-link>
+                </el-menu-item-group>
+              </el-submenu>
+
 <!--                <router-link :to="{name:'editMessage'}">-->
 <!--                  <el-menu-item >-->
 <!--                  <i class="el-icon-chat-dot-round"></i>-->
