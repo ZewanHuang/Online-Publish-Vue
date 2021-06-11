@@ -358,68 +358,9 @@ const routes = [
     ]
   },
   {
-    path: '/editor',
-    name: 'Edit',
-    component: () => import( '../views/workspace/editor/Editor.vue'),
-    meta: {
-      requireAuth: true,
-      requireEditor: true
-    },
-    children:[
-      {
-        path: 'reader_manage',
-        name: 'reader_manage',
-        meta: {
-          requireAuth: true,
-          requireEditor: true
-        },
-        component: () => import( '../views/workspace/editor/subpage/reader_manage.vue')
-      },
-      {
-        path: 'writer_manage',
-        name: 'writer_manage',
-        meta: {
-          requireAuth: true,
-          requireEditor: true
-        },
-        component: () => import( '../views/workspace/editor/subpage/writer_manage.vue')
-      },
-      {
-        path: 'review_manage',
-        name: 'review_manage',
-        component: () => import( '../views/workspace/editor/subpage/review_manage.vue')
-      },
-      {
-        path: 'published_art',
-        name: 'published_art',
-        component: () => import( '../views/workspace/editor/subpage/Published_art.vue')
-      },
-      {
-        path: 'toJudge_art',
-        name: 'toJudge_art',
-        component: () => import( '../views/workspace/editor/subpage/toJudge_art.vue')
-      },
-      {
-        path: 'judged_art',
-        name: 'judged_art',
-        component: () => import( '../views/workspace/editor/subpage/judged_art.vue')
-      },
-      {
-        path: 'toDeal_art',
-        name: 'toDeal_art',
-        component: () => import( '../views/workspace/editor/subpage/toDeal_art.vue')
-      },
-      {
-        path: 'comment',
-        name: 'comment',
-        component: () => import( '../views/workspace/editor/subpage/comment.vue')
-      },
-      {
-        path: 'editMessage',
-        name: 'editMessage',
-        component: () => import( '../views/workspace/editor/subpage/editMessage.vue')
-      },
-    ]
+    path: '/message',
+    name: 'Message',
+    component: () => import('../views/message'),
   },
   {
     path: '/*',

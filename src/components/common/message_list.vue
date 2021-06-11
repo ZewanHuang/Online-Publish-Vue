@@ -1,56 +1,104 @@
 <template>
-  <div class="component-list">
-    <el-row class="submessage-list" v-for="(submessage,index) in submessages">
-        <el-timeline-item  timestamp="2018/4/12" placement="top">
-        <el-card>
-            <h4  @click="lookMessage">{{submessage.context}}</h4>
-            <p>{{submessage.author}} 提交于 {{submessage.time}}</p>
-        </el-card>
-        </el-timeline-item>
-    </el-row>
+  <div class="msg-list">
 
-    <el-row>
-      <el-pagination
-          background layout="prev, pager, next"
-          :total="100"
-      >
-      </el-pagination>
-    </el-row>
+      <el-timeline>
+        <el-timeline-item
+            class="msg"
+            v-for="(msg, index) in msgList"
+            v-if="msg.state===activeNum"
+            :key="index"
+            :timestamp="msg.time"
+            placement="top">
+          <el-card class="msg-card">
+
+            <div slot="header" class="clearfix">
+              <span class="header-text">{{ msg.tag }}</span>
+              <el-button icon="el-icon-delete" class="msg-header-button del" type="text"
+                         @click="delMsg(index)"></el-button>
+              <el-button icon="el-icon-star-off" class="msg-header-button like" type="text" v-if="msg.state!=='3'"
+                         @click="likeMsg(index)"></el-button>
+              <el-button icon="el-icon-bell" class="msg-header-button bell" type="text" v-if="msg.state==='2'"
+                         @click="alertMsg(index)"></el-button>
+              <el-button icon="el-icon-finished" class="msg-header-button check" type="text" v-if="msg.state==='1'"
+                         @click="checkMsg(index)"></el-button>
+            </div>
+
+            <div class="msg-content">
+              {{ msg.content }}
+            </div>
+          </el-card>
+        </el-timeline-item>
+      </el-timeline>
+
   </div>
 </template>
 
 <script>
 export default {
   name: "message_list",
-  data() {
-    let page;
-    return {
-      page,
-    }
-  },
   props: {
-    submessages: Array
+    msgList: Array,
+    activeNum: Number,
   },
   methods: {
-    lookMessage: function(index) {
-      alert("跳转到消息对应表单");
+    checkMsg: function (index) {
+      this.msgList[index].state = '2';
     },
-    getAbstract: function(index) {
-      const str = this.articles[index].comment
-      const length = str.length;
-      const lenToShow = 100;
-      if (length < lenToShow) {
-        return str;
-      } else {
-        return str.substring(0, lenToShow) + "...";
-      }
+    alertMsg: function (index) {
+      this.msgList[index].state = '1';
     },
-  },
+    likeMsg: function (index) {
+      this.msgList[index].state = '3';
+    },
+    delMsg: function(index) {
+      let arr = this.msgList;
+      arr.splice(arr.indexOf(index),1);
+    }
+  }
 }
 </script>
 
-<style scoped>
-  .el-card {
-    width: 700px !important;
-  }
+<style>
+.msg-list .msg-card {
+  margin: 10px;
+}
+
+.msg-list .el-card__header {
+  padding: 8px 15px;
+  border-bottom: 1px solid #EBEEF5;
+  box-sizing: border-box;
+}
+
+.msg-list .el-card__body {
+  padding: 15px 15px;
+}
+
+.msg-list .clearfix {
+  padding: 0;
+}
+
+.msg-list .msg-header-button {
+  float: right;
+  font-size: 22px;
+  margin: -2px 0 -1px 14px;
+  padding: 0;
+}
+
+.msg-list .header-text {
+  font-weight: bold;
+}
+
+.msg-list .del {
+  color: crimson;
+}
+.msg-list .bell {
+  color: #faaf21;
+}
+.msg-list .del {
+  color: crimson;
+}
+.msg-list .check {
+  color: #01bf01;
+}
+
 </style>

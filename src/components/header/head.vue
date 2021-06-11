@@ -7,8 +7,7 @@
       <label>
         <input type="text" name="search" placeholder="Search or jump to…"/>
       </label>
-      <router-link to="/help" class="help">Help</router-link>
-      <router-link to="/guide" class="help">Guide</router-link>
+<!--      <router-link to="/help" class="help">Help</router-link>-->
       <el-submenu index="1">
         <template slot="title" id="mine">个人中心</template>
         <el-menu-item index="1-1" @click="myhome">我的主页</el-menu-item>
@@ -17,6 +16,7 @@
       </el-submenu>
       <el-menu-item index="2" @click="workspace">工作空间</el-menu-item>
       <el-menu-item index="3" @click="message">消息</el-menu-item>
+      <el-menu-item index="4" @click="guide">引导</el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -72,6 +72,9 @@ export default {
     message(){
       window.location.href="/message";
     },
+    guide() {
+
+    },
     workspace(){
       const userInfo = user.getters.getUser(user.state())
       switch (userInfo.user.usertype) {
@@ -95,10 +98,10 @@ export default {
 
 <style>
 #nav .el-submenu__title {
-  font-size: 16px;
+  font-size: 15px;
 }
 #nav .el-menu-item {
-  font-size: 16px;
+  font-size: 15px;
 }
 #mine{
   position: absolute;
