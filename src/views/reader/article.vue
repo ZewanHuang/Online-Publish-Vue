@@ -56,9 +56,12 @@ export default {
   methods: {
     read: function () {
       window.open(this.url, '_blank');
+      const formData = new FormData();
+      formData.append('aid', this.aid);
       this.$axios({
         method: 'post',
         url: '/add_read_times/',
+        data: formData,
       })
       .catch(err => {
         console.log(err);
@@ -66,9 +69,12 @@ export default {
     },
     download: function () {
       this.$message.success('下载成功!');
+      const formData = new FormData();
+      formData.append('aid', this.aid);
       this.$axios({
         method: 'post',
         url: '/add_download_times/',
+        data: formData,
       })
       .catch(err => {
         console.log(err);
