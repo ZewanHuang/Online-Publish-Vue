@@ -101,15 +101,8 @@ export default {
     return {
       input: '',
 
-      tableData: [
-        {
-          realName: "小明",
-          title: "纸吸管在可乐中反应现象研究",
-          key: "碳酸",
-          time: "2021/6/11"
-        }
-      ],
-      checkList: [''],
+      tableData: [],
+      checkList: [],
       dialogVisible: false
     };
   },
