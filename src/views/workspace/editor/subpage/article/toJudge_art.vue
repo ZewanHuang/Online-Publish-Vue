@@ -54,17 +54,34 @@
             size="mini"
             @click="openArt(scope.row.aid)">查看文章</el-button>
 
-          <el-dropdown @command="handleCommand">
-              <el-button type="primary" size="mini" style="margin: 10px">
-                分配<i class="el-icon-arrow-down el-icon--right"></i>
-              </el-button>
-            <el-dropdown-menu slot="dropdown" >
-              <el-dropdown-item command="王大明">王大明</el-dropdown-item>
-              <el-dropdown-item command="王二明">王二明</el-dropdown-item>
-              <el-dropdown-item command="王三明">王三明</el-dropdown-item>
-            </el-dropdown-menu>
 
-          </el-dropdown>
+          <el-button type="primary" @click="dialogVisible = true" size="mini">分配</el-button>
+            <el-dialog
+            class="abow_dialog"
+            title="分配审稿人"
+            :visible.sync="dialogVisible"
+            width="30%"
+            :before-close="handleClose">
+              <el-checkbox-group v-model="checkList">
+                <el-checkbox label="王大明" class="choice"></el-checkbox>
+                <el-checkbox label="王二明" class="choice"></el-checkbox>
+                <el-checkbox label="王三明" class="choice"></el-checkbox>
+                <el-checkbox label="王4明" class="choice"></el-checkbox>
+                <el-checkbox label="王5明" class="choice"></el-checkbox>
+                <el-checkbox label="王6明" class="choice"></el-checkbox>
+                <el-checkbox label="王7明" class="choice"></el-checkbox>
+                <el-checkbox label="王8明" class="choice"></el-checkbox>
+                <el-checkbox label="王9明" class="choice"></el-checkbox>
+                <el-checkbox label="10大明" class="choice"></el-checkbox>
+                <el-checkbox label="10二明" class="choice"></el-checkbox>
+                <el-checkbox label="10三明" class="choice"></el-checkbox>
+              </el-checkbox-group>
+            <span slot="footer" class="dialog-footer">
+              <el-button @click="dialogVisible = false">取 消</el-button>
+              <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+            </span>
+          </el-dialog>
+
         </template>
       </el-table-column>
     </el-table>
@@ -84,8 +101,17 @@ export default {
     return {
       input: '',
 
-      tableData: [],
-    }
+      tableData: [
+        {
+          realName: "小明",
+          title: "纸吸管在可乐中反应现象研究",
+          key: "碳酸",
+          time: "2021/6/11"
+        }
+      ],
+      checkList: [''],
+      dialogVisible: false
+    };
   },
   mounted() {
     this.$axios({
@@ -106,8 +132,15 @@ export default {
     addArt(){
       alert("打开添加文章表单" );
     },
-      handleCommand(command) {
-        this.$message('设置'+ command+'为审稿人');
+    handleCommand(command) {
+      this.$message('设置'+ command+'为审稿人');
+    },
+      handleClose(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
       }
   }
 }
@@ -144,5 +177,26 @@ export default {
     margin-bottom: 0;
     width: 50%;
   }
+  .choice{
+    width: 90%;
+    height: 40px;
+    border: #409EFF;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    margin: 5px;
+    padding:5px;
+  }
+  .el-checkbox__label {
+    display: inline-block;
+    padding-left: 40%;
+    padding-top: 10px;
+    line-height: 19px;
+    font-size: 15px;
+}
+
+.el-dialog__body{
+    overflow-y: auto;
+    height: 400px;
+  }
+
 
 </style>
