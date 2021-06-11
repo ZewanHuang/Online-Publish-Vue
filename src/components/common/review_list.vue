@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     contact: function (index) {
-      alert("联系" + this.reviewList[index].reviewer);
+      location.href = 'mailto:' + this.reviewList[index].email;
     }
   },
 }

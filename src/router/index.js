@@ -356,24 +356,45 @@ const routes = [
     ]
   },
   {
-    path: '/reviewArticleCenter',
+    path: '/review/center/:rid',
     name: 'reviewArticleCenter',
+    props: true,
+    meta: {
+      requireAuth: true,
+      requireReview: true,
+    },
     component: () => import('../views/workspace/review/reviewArticleCenter/reviewArticleCenter'),
+
     children:[
       {
         path: 'ReviewEdit',
         name: 'reviewArticleCenter-ReviewEdit',
-        component: () => import( '../views/workspace/review/reviewArticleCenter/subpages/ReviewEdit')
+        meta: {
+          requireAuth: true,
+          requireReview: true,
+        },
+        props: true,
+        component: () => import( '../views/workspace/review/reviewArticleCenter/subpages/ReviewEdit'),
       },
       {
         path: 'AllReview',
         name: 'reviewArticleCenter-AllReview',
-        component: () => import( '../views/workspace/review/reviewArticleCenter/subpages/AllReview')
+        meta: {
+          requireAuth: true,
+          requireReview: true,
+        },
+        props: true,
+        component: () => import( '../views/workspace/review/reviewArticleCenter/subpages/AllReview'),
       },
       {
-        path: 'Article',
+        path: 'article',
         name: 'reviewArticleCenter-Article',
-        component: () => import( '../views/workspace/review/reviewArticleCenter/subpages/Article')
+        meta: {
+          requireAuth: true,
+          requireReview: true,
+        },
+        props: true,
+        component: () => import( '../views/workspace/review/reviewArticleCenter/subpages/Article'),
       }
     ]
   },

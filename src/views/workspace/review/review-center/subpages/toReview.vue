@@ -1,38 +1,41 @@
 <template>
-  <ArticleList :articles="articles"/>
+  <ReviewArticleList :articles="articles"/>
 </template>
 
 <script>
-import ArticleList from "../../../../../components/common/article_list";
+import ReviewArticleList from "../../../../../components/common/review_article_list";
 
 export default {
   name: "ToReview",
   components: {
-    ArticleList,
+    ReviewArticleList,
   },
   data() {
     return {
       hasArticles: false,
-      articles: [
-        {
-          title: '图谱建模基础下海量网络流量的数据挖掘',
-          writer:'易灿',
-          key: [	'图谱建模','流量识别','数据挖掘'],
-          abstract: '随着移动网络流量数据在无线通信网络流量中的比例大幅增长,使其在语音通信业务逐渐饱和的趋势下,必须通过良好的互联网业务流量来进行网络端口的运营。文章首先对网络流量数据挖掘的重要意义进行说明;其次,......'
-        },
-        {
-          title: '“互联网+”时代混合式金课教学设计',
-          writer:	'章明珠',
-          key: ['混合式教学','金课','教学设计','建构主义','联通主义'],
-          abstract: '混合式教学正如火如荼地开展着,然而,如何开展高质量的混合式课程以达到培养学生高阶思维能力的目标？从目前高校混合式教学的现状出发,界定"互联网+"时代,学生能力的培养目标,从建构主义和联通主义学习理论的视角,阐述了......'
-        },
-      ]
+      articles: []
     }
   },
   created() {
     this.$axios({
-      method: 'post',
-      url
+      method: 'get',
+      url: '/self_remarks_undo/',
+    })
+    .then(res => {
+      switch (res.data.status_code) {
+        case '2000':
+          this.articles = JSON.parse(res.data.remarks)
+          break;
+        case '4001':
+          this.$message.error('请先登录！');
+          setTimeout(()=> {
+            this.$router.push('/login');
+          }, 1500);
+          break;
+      }
+    })
+    .catch(err => {
+      console.log(err);
     })
   }
 }

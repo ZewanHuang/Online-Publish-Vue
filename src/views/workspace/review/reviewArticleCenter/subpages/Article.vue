@@ -22,29 +22,40 @@
 import articleDetail from "../../../../../components/common/article_detail";
 export default {
   name: "reviewArticleCenter-Article",
+  props: ['rid'],
   components: {
     articleDetail
   },
   data() {
     return {
-      article: {
-        title: "图谱建模基础下海量网络流量的数据挖掘",
-        author: "易灿 刘彦姝",
-        abstract: "随着移动网络流量数据在无线通信网络流量中的比例大幅增长,使其在语音通信业务逐渐饱和的趋势下," +
-            "必须通过良好的互联网业务流量来进行网络端口的运营。文章首先对网络流量数据挖掘的重要意义进行说明;" +
-            "其次,通过分析用户网页浏览过程。创建出请求依赖图;" +
-            "最后,提出网络流量数据挖掘的有效识别算法,为流量挖掘提供图谱建模基础。",
-        keywords: "移动互联网 网络流量",
-        type: "科学杂志",
-      },
+      article: {},
+      url: '',
     }
+  },
+  created() {
+    const formData = new FormData();
+    formData.append('remark_id', this.rid);
+    this.$axios({
+      method: 'post',
+      url: '/search_exact/',
+      data: formData,
+    })
+    .then(res => {
+      if (res.data.status_code === '2000') {
+        this.article = JSON.parse(res.data.article);
+        this.url = '/api' + this.article.article_address;
+      }
+    })
+    .catch(err => {
+      this.$router.replace('/PageNotFound');
+    })
   },
   methods: {
     read: function () {
-      alert("跳转至《" + this.article.title + "》的链接")
+      window.open(this.url, '_blank');
     },
     download: function () {
-      alert("下载《" + this.article.title + "》")
+      this.$message.success('下载成功!');
     },
     toReview:function (){
       this.$router.replace({name:'reviewArticleCenter-ReviewEdit'})
