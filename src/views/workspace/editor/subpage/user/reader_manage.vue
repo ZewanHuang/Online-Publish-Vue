@@ -1,8 +1,26 @@
 <template>
-    <div>
-    <input v-model="input" placeholder="请输入内容"/>
-    <el-button icon="el-icon-search" circle></el-button>
-    <el-button circle icon="el-icon-plus" @click="addPerson"></el-button>
+    <div class="reader_manage">
+      <div class="left">
+        <el-button type="" @click="dialogFormVisible = true">添加读者</el-button>
+      </div>
+
+      <el-dialog title="添加读者" :visible.sync="dialogFormVisible">
+        <el-form :model="form">
+          <el-form-item label="用户名" :label-width="formLabelWidth">
+            <el-input v-model="form.username" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="邮箱" :label-width="formLabelWidth">
+            <el-input v-model="form.email" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="密码" :label-width="formLabelWidth">
+            <el-input v-model="form.password" autocomplete="off" show-password></el-input>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">取 消</el-button>
+          <el-button type="primary" @click="addReader">确 定</el-button>
+        </div>
+      </el-dialog>
 
     <el-table
       :data="tableData"
@@ -49,7 +67,15 @@ export default {
   data() {
     return {
       input: '',
-      tableData: []
+      tableData: [],
+
+      dialogFormVisible: false,
+      form: {
+        username: '',
+        email: '',
+        password: '',
+      },
+      formLabelWidth: '120px',
     }
   },
   mounted() {
@@ -68,11 +94,71 @@ export default {
     opencenter(index) {
       this.$router.push('/' + index +'/info')
     },
-    addPerson() {
-        alert("打开添加人员表单");
+    addReader() {
+      const formData = new FormData();
+      formData.append('username', this.form.username);
+      formData.append('email', this.form.email);
+      formData.append('password', this.form.password);
+
+      this.$axios({
+        method: 'post',
+        url: '/editor/add_reader/',
+        data: formData,
+      })
+      .then(res => {
+        switch (res.data.status_code) {
+          case '2000':
+            this.$message.success('添加成功！');
+            this.dialogFormVisible = false;
+            setTimeout(()=> {
+              location.reload();
+            },1500);
+            break;
+          case '4001':
+            this.$message.error('用户名重复！');
+            break;
+          case '4002':
+            this.$message.error('邮箱已注册！');
+            break;
+          case '4003':
+            this.$message.error('密码须为8-18个字符，且同时包含英文字母与数字！');
+            break;
+          case '3001':
+            this.$message.error('请检查填写的信息！');
+            break;
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
     },
     deleteReader(index) {
-
+      const formData = new FormData();
+      formData.append('username', index);
+      this.$axios({
+        method: 'post',
+        url: '/editor/del_user/',
+        data: formData,
+      })
+      .then(res => {
+        switch (res.data.status_code) {
+          case '2000':
+            this.$message.success('删除成功！');
+            setTimeout(() => {
+              location.reload();
+            }, 1500);
+            break;
+          case '4001':
+            this.$message.error('用户不存在！');
+            break;
+          case '4002':
+            this.$message.error('删除失败！');
+            break;
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
     },
   }
 }
@@ -80,17 +166,26 @@ export default {
 </script>
 
 <style>
-  input{
-  font-size: 12px;
-  width: 650px;
-  height: 15px;
-  border: 1px solid black;
-  border-radius: 20px;
-  outline: none;
-  padding: 10px;
-  left: 0;
-  }
-  .box {
-    margin: 20px;
+.reader_manage .left {
+  text-align: left;
+}
+.el-dialog {
+  width: 35%;
+  height: 380px;
+}
+.reader_manage .el-form-item__label {
+  text-align: right;
+  vertical-align: middle;
+  float: left;
+  font-size: 14px;
+  color: #606266;
+  line-height: 40px;
+  padding: 0 12px 0 0;
+  box-sizing: border-box;
+  width: 70px !important;
+}
+
+.box {
+  margin: 20px;
 }
 </style>
