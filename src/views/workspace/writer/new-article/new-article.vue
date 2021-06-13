@@ -26,11 +26,12 @@
         </el-form-item>
         <el-form-item label="类别">
           <el-select v-model="form.type" placeholder="请选择文章类别">
-            <el-option label="历史散文" value="历史散文"></el-option>
-            <el-option label="历史小说" value="历史小说"></el-option>
-            <el-option label="历史自传" value="历史自传"></el-option>
-            <el-option label="史实阐释" value="史实阐释"></el-option>
-            <el-option label="古籍研读" value="古籍研读"></el-option>
+            <div v-for="category in category_list">
+              <el-option
+                  :label=category.category
+                  :value=category.category
+              ></el-option>
+            </div>
           </el-select>
         </el-form-item>
       </el-form>
@@ -81,8 +82,22 @@ export default {
         keywords: '',
         type: '',
         content: '',
-      }
+      },
+
+      category_list: [],
     }
+  },
+  mounted() {
+    this.$axios({
+      method: 'get',
+      url: '/editor/get_category/',
+    })
+    .then(res => {
+      this.category_list = JSON.parse(res.data.info);
+    })
+    .catch(err => {
+      console.log(err);
+    })
   },
   methods: {
     next() {

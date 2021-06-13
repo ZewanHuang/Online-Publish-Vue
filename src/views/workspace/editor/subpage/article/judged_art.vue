@@ -1,9 +1,5 @@
 <template>
   <div>
-<!--    <input v-model="input" placeholder="请输入内容"/>-->
-<!--    <el-button icon="el-icon-search" circle></el-button>-->
-<!--    <el-button circle icon="el-icon-plus" @click="addArt"></el-button>-->
-
     <el-table
       :data="tableData"
       style="width: 100%">
