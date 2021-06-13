@@ -19,6 +19,13 @@
                     </el-menu-item>
                 </router-link>
 
+              <router-link :to="{name:'article_category'}">
+                <el-menu-item >
+                  <i class="el-icon-s-management"></i>
+                  <span slot="title">文章类目</span>
+                </el-menu-item>
+              </router-link>
+
                 <el-submenu index="1">
                 <template slot="title">
                     <i class="el-icon-s-custom"></i>
