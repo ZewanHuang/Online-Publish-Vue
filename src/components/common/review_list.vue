@@ -4,6 +4,9 @@
 
       <el-row>
         <el-col :span=2 class="review-portrait">
+          <el-avatar class="header-img" :size="55" :src="review.avatar">
+
+          </el-avatar>
         </el-col>
         <el-col :span=10 class="review-author">
           {{ review.reviewer }}
@@ -56,9 +59,7 @@ export default {
 }
 
 .review-list .review-portrait {
-  background-image: url('../../assets/portrait.png');
   background-position: center center;
-  background-repeat: no-repeat;
   background-size: cover;
   width: 60px;
   height: 60px;

@@ -67,7 +67,7 @@ export default {
 
 <style>
 .article {
-  padding: 0 100px;
+  padding: 0 80px;
 }
 .button{
   padding-top: 20px;
