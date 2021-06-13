@@ -81,7 +81,7 @@ export default {
   },
   methods:{
     openArt(index){
-      this.$router.push('/article/' + index);
+      this.$router.push('/editor/article/' + index);
     },
     contact(index) {
       location.href = 'mailto:' + index;

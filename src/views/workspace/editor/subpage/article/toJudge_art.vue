@@ -79,7 +79,7 @@
     <el-pagination
       background
       layout="prev, pager, next"
-      :total="50"
+      :total="10"
       style="margin: 20px">
     </el-pagination>
   </div>

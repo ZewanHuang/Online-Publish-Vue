@@ -52,7 +52,7 @@
         <template slot-scope="scope">
           <el-button
             size="mini"
-            @click="openArt(scope.row.aid)">编辑</el-button>
+            @click="openArt(scope.row.aid)">查看</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -89,7 +89,7 @@ export default {
   },
   methods:{
     openArt(index){
-      this.$router.push('/article/' + index);
+      this.$router.push('/editor/article/' + index);
     },
     addArt(){
       alert("打开添加文章表单" );
