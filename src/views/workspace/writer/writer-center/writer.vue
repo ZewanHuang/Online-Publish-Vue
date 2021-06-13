@@ -13,7 +13,7 @@
             <ul>
               <li><router-link :to="{name: 'Writer-Overview'}" >概览</router-link></li>
               <li><router-link :to="{name: 'WriteArticle'}" >文章</router-link></li>
-              <li><router-link :to="{name: 'Writing-Review'}" >评论</router-link></li>
+<!--              <li><router-link :to="{name: 'Writing-Review'}" >评论</router-link></li>-->
             </ul>
           </div>
         </el-row>

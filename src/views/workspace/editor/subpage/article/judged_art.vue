@@ -12,8 +12,8 @@
             <el-form-item label="作者">
               <span>{{ props.row.realName }}</span>
             </el-form-item>
-            <el-form-item label="分类">
-              <span>{{ props.row.type }}</span>
+            <el-form-item label="审稿人">
+              <span>{{ props.row.reviews }}</span>
             </el-form-item>
             <el-form-item label="关键词">
               <span>{{ props.row.key }}</span>

@@ -48,7 +48,7 @@
           prop="time"
           width="200px">
       </el-table-column>
-      <el-table-column label="操作" width="100px">
+      <el-table-column label="操作" width="150px">
         <template slot-scope="scope">
           <el-button
             size="mini"

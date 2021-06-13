@@ -48,11 +48,11 @@
         prop="time"
         width="200px">
       </el-table-column>
-      <el-table-column label="操作" width="100px">
+      <el-table-column label="操作" width="150px">
         <template slot-scope="scope">
           <el-button
             size="mini"
-            @click="openArt(scope.row.aid)">查看文章</el-button>
+            @click="openArt(scope.row.aid)">查看</el-button>
 
 
           <el-button type="primary" @click="openBox" size="mini">分配</el-button>
@@ -91,6 +91,7 @@ export default {
   data() {
     return {
       input: '',
+      space: ' ',
 
       tableData: [],
       checkList: [],
@@ -150,7 +151,9 @@ export default {
         switch (res.data.status_code) {
           case '2000':
             this.$message.success('成功为文章分配指定审稿人！');
-            location.reload();
+            setTimeout(()=> {
+              location.reload();
+            }, 1500);
             break;
           case '2001':
             this.$message.success('成功为文章随机分配一位审稿人！');
@@ -177,14 +180,14 @@ export default {
 </script>
 
 <style>
-  .el-dropdown-link {
-    cursor: pointer;
-    color: #409EFF;
-  }
-  .el-icon-arrow-down {
-    font-size: 12px;
-  }
-  input{
+.el-dropdown-link {
+  cursor: pointer;
+  color: #409EFF;
+}
+.el-icon-arrow-down {
+  font-size: 12px;
+}
+input{
   font-size: 12px;
   width: 650px;
   height: 15px;
@@ -193,39 +196,39 @@ export default {
   outline: none;
   padding: 10px;
   left: 0;
-  }
-  .demo-table-expand {
-    font-size: 0;
-  }
-  .demo-table-expand label {
-    width: 90px;
-    color: #99a9bf;
-  }
-  .demo-table-expand .el-form-item {
-    margin-right: 0;
-    margin-bottom: 0;
-    width: 50%;
-  }
-  .choice{
-    width: 90%;
-    height: 40px;
-    border: #409EFF;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-    margin: 5px;
-    padding:5px;
-  }
-  .el-checkbox__label {
-    display: inline-block;
-    padding-left: 40%;
-    padding-top: 10px;
-    line-height: 19px;
-    font-size: 15px;
+}
+.demo-table-expand {
+  font-size: 0;
+}
+.demo-table-expand label {
+  width: 90px;
+  color: #99a9bf;
+}
+.demo-table-expand .el-form-item {
+  margin-right: 0;
+  margin-bottom: 0;
+  width: 50%;
+}
+.choice{
+  width: 90%;
+  height: 40px;
+  border: #409EFF;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+  margin: 5px;
+  padding:5px;
+}
+.el-checkbox__label {
+  display: inline-block;
+  /*padding-left: 23%;*/
+  padding-left: 40%;
+  padding-top: 10px;
+  line-height: 19px;
+  font-size: 15px;
 }
 
 .el-dialog__body{
-    overflow-y: auto;
-    height: 400px;
-  }
-
+  overflow-y: auto;
+  height: 400px;
+}
 
 </style>

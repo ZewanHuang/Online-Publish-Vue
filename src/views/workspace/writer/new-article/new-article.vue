@@ -146,10 +146,35 @@ export default {
       })
     },
     next_exit() {
-      this.next()
-      setTimeout(()=> {
-        this.$router.replace('/writing/article');
-      },3000)
+      const formData = new FormData();
+      formData.append('articleID', this.article_id);
+      this.$axios({
+        method: 'post',
+        url: '/confirm_article/',
+        data: formData,
+      })
+      .then(res => {
+        switch (res.data.status_code) {
+          case '2000':
+            this.next();
+            setTimeout(()=> {
+              this.$router.replace('/writing/article');
+            },3000);
+            break;
+          case '4001':
+            this.$message.error('未查询到此文章，请重新填写文章信息！');
+            setTimeout(() => {
+              this.$router.push('/new-article/edit');
+            }, 1500);
+            break;
+          case '4002':
+            this.$message.warning('请上传文章文件！');
+            break;
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
     }
   },
 }

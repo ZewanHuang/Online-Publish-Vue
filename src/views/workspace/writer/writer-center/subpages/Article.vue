@@ -28,7 +28,7 @@
        <el-button type="success" icon="el-icon-circle-plus-outline" @click="addArticle">添加文章</el-button>
      </el-col>
    </el-row>
-   <hr/>
+<!--   <hr/>-->
 
    <div v-if="hasArticles">
      <ArticleList :articles="articles"/>

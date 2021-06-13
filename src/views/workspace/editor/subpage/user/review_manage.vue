@@ -100,32 +100,40 @@ export default {
       window.location.href = 'mailto:' + index;
     },
     deleteReview(index) {
-      const formData = new FormData();
-      formData.append('username', index);
-      this.$axios({
-        method: 'post',
-        url: '/editor/del_user/',
-        data: formData,
-      })
-      .then(res => {
-        switch (res.data.status_code) {
-          case '2000':
-            this.$message.success('删除成功！');
-            setTimeout(() => {
-              location.reload();
-            }, 1500);
-            break;
-          case '4001':
-            this.$message.error('用户不存在！');
-            break;
-          case '4002':
-            this.$message.error('删除失败！');
-            break;
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      })
+      this.$confirm('此操作将永远删除该审稿人, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        const formData = new FormData();
+        formData.append('username', index);
+        this.$axios({
+          method: 'post',
+          url: '/editor/del_user/',
+          data: formData,
+        })
+        .then(res => {
+          switch (res.data.status_code) {
+            case '2000':
+              this.$message.success('删除成功！');
+              setTimeout(() => {
+                location.reload();
+              }, 1500);
+              break;
+            case '4001':
+              this.$message.error('用户不存在！');
+              break;
+            case '4002':
+              this.$message.error('删除失败！');
+              break;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      }).catch(() => {
+        this.$message('已取消删除');
+      });
     },
     addReview() {
       const formData = new FormData();
