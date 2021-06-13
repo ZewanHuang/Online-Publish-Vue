@@ -80,16 +80,6 @@
                 </el-menu-item-group>
               </el-submenu>
 
-<!--                <router-link :to="{name:'editMessage'}">-->
-<!--                  <el-menu-item >-->
-<!--                  <i class="el-icon-chat-dot-round"></i>-->
-<!--                  <span slot="title">消息</span>-->
-<!--                  </el-menu-item>-->
-<!--                </router-link>-->
-                <!-- <el-menu-item index="5">
-                <i class="el-icon-setting"></i>
-                <span slot="title">设置</span>
-                </el-menu-item> -->
             </el-menu>
             </el-col>
         </el-row>

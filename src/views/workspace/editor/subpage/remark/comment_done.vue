@@ -25,6 +25,11 @@
         </template>
       </el-table-column>
       <el-table-column
+          label="审稿人"
+          prop="review"
+          width="100px">
+      </el-table-column>
+      <el-table-column
           label="文章名"
           prop="title"
           width="300px">
@@ -35,20 +40,18 @@
           width="160px">
       </el-table-column>
       <el-table-column
-          label="审稿人"
-          prop="review"
-          width="160px">
-      </el-table-column>
-      <el-table-column
           label="提交时间"
-          prop="review"
+          prop="time"
           width="160px">
       </el-table-column>
-      <el-table-column label="操作" width="100px">
+      <el-table-column label="操作" width="250px">
         <template slot-scope="scope">
           <el-button
               size="mini"
               @click="openArt(scope.row.aid)">查看文章</el-button>
+          <el-button
+              size="mini"
+              @click="contact(scope.row.email)">联系审核</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -69,13 +72,19 @@ export default {
       method: 'get',
       url: '/editor/get_remarks_done/',
     })
+    .then(res => {
+      this.tableData = JSON.parse(res.data.remarks);
+    })
+    .catch(err => {
+      console.log(err);
+    })
   },
   methods:{
     openArt(index){
       this.$router.push('/article/' + index);
     },
-    addArt(){
-      alert("打开添加文章表单" );
+    contact(index) {
+      location.href = 'mailto:' + index;
     }
   }
 }

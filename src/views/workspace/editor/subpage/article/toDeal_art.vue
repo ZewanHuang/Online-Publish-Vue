@@ -52,16 +52,19 @@
         <template slot-scope="scope">
           <el-button
             size="mini"
-            @click="openArt(scope.row.aid)">查看评论</el-button>
+            @click="openArt(scope.row.aid)">查看</el-button>
+          <el-button
+              size="mini"
+              @click="success(scope.row.aid)">发布</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
-      background
-      layout="prev, pager, next"
-      :total="1000"
-      style="margin: 20px">
-    </el-pagination>
+<!--    <el-pagination-->
+<!--      background-->
+<!--      layout="prev, pager, next"-->
+<!--      :total="1000"-->
+<!--      style="margin: 20px">-->
+<!--    </el-pagination>-->
   </div>
 </template>
 
@@ -78,7 +81,7 @@ export default {
   mounted() {
     this.$axios({
       method: 'get',
-      url: '/editor/get_articles_4/',
+      url: '/editor/get_articles_2/',
     })
     .then(res => {
       this.tableData = JSON.parse(res.data.info);
@@ -88,12 +91,35 @@ export default {
     })
   },
   methods:{
-    openArt(){
-      this.$router.push('/article/' + index);
+    openArt(index){
+      this.$router.push('/editor/article/' + index);
     },
-    addArt(){
-      alert("打开添加文章表单" );
-    }
+    success(index) {
+      const formData = new FormData();
+      formData.append('aid', index);
+      formData.append('status', '4');
+      this.$axios({
+        method: 'post',
+        url: '/editor/update_status/',
+        data: formData,
+      })
+      .then(res => {
+        switch (res.data.status_code) {
+          case '2000':
+            this.$message.success('发布成功！');
+            setTimeout(()=> {
+              location.reload();
+            }, 1500);
+            break;
+          case '4002':
+            this.$message.error('文章不存在！');
+            break;
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    },
   }
 }
 

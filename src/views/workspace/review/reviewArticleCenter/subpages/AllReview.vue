@@ -1,6 +1,9 @@
 <template>
-  <div class="all-review">
+  <div class="all-review" v-if="hasReview">
     <review-list :reviewList="reviewList"></review-list>
+  </div>
+  <div v-else>
+    该文章还未收到任何评论！
   </div>
 </template>
 
@@ -15,7 +18,8 @@ export default {
   },
   data() {
     return {
-      reviewList: []
+      reviewList: [],
+      hasReview: false,
     }
   },
   created() {
@@ -27,8 +31,14 @@ export default {
       data: formData,
     })
     .then(res => {
-      if (res.data.status_code === '2000') {
-        this.reviewList = JSON.parse(res.data.data);
+      switch (res.data.status_code) {
+        case '2000':
+          this.reviewList = JSON.parse(res.data.data);
+          this.hasReview = true;
+          break;
+        case '4003':
+          this.hasReview = false;
+          break;
       }
     })
     .catch(err => {

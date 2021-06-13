@@ -84,6 +84,24 @@ export default {
     }
   },
   mounted() {
+    this.$axios({
+      method: 'get',
+      url: '/most_popular/',
+    })
+    .then(res => {
+      switch (res.data.status_code) {
+        case '2000':
+          this.hasArticles = true;
+          this.articles = JSON.parse(res.data.articles);
+          break;
+        case '4002':
+          this.hasArticles = false;
+          break;
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
   },
   methods: {
     searchArticle:function (){
@@ -128,25 +146,6 @@ export default {
     changeStyle: function() {
       this.imgStyle.height = '120px';
       this.isSearching=true;
-
-      this.$axios({
-        method: 'get',
-        url: '/most_popular/',
-      })
-      .then(res => {
-        switch (res.data.status_code) {
-          case '2000':
-            this.hasArticles = true;
-            this.articles = JSON.parse(res.data.articles);
-            break;
-          case '4002':
-            this.hasArticles = false;
-            break;
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      })
     },
     openArticle: function() {
       this.$message('打开了某文章');

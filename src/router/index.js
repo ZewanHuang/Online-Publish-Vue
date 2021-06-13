@@ -244,6 +244,16 @@ const routes = [
     component: () => import( '../views/workspace/editor/Editor.vue'),
     children:[
       {
+        path: 'article/:aid',
+        name: 'article',
+        props: true,
+        meta: {
+          requireAuth: true,
+          requireEditor: true,
+        },
+        component: () => import('../views/workspace/editor/subpage/remark/comment/comment')
+      },
+      {
         path: 'article_category',
         name: 'article_category',
         meta: {

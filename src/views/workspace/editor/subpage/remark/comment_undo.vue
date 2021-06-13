@@ -25,6 +25,11 @@
         </template>
       </el-table-column>
       <el-table-column
+          label="审稿人"
+          prop="review"
+          width="160px">
+      </el-table-column>
+      <el-table-column
           label="文章名"
           prop="title"
           width="300px">
@@ -32,11 +37,6 @@
       <el-table-column
           label="作者"
           prop="writer"
-          width="160px">
-      </el-table-column>
-      <el-table-column
-          label="审稿人"
-          prop="review"
           width="160px">
       </el-table-column>
       <el-table-column
@@ -49,6 +49,9 @@
           <el-button
               size="mini"
               @click="openArt(scope.row.aid)">查看文章</el-button>
+          <el-button
+              size="mini"
+              @click="contact(scope.row.email)">联系审核</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -74,8 +77,8 @@ export default {
     openArt(index){
       this.$router.push('/article/' + index);
     },
-    addArt(){
-      alert("打开添加文章表单" );
+    contact(index) {
+      location.href = 'mailto:' + index;
     }
   }
 }

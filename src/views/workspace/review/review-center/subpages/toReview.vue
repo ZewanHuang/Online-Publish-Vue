@@ -1,5 +1,10 @@
 <template>
-  <ReviewArticleList :articles="articles"/>
+  <div class="toReview">
+    <ReviewArticleList v-if="hasArticles" :articles="articles"/>
+    <div v-if="!hasArticles" class="top">
+      您目前未被分配文章！
+    </div>
+  </div>
 </template>
 
 <script>
@@ -13,7 +18,7 @@ export default {
   data() {
     return {
       hasArticles: false,
-      articles: []
+      articles: [],
     }
   },
   created() {
@@ -24,13 +29,17 @@ export default {
     .then(res => {
       switch (res.data.status_code) {
         case '2000':
-          this.articles = JSON.parse(res.data.remarks)
+          this.hasArticles = true;
+          this.articles = JSON.parse(res.data.remarks);
           break;
         case '4001':
           this.$message.error('请先登录！');
           setTimeout(()=> {
             this.$router.push('/login');
           }, 1500);
+          break;
+        case '4002':
+          this.hasArticles = false;
           break;
       }
     })
@@ -43,6 +52,9 @@ export default {
 
 <style>
 
+.top {
+  margin-top: 30px;
+}
 .to-audit .article-box{
   margin-top: 30px;
   margin-bottom: 1px;
