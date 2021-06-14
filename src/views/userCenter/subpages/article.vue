@@ -95,6 +95,9 @@ export default {
         case '4002':
           this.hasArticles = false;
           break;
+        case '4005':
+          this.isAuthor = false;
+          break;
       }
     })
     .catch(err => {

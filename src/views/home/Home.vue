@@ -34,7 +34,7 @@
         <el-card class="card">
           <div slot="header" class="clearfix" style="text-align: left">
             <span  class="card-title">{{ article.title }}</span>
-            <el-button class="card-button" @click="openArticle" type="text">查看文章</el-button>
+            <el-button class="card-button" @click="openArticle(index)" type="text">查看文章</el-button>
           </div>
 
           <div slot="default" class="card-body">
@@ -147,8 +147,8 @@ export default {
       this.imgStyle.height = '120px';
       this.isSearching=true;
     },
-    openArticle: function() {
-      this.$message('打开了某文章');
+    openArticle: function(index) {
+      this.$router.push('/article/' + this.articles[index].aid);
     },
     getAbstract: function(index) {
       const str = this.articles[index].abstract

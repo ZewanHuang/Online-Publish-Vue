@@ -4,7 +4,7 @@
       <el-button type="" @click="dialogFormVisible = true">添加类目</el-button>
     </div>
 
-    <el-dialog title="添加读者" :visible.sync="dialogFormVisible">
+    <el-dialog title="添加类目" :visible.sync="dialogFormVisible">
       <el-form :model="form">
         <el-form-item label="分类名称" :label-width="formLabelWidth">
           <el-input
