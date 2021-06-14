@@ -106,10 +106,7 @@ export default {
   },
   methods: {
     openArticle: function(index) {
-      alert("打开：" + this.articleList[index].title);
-    },
-    writeNewArticle: function() {
-      alert("let's go")
+      this.$router.push('/article/' + this.articleList[index].article_id);
     },
     applyToAuthor() {
       this.$axios({
