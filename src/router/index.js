@@ -235,6 +235,40 @@ const routes = [
     ]
   },
   {
+    path: '/message',
+    name: 'Message',
+    meta: {
+      requireAuth: true,
+    },
+    component: () => import('../views/message/messageUndo'),
+    children: [
+      {
+        path: 'done',
+        name: 'Done',
+        meta: {
+          requireAuth: true,
+        },
+        component: () => import('../views/message/messageDone'),
+      },
+      {
+        path: 'save',
+        name: 'Save',
+        meta: {
+          requireAuth: true,
+        },
+        component: () => import('../views/message/messageSaved'),
+      },
+      {
+        path: '',
+        name: 'UnFinish',
+        meta: {
+          requireAuth: true,
+        },
+        component: () => import('../views/message/messageUndo'),
+      }
+    ]
+  },
+  {
     path: '/editor',
     name: 'Editor',
     meta: {
@@ -405,11 +439,6 @@ const routes = [
         component: () => import( '../views/workspace/review/reviewArticleCenter/subpages/Article'),
       }
     ]
-  },
-  {
-    path: '/message',
-    name: 'Message',
-    component: () => import('../views/message'),
   },
   {
     path: '/*',

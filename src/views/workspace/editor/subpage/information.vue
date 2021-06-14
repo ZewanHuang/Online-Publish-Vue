@@ -52,7 +52,6 @@
                 <span class="num">{{ remarkCount }}</span>
                 <span>条</span>
                 <div class="bottom clearfix">
-                <!-- <el-button type="text" class="button" @click="goComment">查看详情</el-button> -->
                 </div>
             </div>
             </el-card>

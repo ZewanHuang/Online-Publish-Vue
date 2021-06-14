@@ -5,21 +5,20 @@
         <el-timeline-item
             class="msg"
             v-for="(msg, index) in msgList"
-            v-if="msg.state===activeNum"
             :key="index"
             :timestamp="msg.time"
             placement="top">
           <el-card class="msg-card">
 
             <div slot="header" class="clearfix">
-              <span class="header-text">{{ msg.tag }}</span>
+              <span class="header-text">{{ msg.title }}</span>
               <el-button icon="el-icon-delete" class="msg-header-button del" type="text"
                          @click="delMsg(index)"></el-button>
-              <el-button icon="el-icon-star-off" class="msg-header-button like" type="text" v-if="msg.state!=='3'"
+              <el-button icon="el-icon-star-off" class="msg-header-button like" type="text"
                          @click="likeMsg(index)"></el-button>
-              <el-button icon="el-icon-bell" class="msg-header-button bell" type="text" v-if="msg.state==='2'"
+              <el-button icon="el-icon-bell" class="msg-header-button bell" type="text"
                          @click="alertMsg(index)"></el-button>
-              <el-button icon="el-icon-finished" class="msg-header-button check" type="text" v-if="msg.state==='1'"
+              <el-button icon="el-icon-finished" class="msg-header-button check" type="text"
                          @click="checkMsg(index)"></el-button>
             </div>
 
