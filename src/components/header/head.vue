@@ -44,24 +44,24 @@ export default {
         url: '/logout/',
         data: {}
       })
-          .then(res => {
-            switch (res.data.status_code) {
-              case "2000":
-                this.$message.success('退出成功！');
-                setTimeout(()=> {
-                  location.reload();
-                }, 1500);
-                // 登出成功后清空前端存储内容，并自动跳转 /login
-                this.$store.dispatch('clear');
-                break;
-              case "4001":
-                this.$message.error("用户未登录！");
-                break;
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          })
+      .then(res => {
+        switch (res.data.status_code) {
+          case "2000":
+            this.$message.success('退出成功！');
+            setTimeout(()=> {
+              window.location.href = '/';
+            }, 1500);
+            // 登出成功后清空前端存储内容，并自动跳转 /login
+            this.$store.dispatch('clear');
+            break;
+          case "4001":
+            this.$message.error("用户未登录！");
+            break;
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
     },
     setting(){
       window.location.href="/setting";
