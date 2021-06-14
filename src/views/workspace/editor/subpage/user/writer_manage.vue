@@ -54,7 +54,7 @@
           label="工作单位"
           width="120px">
         </el-table-column>
-        <el-table-column label="操作" width="200px">
+        <el-table-column label="操作" width="200px" align="center">
           <template slot-scope="scope">
             <el-button
               size="mini"

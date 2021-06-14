@@ -43,7 +43,7 @@
           label="邮箱"
           width="350">
         </el-table-column>
-        <el-table-column label="操作" width="150px">
+        <el-table-column label="操作" width="150px" align="center">
           <template slot-scope="scope">
             <el-button
               size="mini"

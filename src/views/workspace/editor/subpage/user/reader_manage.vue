@@ -34,14 +34,20 @@
       <el-table-column
         prop="email"
         label="邮箱"
-        width="300">
+        width="250">
       </el-table-column>
       <el-table-column
         prop="time"
         label="注册时间"
         width="200">
       </el-table-column>
-      <el-table-column label="操作" width="150px">
+      <el-table-column
+          prop="hasConfirmed"
+          align="center"
+          label="是否已验证"
+          width="120">
+      </el-table-column>
+      <el-table-column label="操作" width="150px" align="center">
         <template slot-scope="scope">
           <el-button
             size="mini"
