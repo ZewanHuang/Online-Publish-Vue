@@ -15,7 +15,7 @@
         </router-link>
       </el-col>
       <el-col :span=5 class="center font-wrap">
-        <router-link to="/contactus" class="font">联系我们</router-link>
+        <a href="mailto:zewantop@163.com" class="font">联系我们</a>
       </el-col>
       <el-col :span=5 class="center font-wrap">
         <a href="https://beian.miit.gov.cn/" target="_blank" class="font">备案号：粤ICP备2021021248号-1</a>
@@ -27,6 +27,11 @@
 <script>
 export default {
   name: 'navBar',
+  methods: {
+    contactUs() {
+      location.href = 'mailto:zewantop@163.com';
+    }
+  }
 }
 </script>
 
