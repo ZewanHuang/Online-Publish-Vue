@@ -72,6 +72,12 @@ export default {
       method: 'get',
       url: '/editor/get_remarks_undo/',
     })
+    .then(res => {
+      this.tableData = JSON.parse(res.data.remarks);
+    })
+    .catch(err => {
+      console.log(err);
+    })
   },
   methods:{
     openArt(index){
