@@ -111,7 +111,7 @@ export default {
           this.$router.push("/review/overview");
           break;
         case '作者':
-          this.$router.push("/writer/overview");
+          this.$router.push("/writing/overview");
           break;
         case '编辑':
           this.$router.push("/editor/information");
