@@ -58,7 +58,7 @@
 
     <div v-if="active===2">
       <p>您已提交文章，请耐心等待审核！</p>
-      <p><router-link to="/writing/overview">3s后自动跳转</router-link></p>
+      <p @click="toOverview">3s后自动跳转</p>
     </div>
 
 
@@ -100,6 +100,9 @@ export default {
     })
   },
   methods: {
+    toOverview() {
+      window.location.href = '/writing/overview';
+    },
     next() {
       if (this.active++ > 2)
         this.active = 0;
@@ -158,7 +161,7 @@ export default {
           case '2000':
             this.next();
             setTimeout(()=> {
-              this.$router.replace('/writing/article');
+              window.location.href = '/writing/article';
             },3000);
             break;
           case '4001':

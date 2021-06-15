@@ -106,7 +106,8 @@ export default {
     })
   },
   methods: {
-    searchArticle:function (){
+    searchArticle:function () {
+      this.head_title = '搜索结果：';
       this.articles = [];
 
       if (this.value === '')
@@ -134,7 +135,6 @@ export default {
         .then(res => {
           switch (res.data.status_code) {
             case '2000':
-              this.head_title = '搜索结果：';
               this.hasArticles = true;
               this.articles = JSON.parse(res.data.articles);
               console.log(this.articles);
