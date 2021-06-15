@@ -48,11 +48,14 @@
           prop="time"
           width="200px">
       </el-table-column>
-      <el-table-column label="操作" width="100px" align="center">
+      <el-table-column label="操作" width="180px" align="center">
         <template slot-scope="scope">
           <el-button
             size="mini"
             @click="openArt(scope.row.aid)">查看</el-button>
+          <el-button
+            size="mini"
+            @click="delArt(scope.row.aid)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -91,9 +94,27 @@ export default {
     openArt(index){
       this.$router.push('/editor/article/' + index);
     },
-    addArt(){
-      alert("打开添加文章表单" );
-    }
+    delArt(index) {
+      const formData = new FormData();
+      formData.append('article_id', index);
+      this.$axios({
+        method: 'post',
+        url: '/editor/delete/',
+      })
+      .then(res => {
+        switch (res.data.status_code) {
+          case '2000':
+            this.$message.success('删除成功！');
+            break;
+          case '4002':
+            this.$message.error('文章不存在！');
+            break;
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    },
   }
 }
 

@@ -87,9 +87,6 @@ export default {
     openArt(index){
       this.$router.push('/article/' + index);
     },
-    addArt(){
-      alert("打开添加文章表单" );
-    }
   }
 }
 
