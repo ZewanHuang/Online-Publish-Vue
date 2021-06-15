@@ -119,7 +119,7 @@
 .num2{
   color: rgb(34, 141, 241);
 }
-.item{
+#box .item{
   margin:1%;
 }
 

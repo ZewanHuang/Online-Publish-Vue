@@ -3,8 +3,7 @@
     <el-row class="nav-row">
       <el-col :span=10 class="left">
         <router-link to="/">
-          <img src="../../assets/logo.png" alt="logo" class="nav-logo">
-          <span class="brand-name"> 网上出版系统</span>
+          <img src="../../assets/banner1.png" alt="banner">
         </router-link>
       </el-col>
       <el-col :span=5 :offset=5 class="right">
@@ -47,11 +46,11 @@ export default {
   padding-bottom: 3px;
 }
 
-.left {
+#nav .left {
   text-align: left;
   padding: 5px;
 }
-.right {
+#nav .right {
   text-align: right;
   padding: 5px;
 }
@@ -61,13 +60,6 @@ export default {
 }
 a {
   text-decoration: none;
-}
-#nav .logo {
-  margin-top: 1px;
-}
-
-#nav .nav-logo{
-  margin: 0;
 }
 
 #nav .brand-name {
@@ -112,8 +104,8 @@ a {
 }
 #nav img {
   padding: 5px;
-  width: 40px;
-  height: 40px;
+  width: 250px;
+  height: 50px;
   vertical-align:-20px;
 }
 #nav span {

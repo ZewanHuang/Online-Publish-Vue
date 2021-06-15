@@ -1,21 +1,24 @@
 <template>
   <div id="nav">
     <el-menu class="el-menu-demo" mode="horizontal">
-      <router-link to="/">
-        <img src="../../assets/logo.png" alt="logo">
-      </router-link>
-      <label>
-        <input type="text" name="search" placeholder="Search or jump to…"/>
-      </label>
-<!--      <router-link to="/help" class="help">Help</router-link>-->
+<!--      <router-link to="/">-->
+        <img src="../../assets/banner1.png" alt="banner" @click="toHome" class="cursor">
+<!--      </router-link>-->
       <el-submenu index="1">
         <template slot="title" id="mine">个人中心</template>
         <el-menu-item index="1-1" @click="myhome">我的主页</el-menu-item>
         <el-menu-item index="1-4" @click="setting">设置</el-menu-item>
         <el-menu-item index="1-5" @click="logout">退出登录</el-menu-item>
       </el-submenu>
-      <el-menu-item index="2" @click="workspace">工作空间</el-menu-item>
-      <el-menu-item index="3" @click="message">消息</el-menu-item>
+      <el-menu-item index="2" @click="workspace">
+        工作空间
+      </el-menu-item>
+      <el-menu-item index="3" @click="message">
+        消息
+        <el-badge :value="msgCount" class="item" v-if="msgCount!==0">
+        </el-badge>
+      </el-menu-item>
+
       <el-menu-item index="4" @click="guide">引导</el-menu-item>
     </el-menu>
   </div>
@@ -28,10 +31,36 @@ export default {
   name: 'navBar',
   data() {
     return {
+      msgCount: 0,
       username: user.getters.getUser(user.state()).user.username
     }
   },
+  mounted() {
+    this.$axios({
+      method: 'get',
+      url: '/message/getUnread/',
+    })
+    .then(res => {
+      switch (res.data.status_code) {
+        case '2000':
+          this.msgCount = res.data.msgCount;
+          break;
+        case '4001':
+          this.$message.warning('请先登录！');
+          break;
+        case '4002':
+          this.$message.error('未查询到此用户！');
+          break;
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  },
   methods: {
+    toHome() {
+      window.location.href = '/';
+    },
     getUrl() {
       return {
         path: '/' + this.username + '/info'
@@ -64,13 +93,13 @@ export default {
       })
     },
     setting(){
-      window.location.href="/setting";
+      this.$router.push('/setting');
     },
     myhome(){
-      window.location.href="/" + this.username + "/info/collection";
+      this.$router.push("/" + this.username + "/info/collection");
     },
     message(){
-      window.location.href="/message";
+      this.$router.push('/message');
     },
     guide() {
 
@@ -79,13 +108,13 @@ export default {
       const userInfo = user.getters.getUser(user.state())
       switch (userInfo.user.usertype) {
         case '审稿人':
-          window.location.href="/review/overview";
+          this.$router.push("/review/overview");
           break;
         case '作者':
-          window.location.href="/writing/overview";
+          this.$router.push("/writer/overview");
           break;
         case '编辑':
-          window.location.href="/editor/information";
+          this.$router.push("/editor/information");
           break;
         default:
           this.$message.warning("请到个人中心申请成为作者！");
@@ -97,6 +126,16 @@ export default {
 </script>
 
 <style>
+#nav .cursor {
+  cursor: pointer;
+}
+#nav .item {
+  /*margin-top: 10px;*/
+  /*margin-right: 40px;*/
+}
+#nav .font {
+  color: #007dff;
+}
 #nav .el-submenu__title {
   font-size: 15px;
 }
@@ -106,13 +145,6 @@ export default {
 #mine{
   position: absolute;
   right:10%;
-}
-.help{
-  color: rgb(128, 123, 123);
-  margin: 25px;
-}
-img {
-  margin-right: 8px;
 }
 #nav .el-menu.el-menu--horizontal {
   border-bottom: solid 0 #e6e6e6;

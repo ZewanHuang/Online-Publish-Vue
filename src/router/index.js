@@ -240,33 +240,7 @@ const routes = [
     meta: {
       requireAuth: true,
     },
-    component: () => import('../views/message/messageUndo'),
-    children: [
-      {
-        path: 'done',
-        name: 'Done',
-        meta: {
-          requireAuth: true,
-        },
-        component: () => import('../views/message/messageDone'),
-      },
-      {
-        path: 'save',
-        name: 'Save',
-        meta: {
-          requireAuth: true,
-        },
-        component: () => import('../views/message/messageSaved'),
-      },
-      {
-        path: '',
-        name: 'UnFinish',
-        meta: {
-          requireAuth: true,
-        },
-        component: () => import('../views/message/messageUndo'),
-      }
-    ]
+    component: () => import('../views/message'),
   },
   {
     path: '/editor',

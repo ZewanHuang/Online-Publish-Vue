@@ -1,33 +1,34 @@
 <template>
   <div class="msg-list">
 
-      <el-timeline>
-        <el-timeline-item
-            class="msg"
-            v-for="(msg, index) in msgList"
-            :key="index"
-            :timestamp="msg.time"
-            placement="top">
-          <el-card class="msg-card">
+    <el-timeline>
+      <el-timeline-item
+          class="msg"
+          v-for="(msg, index) in msgList"
+          v-if="msg.state===activeNum"
+          :key="index"
+          :timestamp="msg.time"
+          placement="top">
+        <el-card class="msg-card">
 
-            <div slot="header" class="clearfix">
-              <span class="header-text">{{ msg.title }}</span>
-              <el-button icon="el-icon-delete" class="msg-header-button del" type="text"
-                         @click="delMsg(index)"></el-button>
-              <el-button icon="el-icon-star-off" class="msg-header-button like" type="text"
-                         @click="likeMsg(index)"></el-button>
-              <el-button icon="el-icon-bell" class="msg-header-button bell" type="text"
-                         @click="alertMsg(index)"></el-button>
-              <el-button icon="el-icon-finished" class="msg-header-button check" type="text"
-                         @click="checkMsg(index)"></el-button>
-            </div>
+          <div slot="header" class="clearfix">
+            <span class="header-text">{{ msg.tag }}</span>
+            <el-button icon="el-icon-delete" class="msg-header-button del" type="text"
+                       @click="delMsg(index)"></el-button>
+            <el-button icon="el-icon-star-off" class="msg-header-button like" type="text" v-if="msg.state!=='3'"
+                       @click="likeMsg(index)"></el-button>
+            <el-button icon="el-icon-bell" class="msg-header-button bell" type="text" v-if="msg.state==='2'"
+                       @click="alertMsg(index)"></el-button>
+            <el-button icon="el-icon-finished" class="msg-header-button check" type="text" v-if="msg.state==='1'"
+                       @click="checkMsg(index)"></el-button>
+          </div>
 
-            <div class="msg-content">
-              {{ msg.content }}
-            </div>
-          </el-card>
-        </el-timeline-item>
-      </el-timeline>
+          <div class="msg-content">
+            {{ msg.content }}
+          </div>
+        </el-card>
+      </el-timeline-item>
+    </el-timeline>
 
   </div>
 </template>
@@ -41,17 +42,116 @@ export default {
   },
   methods: {
     checkMsg: function (index) {
-      this.msgList[index].state = '2';
+      const formData = new FormData();
+      formData.append('mid', this.msgList[index].mid);
+      this.$axios({
+        method: 'post',
+        url: '/message/finish/',
+        data: formData,
+      })
+      .then(res => {
+        switch (res.data.status_code) {
+          case '2000':
+            this.$message.success('消息已读成功！');
+            setTimeout(() => {
+              location.reload();
+            }, 1500);
+            break;
+          case '4001':
+            this.$message.error('消息不存在！');
+            break;
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+      // this.msgList[index].state = '2';
     },
+
     alertMsg: function (index) {
-      this.msgList[index].state = '1';
+      const formData = new FormData();
+      formData.append('mid', this.msgList[index].mid);
+      this.$axios({
+        method: 'post',
+        url: '/message/unfinish/',
+        data: formData,
+      })
+      .then(res => {
+        switch (res.data.status_code) {
+          case '2000':
+            this.$message.success('成功将消息设置为未读！');
+            setTimeout(() => {
+              location.reload();
+            }, 1500);
+            break;
+          case '4001':
+            this.$message.error('消息不存在！');
+            break;
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+      // this.msgList[index].state = '1';
     },
+
     likeMsg: function (index) {
-      this.msgList[index].state = '3';
+      const formData = new FormData();
+      formData.append('mid', this.msgList[index].mid);
+      this.$axios({
+        method: 'post',
+        url: '/message/save/',
+        data: formData,
+      })
+      .then(res => {
+        switch (res.data.status_code) {
+          case '2000':
+            this.$message.success('收藏成功！');
+            setTimeout(() => {
+              location.reload();
+            }, 1500);
+            break;
+          case '4001':
+            this.$message.error('消息不存在！');
+            break;
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+      // this.msgList[index].state = '3';
     },
+
     delMsg: function(index) {
-      let arr = this.msgList;
-      arr.splice(arr.indexOf(index),1);
+      const formData = new FormData();
+      formData.append('mid', this.msgList[index].mid);
+      this.$axios({
+        method: 'post',
+        url: '/message/delete/',
+        data: formData,
+      })
+      .then(res => {
+        switch (res.data.status_code) {
+          case '2000':
+            this.$message.success('删除成功！');
+            setTimeout(() => {
+              location.reload();
+            }, 1500);
+            break;
+          case '4001':
+            this.$message.error('消息不存在！');
+            break;
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+      // let arr = this.msgList;
+      // arr.splice(arr.indexOf(index),1);
     }
   }
 }

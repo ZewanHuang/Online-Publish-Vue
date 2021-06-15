@@ -10,15 +10,15 @@
           active-text-color="#147fd9"
           @select="handleSelect"
       >
-        <el-menu-item index="1" @click="toUnsaved">
+        <el-menu-item index="1">
           <i class="el-icon-warning"></i>
           <span slot="title">未读消息</span>
         </el-menu-item>
-        <el-menu-item index="2" @click="toFinished">
+        <el-menu-item index="2">
           <i class="el-icon-warning-outline"></i>
           <span slot="title">已读消息</span>
         </el-menu-item>
-        <el-menu-item index="3" @click="toSaved">
+        <el-menu-item index="3">
           <i class="el-icon-star-off"></i>
           <span slot="title">收藏消息</span>
         </el-menu-item>
@@ -28,42 +28,31 @@
 
 
     <el-main class="message-list">
-      <message-list :msg-list="msgList" :active-num="1"></message-list>
+      <message-list :msg-list="msgList" :active-num="activeNum"></message-list>
     </el-main>
 
   </el-container>
 </template>
 
 <script>
-import messageList from "../../components/common/message_list";
+import messageList from "../components/common/message_list";
 
 export default {
-  name: "messageUndo",
+  name: "message",
   components: {
     messageList,
   },
   data() {
     return {
       flag: true,
-      msgList: [
-        {
-          title: "消息标签",
-          content: "消息这个词应用比较广泛，新鲜事就叫消息，还指报道事情的概貌而不讲述详细的经过和细节，" +
-              "以简明的文字迅速及时地报道最新事实的短篇新闻宣传文书，也是最常见、最经常采用的新闻体裁",
-          state: '1',
-          time: "2021/6/10 23:59:59",
-        },
-        {
-          title: "消息标签",
-          content: "消息这个词应用比较广泛，新鲜事就叫消息，还指报道事情的概貌而不讲述详细的经过和细节，" +
-              "以简明的文字迅速及时地报道最新事实的短篇新闻宣传文书，也是最常见、最经常采用的新闻体裁",
-          state: '2',
-          time: "2021/6/10 23:59:59",
-        },
-      ],
+      activeNum: 1,
+      msgList: [],
     }
   },
   methods: {
+    handleSelect: function (key) {
+      this.activeNum=key;
+    },
     openHint: function () {
       this.$notify.info({
         title: '按钮提示',
@@ -91,18 +80,27 @@ export default {
         customClass: 'hint-box'
       });
     },
-    toUnsaved() {
-      window.location.href = '/message';
-    },
-    toFinished() {
-      window.location.href = '/message/done';
-    },
-    toSaved() {
-      window.location.href = '/message/save';
-    }
   },
-  created() {
+  mounted() {
     this.openHint();
+
+    this.$axios({
+      method: 'get',
+      url: '/message/getAll/',
+    })
+    .then(res => {
+      switch (res.data.status_code) {
+        case '2000':
+          this.msgList = JSON.parse(res.data.messages);
+          break;
+        case '4001':
+          this.$router.push('/');
+          break;
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
   },
 }
 </script>

@@ -28,7 +28,7 @@
     </el-row>
     <div class="hotArticle" v-if="isSearching">
       <el-row style="text-align: left">
-        <span><h3>文章热搜：</h3></span>
+        <span><h3>{{ head_title }}</h3></span>
       </el-row>
       <el-row class="article-list" v-for="(article,index) in articles">
         <el-card class="card">
@@ -67,7 +67,8 @@ export default {
   },
   data() {
     return {
-      isSearching:false,
+      head_title: '热搜文章：',
+      isSearching: false,
       input: '',
       imgStyle: {
         position: 'relative',
@@ -84,6 +85,7 @@ export default {
     }
   },
   mounted() {
+    this.head_title = '热搜文章：';
     this.$axios({
       method: 'get',
       url: '/most_popular/',
@@ -105,6 +107,8 @@ export default {
   },
   methods: {
     searchArticle:function (){
+      this.articles = [];
+
       if (this.value === '')
         this.$message.warning('请选择搜索条件');
       else if (this.input === '')
@@ -130,8 +134,10 @@ export default {
         .then(res => {
           switch (res.data.status_code) {
             case '2000':
+              this.head_title = '搜索结果：';
               this.hasArticles = true;
               this.articles = JSON.parse(res.data.articles);
+              console.log(this.articles);
               break;
             case '4002':
               this.hasArticles = false;
