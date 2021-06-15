@@ -91,6 +91,7 @@ export default {
   methods: {
     submit(form) {
       const formData = new FormData();
+      formData.append('aid', this.aid)
       formData.append('title', this.form.name)
       formData.append('writers', this.form.author)
       formData.append('abstract', this.form.abstract)
@@ -100,14 +101,14 @@ export default {
 
       this.$axios({
         method: 'post',
-        url: '/upload/',
+        url: '/edit_article/',
         data:　formData,
       })
       .then(res => {
         switch (res.data.status_code) {
           case '2000':
             this.$message.success('保存成功!');
-            const url = '/article/center/'+this.aid+'/info/collection';
+            const url = '/article/center/'+this.aid+'/info';
             setTimeout(()=> {
               this.$router.replace(url);
             }, 1000);

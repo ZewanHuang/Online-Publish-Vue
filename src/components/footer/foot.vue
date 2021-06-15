@@ -49,6 +49,8 @@ export default {
   font-size: 13px;
   height: 70px;
   box-shadow: 0 0 0 0 lightgray;
+
+  /*background-color: rgba(0, 0, 0, 0);*/
 }
 #foot .el-col {
   margin-top: 10px;

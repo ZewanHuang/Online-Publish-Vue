@@ -31,40 +31,16 @@ export default {
     return {
       hasArticles: false,
       articles: [],
-      newsList: [
-        /*
+
+      /*
         0-修改了文章
         1-成功修改
         2-提交了文章
         3-成功发布
         4-审核了文章
+        5-删除了文章
          */
-        {
-          status: 1,
-          title: '基于物联网的恒温恒湿箱的远程监控系统设计',
-          date:'2021/05/26'
-        },
-        {
-          status: 2,
-          title: '企业智慧移动办公平台创新型研究',
-          date:'2021/05/01'
-        },
-        {
-          status: 3,
-          title: '远程监控系统设计',
-          date:'2021/05/01'
-        },
-        {
-          status: 0,
-          title: '互联网营销战略概论',
-          date:'2021/05/02'
-        },
-        {
-          status: 5,
-          title: '删除效果',
-          date:'2021/05/02'
-        },
-      ],
+      newsList: [],
     }
   },
   created() {
@@ -83,6 +59,22 @@ export default {
           break;
         case '4002':
           this.hasArticles = false;
+          break;
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  },
+  mounted() {
+    this.$axios({
+      method: 'get',
+      url: '/get_activity/',
+    })
+    .then(res => {
+      switch (res.data.status_code) {
+        case '2000':
+          this.newsList = JSON.parse(res.data.acts);
           break;
       }
     })

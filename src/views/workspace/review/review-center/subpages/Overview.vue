@@ -33,10 +33,6 @@ export default {
       articles: [],
       newsList: [
         /*
-        0-修改了文章
-        1-成功修改
-        2-提交了文章
-        3-成功发布
         4-审核了文章
          */
         {
