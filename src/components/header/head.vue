@@ -1,5 +1,5 @@
 <template>
-  <div id="nav">
+  <div id="nava">
     <el-menu class="el-menu-demo" mode="horizontal">
 <!--      <router-link to="/">-->
         <img src="../../assets/banner1.png" alt="banner" @click="toHome" class="cursor">
@@ -126,27 +126,43 @@ export default {
 </script>
 
 <style>
-#nav .cursor {
+#nava {
+  padding: 0 5% 0 5%;
+}
+#nava .cursor {
   cursor: pointer;
 }
-#nav .item {
+#nava .item {
   /*margin-top: 10px;*/
   /*margin-right: 40px;*/
 }
-#nav .font {
+#nava .font {
   color: #007dff;
 }
-#nav .el-submenu__title {
+#nava .el-submenu__title {
+  float: right;
   font-size: 15px;
 }
-#nav .el-menu-item {
+#nava .el-submenu{
+  float: right;
+}
+#nava .el-menu-item {
+  float: right;
   font-size: 15px;
+  width: 100px;
+}
+#nava img{
+  float: left;
+  margin-top: 2px;
+  padding: 5px;
+  width: 250px;
+  height: 50px;
 }
 #mine{
   position: absolute;
   right:10%;
 }
-#nav .el-menu.el-menu--horizontal {
+#nava .el-menu.el-menu--horizontal {
   border-bottom: solid 0 #e6e6e6;
 }
 </style>

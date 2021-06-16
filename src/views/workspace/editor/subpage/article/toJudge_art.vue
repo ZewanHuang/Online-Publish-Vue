@@ -210,6 +210,7 @@ input{
   width: 50%;
 }
 .toJudge .choice{
+  text-align: left;
   width: 90%;
   height: 40px;
   border: #409EFF;

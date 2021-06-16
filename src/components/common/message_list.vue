@@ -53,9 +53,10 @@ export default {
         switch (res.data.status_code) {
           case '2000':
             this.$message.success('消息已读成功！');
-            setTimeout(() => {
-              location.reload();
-            }, 1500);
+            // setTimeout(() => {
+            //   location.reload();
+            // }, 1500);
+            this.msgList[index].state = '2';
             break;
           case '4001':
             this.$message.error('消息不存在！');
@@ -65,8 +66,6 @@ export default {
       .catch(err => {
         console.log(err);
       });
-
-      // this.msgList[index].state = '2';
     },
 
     alertMsg: function (index) {
@@ -81,9 +80,10 @@ export default {
         switch (res.data.status_code) {
           case '2000':
             this.$message.success('成功将消息设置为未读！');
-            setTimeout(() => {
-              location.reload();
-            }, 1500);
+            // setTimeout(() => {
+            //   location.reload();
+            // }, 1500);
+            this.msgList[index].state = '1';
             break;
           case '4001':
             this.$message.error('消息不存在！');
@@ -93,8 +93,6 @@ export default {
       .catch(err => {
         console.log(err);
       });
-
-      // this.msgList[index].state = '1';
     },
 
     likeMsg: function (index) {
@@ -109,9 +107,10 @@ export default {
         switch (res.data.status_code) {
           case '2000':
             this.$message.success('收藏成功！');
-            setTimeout(() => {
-              location.reload();
-            }, 1500);
+            // setTimeout(() => {
+            //   location.reload();
+            // }, 1500);
+            this.msgList[index].state = '3';
             break;
           case '4001':
             this.$message.error('消息不存在！');
@@ -121,8 +120,6 @@ export default {
       .catch(err => {
         console.log(err);
       });
-
-      // this.msgList[index].state = '3';
     },
 
     delMsg: function(index) {

@@ -46,23 +46,23 @@ export default {
   padding-bottom: 3px;
 }
 
-#nav .left {
+#nav .nav-row .left {
   text-align: left;
   padding: 5px;
 }
-#nav .right {
+#nav .nav-row .right {
   text-align: right;
   padding: 5px;
 }
 
-#nav .btn {
+#nav .nav-row .btn {
   margin-top: 5px;
 }
 a {
   text-decoration: none;
 }
 
-#nav .brand-name {
+#nav .nav-row .brand-name {
   font-family: headTitle, sans-serif;
   font-size: 23px;
   color: #0090cc;
@@ -102,11 +102,9 @@ a {
   color: #0090cc;
   border-bottom: solid;
 }
-#nav img {
-  padding: 5px;
-  width: 250px;
+#nav .nav-row img {
+  width: 260px;
   height: 50px;
-  vertical-align:-20px;
 }
 #nav span {
   font-size: 17px;

@@ -1,9 +1,11 @@
 <template>
   <div class="home">
-    <img v-bind:style="imgStyle" src="../../assets/logo.png">
+    <div class="home-pic">
+      <img :style="imgStyle" src="../../assets/logo.png" alt="Big Logo">
+    </div>
     <h1>欢迎进入网上出版系统</h1>
     <el-row class="searchArea">
-      <el-col :span="3" :offset="7">
+      <el-col :span="3" :offset="6">
         <el-select v-model="value" placeholder="请选择" id="op">
           <el-option
               v-for="item in searchOptions"
@@ -13,7 +15,7 @@
           </el-option>
         </el-select>
       </el-col>
-      <el-col :span="7" >
+      <el-col :span="7">
         <el-input
             id="search"
             v-model="input"
@@ -71,8 +73,6 @@ export default {
       isSearching: false,
       input: '',
       imgStyle: {
-        position: 'relative',
-        margin: '20px',
         height: '400px',
         transition: 'height 1s',
       },
@@ -183,55 +183,59 @@ export default {
 <style>
 .home{
   background: url("../../assets/1.png") ;
+  min-height: 700px;
+  width: 100%;
 }
 
-#search{
-
+.home #search{
   width: 400px;
   margin: 0 0;
 }
 
-#op{
+.home #op{
   margin: 0 0;
 }
 
-.searchArea{
+.home .home-pic {
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.home .searchArea{
   padding-top: 20px;
   padding-bottom: 10px;
 }
 
-.hotArticle{
+.home .hotArticle{
   width: 60%;
   margin: auto;
 }
-.hotArticle .article-list .card {
+.home .hotArticle .article-list .card {
   margin: 10px;
 }
 
-.hotArticle .card-body {
+.home .hotArticle .card-body {
   text-align: left;
 }
 
-.hotArticle .card-button {
+.home .hotArticle .card-button {
   float: right;
   padding: 3px 0;
   font-size: medium;
 }
 
-.hotArticle .card-title {
+.home .hotArticle .card-title {
   font-weight: bold;
   color: #409eff;
   font-size: large;
 }
 
-.hotArticle .card-body-el {
+.home .hotArticle .card-body-el {
   padding-bottom: 10px;
 }
 
-.hotArticle .card-body-el-title {
+.home .hotArticle .card-body-el-title {
   font-weight: bold;
 }
-
-
 </style>
 

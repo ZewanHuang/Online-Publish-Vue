@@ -243,6 +243,11 @@ const routes = [
     component: () => import('../views/message'),
   },
   {
+    path: '/about',
+    name: 'About',
+    component: () => import('../views/home/About'),
+  },
+  {
     path: '/editor',
     name: 'Editor',
     meta: {

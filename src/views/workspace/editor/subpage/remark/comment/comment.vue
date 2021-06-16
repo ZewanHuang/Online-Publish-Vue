@@ -1,24 +1,22 @@
 <template>
   <div class="editor-article">
     <article-detail :article="article"></article-detail>
-    <div class="button">
-      <el-row>
-        <el-col :span=5 :offset=7>
-          <el-button type="primary" icon="el-icon-view" @click="read">在线阅读</el-button>
-        </el-col>
-        <el-col :span=5>
-          <a :href=this.url download>
-            <el-button
-                type="default"
-                icon="el-icon-download"
-                @click="download"
-            >下载文章</el-button>
-          </a>
-        </el-col>
-      </el-row>
-    </div>
+    <el-row class="button">
+      <el-col :span=6 :offset=6>
+        <el-button type="primary" icon="el-icon-view" @click="read">在线阅读</el-button>
+      </el-col>
+      <el-col :span=6>
+        <a :href=this.url download>
+          <el-button
+              type="default"
+              icon="el-icon-download"
+              @click="download"
+          >下载文章</el-button>
+        </a>
+      </el-col>
+    </el-row>
 
-    <el-divider/>
+<!--    <el-divider/>-->
     <div class="comment">
       <div v-for="(item,i) in comments" :key="i" class="author-title reply-father">
         <el-avatar class="header-img" :size="40" :src="item.avatar"></el-avatar>
@@ -112,6 +110,7 @@ export default {
 }
 
 .editor-article .button{
+  width: 100%;
   padding-top: 60px;
 }
 .editor-article .author-title {
@@ -147,6 +146,7 @@ export default {
 
 }
 .comment {
+  margin-top: 20px;
   text-align: left;
 }
 
