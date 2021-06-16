@@ -55,7 +55,7 @@
             @click="openArt(scope.row.aid)">查看</el-button>
 
 
-          <el-button type="primary" @click="openBox" size="mini">分配</el-button>
+          <el-button type="primary" @click="openBox(scope.$index, scope.row)" size="mini">分配</el-button>
           <el-dialog
               class="abow_dialog"
               title="分配审稿人"
@@ -124,7 +124,8 @@ export default {
         })
         .catch(_ => {});
     },
-    openBox() {
+    openBox(index, row) {
+      console.log(index, row);
       this.$axios({
         method: 'get',
         url: '/editor/get_reviews_name/',
@@ -138,6 +139,7 @@ export default {
       this.dialogVisible = true;
     },
     handleReview(index) {
+
       const formData = new FormData();
       formData.append('reviews', this.reviews);
       formData.append('aid', index);
@@ -157,6 +159,9 @@ export default {
             break;
           case '2001':
             this.$message.success('成功为文章随机分配一位审稿人！');
+            setTimeout(()=> {
+              location.reload();
+            }, 1500);
             break;
           case '4005':
             this.$message.error('您指定的审稿人不存在！');

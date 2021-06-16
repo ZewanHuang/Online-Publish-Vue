@@ -192,11 +192,6 @@ const routes = [
     ]
   },
   {
-    path: '/apply',
-    name: 'Apply',
-    component: () => import( '../views/user/Apply.vue')
-  },
-  {
     path: '/review',
     name: 'Review',
     component: () => import( '../views/workspace/review/review-center/review.vue'),

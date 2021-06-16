@@ -45,7 +45,7 @@ export default {
   data() {
     return {
       flag: true,
-      activeNum: 1,
+      activeNum: "1",
       msgList: [],
     }
   },

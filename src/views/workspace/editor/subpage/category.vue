@@ -159,5 +159,7 @@ export default {
 </script>
 
 <style scoped>
-
+.article_category .left {
+  text-align: left;
+}
 </style>

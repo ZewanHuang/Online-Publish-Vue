@@ -18,14 +18,31 @@
 </template>
 
 <script>
+import user from "@/store/user";
+
 export default {
   name: "ArticleOverview",
+  data() {
+    return {
+      isAuthor: false,
+    }
+  },
+  created() {
+    const userInfo = user.getters.getUser(user.state());
+    if (userInfo.user.usertype === '作者') {
+      this.isAuthor = true;
+    }
+  },
   props: {
     articles: Array
   },
   methods: {
     openArticle: function(index) {
-      this.$router.push('/article/center/' + this.articles[index].aid + '/info');
+      if (this.isAuthor) {
+        this.$router.push('/article/center/' + this.articles[index].aid + '/info');
+      } else {
+        this.$router.push('/article/' + this.articles[index].aid);
+      }
     }
   }
 }

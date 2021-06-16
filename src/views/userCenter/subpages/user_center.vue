@@ -2,7 +2,7 @@
   <div id="navInfo">
       <ul>
 <!--        <li><router-link :to="{name: 'News'}">动态</router-link></li>-->
-        <li><router-link :to="{name: 'Collection'}">收藏</router-link></li>
+<!--        <li><router-link :to="{name: 'Collection'}">收藏</router-link></li>-->
         <li><router-link :to="{name: 'Article'}">文章</router-link></li>
       </ul>
     </div>

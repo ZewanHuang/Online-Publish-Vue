@@ -7,7 +7,6 @@
       <el-submenu index="1">
         <template slot="title" id="mine">个人中心</template>
         <el-menu-item index="1-1" @click="myhome">我的主页</el-menu-item>
-        <el-menu-item index="1-4" @click="setting">设置</el-menu-item>
         <el-menu-item index="1-5" @click="logout">退出登录</el-menu-item>
       </el-submenu>
       <el-menu-item index="2" @click="workspace">
@@ -30,7 +29,8 @@ export default {
   data() {
     return {
       msgCount: 0,
-      username: user.getters.getUser(user.state()).user.username
+      username: user.getters.getUser(user.state()).user.username,
+      path: '',
     }
   },
   mounted() {
@@ -94,7 +94,7 @@ export default {
       this.$router.push('/setting');
     },
     myhome(){
-      this.$router.push("/" + this.username + "/info/collection");
+      window.location.href = "/" + this.username + "/info/article";
     },
     message(){
       this.$router.push('/message');

@@ -84,6 +84,11 @@ export default {
     .then(res => {
         this.userinfo = JSON.parse(res.data.user);
         this.imageUrl = this.userinfo.avatar;
+
+        this.ruleForm.real_name = this.userinfo.real_name;
+        this.ruleForm.education = this.userinfo.education;
+        this.ruleForm.job = this.userinfo.job;
+        this.ruleForm.description = this.userinfo.description;
     })
     .catch(err => {
       console.log(err);
@@ -109,7 +114,7 @@ export default {
             switch (res.data.status_code) {
               case "2000":
                 this.$message.success("保存成功！");
-                this.$router.push("/" + this.userinfo.username + "/info/activity");
+                this.$router.push("/" + this.userinfo.username + "/info/article");
                 break;
               case "4001":
                 this.$message.error("用户未登录！");

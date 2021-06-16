@@ -25,10 +25,15 @@
       </div>
     </div>
 
-    <div class="article-isNotAuthor" v-else>
+    <div class="article-isNotAuthor" v-else-if="!isReview">
       <i class="el-icon-edit"></i>
       <br>
       <el-button class="el-button" type="primary" @click="applyToAuthor">点击成为作者</el-button>
+    </div>
+    <div v-else class="non-article-text">
+      <p>
+        身份为审稿人，无权申请成为作者。有需求请<a href="mailto:zewantop@163.com">联系编辑</a>！
+      </p>
     </div>
   </div>
 </template>
@@ -43,6 +48,7 @@ export default {
     return {
       is_self: false,
       isAuthor: false,
+      isReview: false,
       showArticle: false,
       hasArticles: false,
       articleList: [],
@@ -51,7 +57,10 @@ export default {
   created() {
     const userInfo = user.getters.getUser(user.state());
     if (userInfo && userInfo.user.usertype === '作者') {
-        this.isAuthor = true;
+      this.isAuthor = true;
+    }
+    if (userInfo && userInfo.user.usertype === '审稿人') {
+      this.isReview = true;
     }
 
     const formData = new FormData();
@@ -122,7 +131,7 @@ export default {
                 'username': user.getters.getUser(user.state()).user.username,
                 'confirmed': user.getters.getUser(user.state()).user.confirmed,
               }});
-            this.$router.push('/' + user.getters.getUser(user.state()).user.username + '/info/collection');
+            window.location.href = '/' + user.getters.getUser(user.state()).user.username + '/info/article';
             break;
           case '4001':
             this.$message.warning('请先完成邮箱验证！');
