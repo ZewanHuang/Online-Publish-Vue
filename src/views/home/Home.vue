@@ -154,10 +154,10 @@ export default {
       this.isSearching=true;
     },
     openArticle: function(index) {
-      this.$router.push('/article/' + this.articles[index].aid);
+      this.$router.push('/article/' + this.articles[index].article_id);
     },
     getAbstract: function(index) {
-      const str = this.articles[index].abstract
+      const str = this.articles[index].abstract;
       const length = str.length;
       const lenToShow = 100;
       if (length < lenToShow) {
