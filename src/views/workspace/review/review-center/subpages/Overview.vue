@@ -31,32 +31,24 @@ export default {
     return {
       hasArticles: false,
       articles: [],
-      newsList: [
-        /*
-        4-审核了文章
-         */
-        {
-          status: 4,
-          title: '基于物联网的恒温恒湿箱的远程监控系统设计',
-          date:'2021/05/26'
-        },
-        {
-          status: 4,
-          title: '企业智慧移动办公平台创新型研究',
-          date:'2021/05/01'
-        },
-        {
-          status: 4,
-          title: '远程监控系统设计',
-          date:'2021/05/01'
-        },
-        {
-          status: 4,
-          title: '互联网营销战略概论',
-          date:'2021/05/02'
-        },
-      ],
+      newsList: [],
     }
+  },
+  mounted() {
+    this.$axios({
+      method: 'get',
+      url: '/get_activity/',
+    })
+    .then(res => {
+      switch (res.data.status_code) {
+        case '2000':
+          this.newsList = JSON.parse(res.data.acts);
+          break;
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
   },
   created() {
     this.$axios({

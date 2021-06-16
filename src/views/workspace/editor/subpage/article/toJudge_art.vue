@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="toJudge">
 <!--    <input v-model="input" placeholder="请输入内容"/>-->
 <!--    <el-button icon="el-icon-search" circle></el-button>-->
 <!--    <el-button circle icon="el-icon-plus" @click="addArt"></el-button>-->
@@ -209,7 +209,7 @@ input{
   margin-bottom: 0;
   width: 50%;
 }
-.choice{
+.toJudge .choice{
   width: 90%;
   height: 40px;
   border: #409EFF;
