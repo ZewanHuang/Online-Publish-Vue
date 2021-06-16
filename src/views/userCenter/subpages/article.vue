@@ -122,7 +122,7 @@ export default {
                 'username': user.getters.getUser(user.state()).user.username,
                 'confirmed': user.getters.getUser(user.state()).user.confirmed,
               }});
-            this.$router.push('/' + user.getters.getUser(user.state()).user.username + '/info/activity');
+            this.$router.push('/' + user.getters.getUser(user.state()).user.username + '/info/collection');
             break;
           case '4001':
             this.$message.warning('请先完成邮箱验证！');
