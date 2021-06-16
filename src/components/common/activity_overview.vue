@@ -29,7 +29,11 @@ export default {
   },
   methods: {
     openArticle: function(index) {
-      alert("open_" + this.newsList[index].title);
+      if (this.newsList[index].status === 4) {
+        this.$router.push('/article/' + this.newsList[index].aid);
+      } else {
+        this.$router.push('/article/center/' + this.newsList[index].aid + '/info');
+      }
     }
   },
 }
