@@ -1,15 +1,10 @@
 <template>
   <div id="nav">
     <el-row class="nav-row">
-      <el-col :span=10 class="left">
+      <el-col class="left" :span=20>
         <router-link to="/">
           <img src="../../assets/banner1.png" alt="banner">
         </router-link>
-      </el-col>
-      <el-col :span=5 :offset=5 class="right">
-        <label>
-          <input enter-button placeholder="Search..."></input>
-        </label>
       </el-col>
       <el-col :span=2 class="right">
         <el-button type="text" @click="register" class="btn">注册</el-button>

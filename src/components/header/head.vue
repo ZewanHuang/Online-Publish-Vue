@@ -18,8 +18,6 @@
         <el-badge :value="msgCount" class="item" v-if="msgCount!==0">
         </el-badge>
       </el-menu-item>
-
-      <el-menu-item index="4" @click="guide">引导</el-menu-item>
     </el-menu>
   </div>
 </template>
