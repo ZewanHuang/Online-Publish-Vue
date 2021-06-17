@@ -53,7 +53,14 @@ export default {
   },
   methods: {
     read: function () {
-      window.open(this.url, '_blank');
+      let url_read = '';
+      if (this.url.endsWith('pdf')) {
+        url_read = this.url;
+      } else {
+        // available just to deploy online
+        url_read = 'https://view.officeapps.live.com/op/view.aspx?src=' + 'https://zewan.top' + this.url;
+      }
+      window.open(url_read, '_blank');
       const formData = new FormData();
       formData.append('aid', this.aid);
       this.$axios({

@@ -25,14 +25,19 @@
       </div>
     </div>
 
-    <div class="article-isNotAuthor" v-else-if="!isReview">
+    <div class="article-isNotAuthor" v-else-if="!isReview && !isEditor">
       <i class="el-icon-edit"></i>
       <br>
       <el-button class="el-button" type="primary" @click="applyToAuthor">点击成为作者</el-button>
     </div>
-    <div v-else class="non-article-text">
+    <div v-else-if="isReview" class="non-article-text">
       <p>
         身份为审稿人，无权申请成为作者。有需求请<a href="mailto:zewantop@163.com">联系编辑</a>！
+      </p>
+    </div>
+    <div v-else-if="isEditor" class="non-article-text">
+      <p>
+        身份为编辑，无权申请成为作者！
       </p>
     </div>
   </div>
@@ -49,6 +54,7 @@ export default {
       is_self: false,
       isAuthor: false,
       isReview: false,
+      isEditor: false,
       showArticle: false,
       hasArticles: false,
       articleList: [],
@@ -61,6 +67,9 @@ export default {
     }
     if (userInfo && userInfo.user.usertype === '审稿人') {
       this.isReview = true;
+    }
+    if (userInfo && userInfo.user.usertype === '编辑') {
+      this.isEditor = true;
     }
 
     const formData = new FormData();
