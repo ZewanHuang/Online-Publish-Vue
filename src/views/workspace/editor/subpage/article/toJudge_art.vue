@@ -6,8 +6,9 @@
 
     <el-table
       :data="tableData"
-      style="width: 100%">
-      <el-table-column type="expand">
+      style="width: 100%"
+      :row-key="getRowKey">
+      <el-table-column type="expand" >
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
             <el-form-item label="文章名">
@@ -54,8 +55,11 @@
             size="mini"
             @click="openArt(scope.row.aid)">查看</el-button>
 
+            <el-button type="primary" @click="openBox(scope.row.aid)" size="mini">分配</el-button>
 
-          <el-button type="primary" @click="openBox(scope.$index, scope.row)" size="mini">分配</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
           <el-dialog
               class="abow_dialog"
               title="分配审稿人"
@@ -69,13 +73,11 @@
 
             <span slot="footer" class="dialog-footer">
               <el-button @click="dialogVisible = false">取 消</el-button>
-              <el-button type="primary" @click="handleReview(scope.row.aid)">确 定</el-button>
+              <el-button type="primary" @click="handleReview(indexnum)">确 定</el-button>
             </span>
           </el-dialog>
 
-        </template>
-      </el-table-column>
-    </el-table>
+
     <el-pagination
       background
       layout="prev, pager, next"
@@ -96,6 +98,7 @@ export default {
       tableData: [],
       checkList: [],
       reviewList:[],
+      indexnum: 0,
       dialogVisible: false,
 
       reviews: '',
@@ -114,6 +117,9 @@ export default {
     })
   },
   methods: {
+    getRowKey (row) {
+      return row.id
+    },
     openArt(index){
       this.$router.push('/article/' + index);
     },
@@ -124,13 +130,13 @@ export default {
         })
         .catch(_ => {});
     },
-    openBox(index, row) {
-      console.log(index, row);
+    openBox(index) {
       this.$axios({
         method: 'get',
         url: '/editor/get_reviews_name/',
       })
       .then(res => {
+        this.indexnum=index
         this.reviewList = JSON.parse(res.data.reviews)
       })
       .catch(err => {
