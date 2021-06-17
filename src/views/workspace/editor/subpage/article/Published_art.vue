@@ -100,11 +100,15 @@ export default {
       this.$axios({
         method: 'post',
         url: '/editor/delete/',
+        data: formData,
       })
       .then(res => {
         switch (res.data.status_code) {
           case '2000':
             this.$message.success('删除成功！');
+            setTimeout(()=> {
+              location.reload();
+            }, 1500);
             break;
           case '4002':
             this.$message.error('文章不存在！');
