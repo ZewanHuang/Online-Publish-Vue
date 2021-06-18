@@ -1,5 +1,7 @@
 # 网上出版系统前端
 
+![vue2.0](https://img.shields.io/badge/vue-2.0-brightgreen) ![vue-cli4.5.13](https://img.shields.io/badge/vue--cli-4.5.13-blue)
+
 > 北航 1921 软件工程大作业
 
 后端：[https://github.com/ZewanHuang/Online-Publish-Django](https://github.com/ZewanHuang/Online-Publish-Django)
