@@ -32,7 +32,7 @@
     </div>
     <div v-else-if="isReview" class="non-article-text">
       <p>
-        身份为审稿人，无权申请成为作者。有需求请<a href="mailto:zewantop@163.com">联系编辑</a>！
+        身份为审稿人，无权申请成为作者。有需求请<a :href="sendEmail">联系编辑</a>！
       </p>
     </div>
     <div v-else-if="isEditor" class="non-article-text">
@@ -51,6 +51,8 @@ export default {
   props: ['username'],
   data() {
     return {
+      sendEmail: 'mailto:' + this.GLOBAL.email,
+
       is_self: false,
       isAuthor: false,
       isReview: false,

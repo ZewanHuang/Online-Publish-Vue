@@ -2,7 +2,7 @@
   <div class="edit">
     <div class="portrait" ><el-upload
         class="avatar-uploader"
-        action="http://localhost:8080/api/upload_image/"
+        :action="uploadUrl"
         :show-file-list="false"
       :on-success="handleAvatarSuccess"
       :before-upload="beforeAvatarUpload">
@@ -51,6 +51,7 @@ export default {
   name: "edit",
   data() {
     return {
+      uploadUrl: this.GLOBAL.baseurl + "/api/upload_image/",
       imageUrl: '',
       userinfo: {},
       ruleForm: {

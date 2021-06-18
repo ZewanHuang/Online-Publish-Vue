@@ -79,7 +79,7 @@ export default {
         url_read = this.url;
       } else {
         // available just to deploy online
-        url_read = 'https://view.officeapps.live.com/op/view.aspx?src=' + 'https://zewan.top' + this.url;
+        url_read = 'https://view.officeapps.live.com/op/view.aspx?src=' + this.GLOBAL.baseurl + this.url;
       }
       window.open(url_read, '_blank');
       // const formData = new FormData();

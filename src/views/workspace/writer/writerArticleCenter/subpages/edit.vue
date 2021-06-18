@@ -34,7 +34,7 @@
       <el-upload
           class="upload-demo"
           drag
-          action="http://localhost:8080/api/upload_article/"
+          :action="upload_url"
           :data="{ articleID: this.aid }">
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">将文件拖至此处，或<em>点击上传</em></div>
@@ -54,6 +54,7 @@ export default {
   props: ['aid'],
   data() {
     return {
+      upload_url: this.GLOBAL.baseurl + '/api/upload_article',
       labelPosition: 'left',
       form: {
         name: '',

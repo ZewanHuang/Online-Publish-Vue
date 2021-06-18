@@ -12,6 +12,10 @@ import user from "./store/user";
 import footnav from"./components/footer/foot";
 import News from "./views/userCenter/subpages/activity";
 
+import global_ from "./global/global";//全局变量
+
+Vue.prototype.GLOBAL = global_ //全局变量信息挂载在Vue实例上
+
 Vue.component("foot-nav",footnav);
 
 Vue.use(ElementUI);

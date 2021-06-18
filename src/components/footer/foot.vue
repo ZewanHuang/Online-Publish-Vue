@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span=5 class="center font-wrap">
         <router-link to="/">
-          <a class="font">Copyright 2021 zewan.top</a>
+          <a class="font">Copyright 2021 {{ footUrl }}</a>
         </router-link>
       </el-col>
       <el-col :span=5 class="center font-wrap">
@@ -15,7 +15,7 @@
         </router-link>
       </el-col>
       <el-col :span=5 class="center font-wrap">
-        <a href="mailto:zewantop@163.com" class="font">联系我们</a>
+        <a :href="sendEmail" class="font">联系我们</a>
       </el-col>
       <el-col :span=5 class="center font-wrap">
         <a href="https://beian.miit.gov.cn/" target="_blank" class="font">备案号：粤ICP备2021021248号-1</a>
@@ -27,9 +27,15 @@
 <script>
 export default {
   name: 'navBar',
+  data() {
+    return {
+      footUrl: this.GLOBAL.footerWeb,
+      sendEmail: 'mailto:' + this.GLOBAL.email,
+    }
+  },
   methods: {
     contactUs() {
-      location.href = 'mailto:zewantop@163.com';
+      location.href = 'mailto:' + this.GLOBAL.email;
     }
   }
 }
