@@ -18,7 +18,7 @@
         <a :href="sendEmail" class="font">联系我们</a>
       </el-col>
       <el-col :span=5 class="center font-wrap">
-        <a href="https://beian.miit.gov.cn/" target="_blank" class="font">备案号：粤ICP备2021021248号-1</a>
+        <a href="https://beian.miit.gov.cn/" target="_blank" class="font">备案号：{{ beianNo }}</a>
       </el-col>
     </el-row>
   </div>
@@ -31,6 +31,7 @@ export default {
     return {
       footUrl: this.GLOBAL.footerWeb,
       sendEmail: 'mailto:' + this.GLOBAL.email,
+      beianNo: this.GLOBAL.beianNo
     }
   },
   methods: {
